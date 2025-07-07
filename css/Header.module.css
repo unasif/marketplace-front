@@ -1,0 +1,126 @@
+@charset "UTF-8";
+.header__container {
+  max-width: 1440px; /* Максимальна ширина контейнера */
+  margin: 0 auto; /* Центруємо контейнер */
+  padding: 0 15px; /* Відступи зліва та справа */
+  min-height: 96px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+
+.header {
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  font-style: normal;
+  -webkit-box-shadow: 1px 1px 1px #D5DADF;
+          box-shadow: 1px 1px 1px #D5DADF;
+}
+
+.logoHeader img {
+  width: 100%;
+}
+
+.linksHeader {
+  font-weight: 400;
+  font-size: 16px;
+}
+.linksHeader li {
+  display: inline-block;
+}
+.linksHeader li:not(:last-child) {
+  padding-right: 34px;
+}
+.linksHeader a {
+  text-decoration: none;
+  color: #9d9d9d;
+}
+.linksHeader a:visited {
+  color: #45525c;
+}
+.linksHeader a:hover {
+  color: #13b3ba;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.iconContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+}
+
+.headerButton {
+  padding: 10px 23px;
+  border-radius: 200px;
+  background-color: #ffffff;
+  border: 0px solid #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.headerButton:hover {
+  background-color: rgba(19, 179, 186, 0.2);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.headerIcon {
+  color: #13b3ba;
+  position: relative;
+}
+
+.headerIcon:hover {
+  color: #9d9d9d;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.headerButton p {
+  color: #9d9d9d;
+  margin-top: 4px;
+}
+
+.iconContainer p :hover {
+  color: #9d9d9d;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.cartCount {
+  position: absolute;
+  right: -15%;
+  bottom: 40%;
+  background-color: #de0404;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}

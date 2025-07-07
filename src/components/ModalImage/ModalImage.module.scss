@@ -1,0 +1,30 @@
+
+.modalWindows {
+    position: fixed;
+    width: 100vw; // Ширина на весь екран
+    height: 100vh; 
+    background-color: rgba(0, 0, 0, 0.221);
+    top: 0;
+    left: 0;
+    z-index: 5;
+  }
+  
+  .modalBox {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 10px;
+    }
+    
+    .modalContent {
+      background-color: #fff;
+      color: #000;
+      flex-basis: 450px;
+      max-height: 90vh;
+      padding: 50px;
+      position: relative;
+      overflow: auto;
+      border-radius: 12px;
+    }
+  

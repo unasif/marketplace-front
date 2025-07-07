@@ -1,0 +1,108 @@
+.header__container {
+  max-width: 1440px; /* Максимальна ширина контейнера */
+  margin: 0 auto; /* Центруємо контейнер */
+  padding: 0 15px; /* Відступи зліва та справа */
+  min-height: 96px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.header {
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  font-style: normal;
+  box-shadow: 1px 1px 1px #D5DADF;
+}
+
+
+.logoHeader img {
+  width: 100%;
+}
+
+.linksHeader {
+  font-weight: 400;
+  font-size: 16px;
+  li {
+    display: inline-block;
+  }
+
+  li:not(:last-child) {
+    padding-right: 34px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #9d9d9d;
+  }
+
+  a:visited {
+    color: #45525c;
+  }
+
+  a:hover {
+    color: #13b3ba;
+    transition: color 0.3s;
+  }
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.headerButton {
+  padding: 10px 23px;
+  border-radius: 200px;
+  background-color: #ffffff;
+  border: 0px solid #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;  
+}
+
+.headerButton:hover {
+  background-color: rgba(19, 179, 186, 0.2);
+  transition:  0.3s;
+}
+
+.headerIcon {
+  color: #13b3ba;
+  position: relative;
+}
+
+.headerIcon:hover {
+  color: #9d9d9d;
+  transition: color 0.3s;
+}
+
+.headerButton p {
+  color: #9d9d9d;
+  margin-top: 4px;
+}
+
+.iconContainer p :hover {
+  color: #9d9d9d;
+  transition: color 0.3s;
+}
+
+.cartCount {
+  position: absolute;
+  // top: 0;
+  right: -15%;
+  bottom: 40%;
+  background-color: #de0404;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

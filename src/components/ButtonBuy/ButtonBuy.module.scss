@@ -1,0 +1,17 @@
+.buttonBuy {
+  text-align: center;
+  color: #ffffff;
+  background-color: #136ABA;
+  font-size: 16px;
+  height: 40px;
+  width: 150px;
+  border-radius: 228px;
+  border-color: #136ABA;
+  border: 1px solid transparent;
+}
+
+.buttonBuy:hover {
+  background-color: #13B3BA;
+  border: #ffffff;
+  cursor: pointer;
+}

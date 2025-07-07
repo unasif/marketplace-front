@@ -1,0 +1,11 @@
+.prevArrow {
+  content: url("../../assets/prevArrow.svg");
+  position: absolute;
+  top: 180px;
+  left: -92px;
+  cursor: pointer;
+   svg{
+    width: 52px;
+    height: 52px;
+   }
+}

@@ -1,0 +1,24 @@
+.wrapper {
+  overflow: clip;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  display: flex;
+  flex: 1 0 auto; /* Розтягується на всю доступну висоту */
+}
+
+.content__container {
+  display: flex;
+  justify-content: center; /* Центрування по горизонталі */
+  max-width: 1440px; /* Максимальна ширина контейнера */
+  padding: 0px 15px;
+  margin: 0 auto; /* Розташування контейнера посередині */
+  flex: 1; /* Займає доступний простір всередині .app */
+}
+
+main {
+  flex: 0 1 auto; 
+}

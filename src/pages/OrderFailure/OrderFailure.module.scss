@@ -1,0 +1,54 @@
+.failurePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+
+    color: #2c3e50;
+    text-align: center;
+  
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color:#136ABA;
+    }
+  
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+  
+      a {
+        color: #3498db;
+        text-decoration: underline;
+        &:hover {
+          color: #2980b9;
+        }
+      }
+    }
+  
+    .link {
+      font-size: 1rem;
+      color: #ffffff;
+      background-color: #3498db;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: #2980b9;
+      }
+    }
+  
+    .emailLink {
+      color: #136ABA;
+      font-weight: bold;
+      text-decoration: none;
+  
+      &:hover {
+        color: #136ABA;
+      }
+    }
+  }
+  

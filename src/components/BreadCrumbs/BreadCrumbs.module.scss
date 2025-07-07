@@ -1,0 +1,34 @@
+.breadCrumbs {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 6%;
+}
+
+.home {
+  color: #13b3ba;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.home:hover {
+  color: #45525c;
+  transition: color 0.3s;
+}
+
+.categoryName {
+  color: #45525c;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.categoryName::before {
+  content: " > ";
+  color: #45525c;
+  vertical-align: middle;
+}
+
+.categoryName:hover {
+  color: #13b3ba;
+  transition: color 0.3s;
+}

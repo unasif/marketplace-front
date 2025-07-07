@@ -1,0 +1,103 @@
+.footer {
+  background-color: #001F3D;
+  color: #fff;
+  z-index: 1;
+}
+
+.footer__container {
+  max-width: 1440px; /* Максимальна ширина контейнера */
+  margin: 0 auto; /* Центруємо контейнер */
+  padding: 0 15px; /* Відступи зліва та справа */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social {
+  display: flex;
+  justify-content: space-between;
+  width: 122px;
+  height: 34px;
+  padding-top: 62px;
+}
+
+.socialIcon {
+  height: 34px;
+  width: 34px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    color: #fff;
+  }
+  svg:hover {
+    color: #13b3ba;
+    cursor: pointer;
+  }
+}
+
+.linksFooter a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.linksFooter ul {
+  list-style-type: none;
+
+  li {
+    margin-bottom: 40px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+
+.linksFooter a:hover {
+  color: #13b3ba;
+}
+
+.linksPrivacyPolicy {
+  padding-top: 40px;
+  text-align: center;
+}
+
+.privacyPolicy {
+  text-align: center;
+  color: #45525c;
+  padding-bottom: 20px;
+}
+
+.location,
+.phones,
+.email {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.contactsIcon {
+  width: 32px;
+  height: 32px;
+  background-color: #136aba;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  svg {
+    color: #fff;
+  }
+}
+
+.contactsLabel {
+  margin-left: 10px;
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+  a:hover {
+    color: #13b3ba;
+  }
+}

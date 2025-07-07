@@ -1,0 +1,70 @@
+.searchContainer {
+  position: relative; /* Встановлює контекст позиціонування для результатів */
+  border: 1px solid #45525c;
+  border-radius: 100px;
+  display: flex;
+  flex-basis: 345px;
+  padding: 12px 24px;
+  align-items: center;
+  gap: 12px;
+  background-color: #ffffff; /* Фон для контейнера пошуку */
+}
+
+input {
+  flex-grow: 1; /* Розширює input на всю доступну ширину */
+  border: none; /* Видаляє обвід рамки */
+  outline: none; /* Видаляє обвід при фокусі */
+  color: #45525c;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  border-radius: 100px;
+}
+
+input::placeholder {
+  color: #d5dadf;
+}
+
+.iconSeach {
+  color: #45525c;
+}
+
+.resultsContainer {
+  position: absolute; /* Абсолютне позиціонування для випадаючого списку */
+  top: 100%; /* Розміщує контейнер під input */
+  left: 0;
+  right: 0;
+  max-height: 200px; /* Обмежує висоту списку */
+  overflow-y: auto; /* Додає вертикальну прокрутку, якщо елементів багато */
+  background-color: #ffffff; /* Фон для випадаючого списку */
+  border: 1px solid #45525c; /* Рамка для випадаючого списку */
+  border-radius: 10px;
+  z-index: 10; /* Підвищує пріоритет зображення над іншими елементами */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Додає тінь для кращого візуального ефекту */
+  padding: 10px; /* Внутрішні відступи для контенту */
+}
+
+.nomenclaturaLink {
+  padding: 8px 0;
+  border-bottom: 1px solid #d5dadf; /* Розділює елементи списку */
+  cursor: pointer;
+}
+
+.nomenclaturaLink:hover {
+  background-color: #f0f0f0; /* Підсвічування при наведенні */
+}
+
+.nomenclaturaLink a {
+  text-decoration: none;
+  color: #001f3d; /* Змінив колір тексту */
+  font-size: 14px;
+  display: block; /* Додає блокове відображення, щоб посилання займало всю ширину контейнера */
+}
+
+.nomenclaturaLink a:hover {
+  color: #13b3ba; /* Змінює колір тексту при наведенні */
+}
+
+.nomenclaturaLink:last-child {
+  border-bottom: none; /* Видаляє рамку для останнього елемента */
+}

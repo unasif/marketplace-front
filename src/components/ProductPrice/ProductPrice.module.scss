@@ -1,0 +1,40 @@
+.oldPrice {
+    color: #7D7D91;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    margin: 12px 0px 6px 12px;
+  }
+  
+  .price {
+    color: #001F3D;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    margin-left: 12px;
+  }
+  .notPrice {
+    color: #001F3D;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    margin-left: 12px;
+  }
+  .notPrice::before{
+    content: '\200B';
+    display: block;
+    margin: 12px 0px 6px 12px;
+  }
+
+  .actionPrice {
+    color: #DE0404;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    margin-left: 12px;
+  }
+
+  .hiddenPrice{
+    visibility: hidden;
+    margin: 12px 0px 6px 12px;
+  }
