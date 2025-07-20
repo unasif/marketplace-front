@@ -9,7 +9,7 @@ import ModalCartShopping from '../ModalCartShopping/ModalCartShopping';
 import { useCart } from "../../contexts/CartContext";
 import logo from "../../assets/logo.svg";
 
-const Header = ({ token }) => {
+const Header = ({ primaryColor }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
 
@@ -26,7 +26,10 @@ const Header = ({ token }) => {
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0); // Підрахунок загальної кількості товарів
 
   return (
-    <header className={styles.header}>
+    <header
+      className={styles.header}
+      style={{ backgroundColor: primaryColor }}
+    >
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
           <a href="/">

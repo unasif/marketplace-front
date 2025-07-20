@@ -16,9 +16,13 @@ import { CartProvider } from "./contexts/CartContext";
 import OrderPage from "./pages/OrderPage/OrderPage";
 import OrderSuccess from "./pages/OrderSuccess/OrderSuccess";
 import OrderFailure from "./pages/OrderFailure/OrderFailure";
+import useBaseInfo from "./hooks/useBaseInfo";
 
 function App() {
   const [token, setToken] = useState("");
+  const baseInfo = useBaseInfo();
+  const primaryColor = baseInfo.primary_color;
+  const secondaryColor = baseInfo.secondary_color;
 
   return (
     <CartProvider>
@@ -27,7 +31,7 @@ function App() {
           <DocumentTitle title="iShop) 1.0" />
           <ScrollToTop />
           <Token setToken={setToken} />
-          <Header token={token} />
+          <Header primaryColor={primaryColor} token={token} />
           <div className="content">
             <div className="content__container">
               <Routes>
@@ -50,7 +54,7 @@ function App() {
               </Routes>
             </div>
           </div>
-          <Footer />
+          <Footer secondaryColor={secondaryColor} />
         </div>
       </CategoryProvider>
     </CartProvider>

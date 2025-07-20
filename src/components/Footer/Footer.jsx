@@ -11,9 +11,12 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Footer = () => {
+const Footer = ({ secondaryColor }) => {
   return (
-    <footer className={styles.footer}>
+    <footer
+      className={styles.footer}
+      style={{ backgroundColor: secondaryColor }}
+    >
       <footer className={styles.footer__container}>
         <div className={styles.logoSocial}>
           <div>
