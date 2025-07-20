@@ -66,6 +66,7 @@
   -webkit-box-orient: vertical; /* Встановлює орієнтацію текстового контейнера на вертикальну */
   -webkit-line-clamp: 2; /* Обмежує текст двома рядками */
   min-height: 45px; /* Обмежує висоту контейнера */
+  font-family: var(--main-font-family);
 }
 
 .inStock {

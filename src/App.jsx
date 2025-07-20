@@ -1,7 +1,7 @@
 import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Token from "./contexts/Token";
 import DocumentTitle from "react-document-title";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -27,10 +27,14 @@ function App() {
   const logo2Url = baseInfo.logo2_url;
   const fontFamily = baseInfo.font_family;
 
+  useEffect(() => {
+    document.documentElement.style.setProperty('--main-font-family', fontFamily);
+  }, [fontFamily]);
+
   return (
     <CartProvider>
       <CategoryProvider>
-        <div className="wrapper" style={{ fontFamily }}>
+        <div className="wrapper">
           <DocumentTitle title="iShop) 1.0" />
           <ScrollToTop />
           <Token setToken={setToken} />

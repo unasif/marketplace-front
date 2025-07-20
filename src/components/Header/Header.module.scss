@@ -16,6 +16,7 @@
   z-index: 5;
   font-style: normal;
   box-shadow: 1px 1px 1px #D5DADF;
+  font-family: var(--main-font-family);
 }
 
 
@@ -26,6 +27,7 @@
 .linksHeader {
   font-weight: 400;
   font-size: 16px;
+  font-family: var(--main-font-family);
   li {
     display: inline-block;
   }
@@ -64,6 +66,7 @@
   cursor: pointer;
   font-size: 14px;
   font-weight: 400;  
+  font-family: var(--main-font-family);
 }
 
 .headerButton:hover {
