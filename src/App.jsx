@@ -25,11 +25,12 @@ function App() {
   const secondaryColor = baseInfo.secondary_color;
   const logoUrl = baseInfo.logo_url;
   const logo2Url = baseInfo.logo2_url;
+  const fontFamily = baseInfo.font_family;
 
   return (
     <CartProvider>
       <CategoryProvider>
-        <div className="wrapper">
+        <div className="wrapper" style={{ fontFamily }}>
           <DocumentTitle title="iShop) 1.0" />
           <ScrollToTop />
           <Token setToken={setToken} />
