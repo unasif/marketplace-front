@@ -23,6 +23,8 @@ function App() {
   const baseInfo = useBaseInfo();
   const primaryColor = baseInfo.primary_color;
   const secondaryColor = baseInfo.secondary_color;
+  const logoUrl = baseInfo.logo_url;
+  const logo2Url = baseInfo.logo2_url;
 
   return (
     <CartProvider>
@@ -31,7 +33,7 @@ function App() {
           <DocumentTitle title="iShop) 1.0" />
           <ScrollToTop />
           <Token setToken={setToken} />
-          <Header primaryColor={primaryColor} token={token} />
+          <Header primaryColor={primaryColor} token={token} logoUrl={logoUrl} />
           <div className="content">
             <div className="content__container">
               <Routes>
@@ -54,7 +56,7 @@ function App() {
               </Routes>
             </div>
           </div>
-          <Footer secondaryColor={secondaryColor} />
+          <Footer secondaryColor={secondaryColor} logo2Url={logo2Url} />
         </div>
       </CategoryProvider>
     </CartProvider>

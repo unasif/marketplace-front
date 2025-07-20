@@ -11,7 +11,7 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Footer = ({ secondaryColor }) => {
+const Footer = ({ secondaryColor, logo2Url }) => {
   return (
     <footer
       className={styles.footer}
@@ -21,7 +21,7 @@ const Footer = ({ secondaryColor }) => {
         <div className={styles.logoSocial}>
           <div>
             <a href="/">
-              <img src={logo2} alt="logo" />
+              <img src={logo2Url} alt="logo2" />
             </a>
           </div>
           <div className={styles.social}>

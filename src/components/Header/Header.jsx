@@ -7,9 +7,9 @@ import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ModalCartShopping from '../ModalCartShopping/ModalCartShopping';
 import { useCart } from "../../contexts/CartContext";
-import logo from "../../assets/logo.svg";
 
-const Header = ({ primaryColor, token }) => {
+
+const Header = ({ primaryColor, token, logoUrl }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
 
@@ -22,8 +22,8 @@ const Header = ({ primaryColor, token }) => {
     setOpenCartShopping(false);
   };
   
-  const { cart } = useCart(); // Отримуємо кошик з контексту
-  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0); // Підрахунок загальної кількості товарів
+  const { cart } = useCart();
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <header
@@ -33,7 +33,7 @@ const Header = ({ primaryColor, token }) => {
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
           <a href="/">
-            <img src={logo} alt="logo" />
+            <img src={logoUrl} alt="logo" />
           </a>
         </div>
         <ul className={styles.linksHeader}>
