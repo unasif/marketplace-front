@@ -9,7 +9,7 @@ import ModalCartShopping from '../ModalCartShopping/ModalCartShopping';
 import { useCart } from "../../contexts/CartContext";
 import logo from "../../assets/logo.svg";
 
-const Header = ({ primaryColor }) => {
+const Header = ({ primaryColor, token }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
 
