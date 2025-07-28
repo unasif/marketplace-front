@@ -24,6 +24,36 @@ export const Communication = () => {
               </div>
             );
           }
+          if (mod.module_type === "gallery") {
+            const { images = [] } = mod.content || {};
+            const { columns = 3 } = mod.styles || {};
+            return (
+              <div
+                key={mod.id}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: `repeat(${columns}, 1fr)`,
+                  gap: "20px",
+                  margin: "40px 0",
+                }}
+              >
+                {images.map((img, idx) => (
+                  <div key={idx} style={{ textAlign: "center" }}>
+                    <img
+                      src={img.url}
+                      alt={img.caption || ""}
+                      style={{ width: "100%", borderRadius: "8px" }}
+                    />
+                    {img.caption && (
+                      <div style={{ marginTop: "8px", color: "#555" }}>
+                        {img.caption}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            );
+          }
           // інші модулі добавлю потім
           return null;
         })}
