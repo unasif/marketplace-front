@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import styles from "./CategoriesSidebar.module.scss";
 import SubCategories from "../SubCategories/SubCategories";
 
-const CategoriesSidebar = ({ token, categories }) => {
+const CategoriesSidebar = ({ token, categories = [] }) => {
   const location = useLocation();
 
   const isActive = (path) => {
