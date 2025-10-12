@@ -28,6 +28,21 @@
   }
 }
 
+.link {
+  color: #45525c; 
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: #13b3ba;
+}
+
+.active {
+  color: #13b3ba;
+  transition: color 0.2s;
+}
+
 .menuHeader {
   color: #45525c;
   font-size: 18px;
