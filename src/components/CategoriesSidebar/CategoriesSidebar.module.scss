@@ -4,7 +4,7 @@
 
 .linksSidebar p {
   font-weight: 700;
-  font-style: 400;
+  font-style: normal;
   line-height: 1.4;
   padding-bottom: 10px;
   font-size: 20px;
@@ -97,4 +97,8 @@
   @media (max-width: 1199.98px) {
     display: none;
   }
+}
+
+.sidebar {
+  margin-top: 8px;
 }

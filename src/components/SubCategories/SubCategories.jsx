@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useCategoriesById from "../../hooks/useCategoriesById";
 import AccordionArrow from "../../assets/accordionArrow.svg";
 import styles from "../CategoriesSidebar/CategoriesSidebar.module.scss";
 
-import FiltersBlock from "./FiltersBlock";
+import FiltersBlock from "../FiltersBlock/FiltersBlock";
 
 const SubCategories = ({ token, categoryId, level = 0 }) => {
   const categories = useCategoriesById(token, categoryId);
   const [openIds, setOpenIds] = useState([]);
-  const navigate = useNavigate();
   const location = useLocation();
 
   if (!categories || categories.length === 0) {
@@ -28,7 +27,7 @@ const SubCategories = ({ token, categoryId, level = 0 }) => {
 
   return (
     <>
-      <ul className={styles.subMenuList} style={{ paddingLeft: level * 16 }}>
+      <ul className={styles.subMenu} style={{ paddingLeft: level * 16 }}>
         {categories.map((category) => (
           <li key={category.id} className={styles.menuItem}>
             <div style={{ display: "flex", alignItems: "center" }}>
