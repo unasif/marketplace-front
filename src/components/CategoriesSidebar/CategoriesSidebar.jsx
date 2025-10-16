@@ -13,23 +13,25 @@ const CategoriesSidebar = ({ token, categories = [] }) => {
   return (
     <nav className={styles.linksSidebar}>
       <p>Категорії</p>
-      <SubCategories token={token} categoryId={null} />
-      <div className={styles.sidebar}>
-        {categories.map((cat) => {
-          const path = `/category/${cat.id}`;
-          return (
-            <Link
-              key={cat.id}
-              to={path}
-              className={`${styles.link} ${
-                isActive(path) ? styles.active : ""
-              }`}
-            >
-              {cat.name}
-            </Link>
-          );
-        })}
-      </div>
+
+      {categories && categories.length > 0 ? (
+        <div className={styles.sidebar}>
+          {categories.map((cat) => {
+            const path = `/category/${cat.id}`;
+            return (
+              <Link
+                key={cat.id}
+                to={path}
+                className={`${styles.link} ${isActive(path) ? styles.active : ""}`}
+              >
+                {cat.name}
+              </Link>
+            );
+          })}
+        </div>
+      ) : (
+        <SubCategories token={token} categoryId={null} />
+      )}
     </nav>
   );
 };
