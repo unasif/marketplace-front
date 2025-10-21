@@ -60,15 +60,13 @@
 }
 
 .subMenu {
-  height: auto; 
-  overflow: visible;
-  transition: none;
-}
-
-.subMenu.collapsed {
   height: 0;
   overflow: hidden;
   transition: height 0.3s;
+}
+
+.subMenu.open {
+  height: auto;
 }
 
 .menuItem {
