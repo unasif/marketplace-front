@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useCategoriesById from "../../hooks/useCategoriesById";
 import AccordionArrow from "../../assets/accordionArrow.svg";
 import styles from "../CategoriesSidebar/CategoriesSidebar.module.scss";
@@ -10,7 +10,6 @@ const SubCategories = ({ token, categoryId, level = 0 }) => {
   const categories = useCategoriesById(token, categoryId);
   const [openIds, setOpenIds] = useState([]);
   const navigate = useNavigate();
-  const location = useLocation();
 
   if (!categories || categories.length === 0) {
     return null;
@@ -22,24 +21,13 @@ const SubCategories = ({ token, categoryId, level = 0 }) => {
     );
   };
 
-  const isActive = (path) => {
-    return location.pathname === path || location.pathname.startsWith(path);
-  };
-
   return (
     <>
       <ul className={styles.subMenuList} style={{ paddingLeft: level * 16 }}>
         {categories.map((category) => (
           <li key={category.id} className={styles.menuItem}>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <Link
-                to={`/category/${category.id}`}
-                className={`${styles.link} ${
-                  isActive(`/category/${category.id}`) ? styles.active : ""
-                }`}
-              >
-                {category.name}
-              </Link>
+              <Link to={`/category/${category.id}`}>{category.name}</Link>
               <SubCategoriesArrow
                 token={token}
                 categoryId={category.id}
