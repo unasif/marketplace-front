@@ -4,6 +4,8 @@ import useCategoriesById from "../../hooks/useCategoriesById";
 import AccordionArrow from "../../assets/accordionArrow.svg";
 import styles from "../CategoriesSidebar/CategoriesSidebar.module.scss";
 
+import FiltersBlock from "../FiltersBlock/FiltersBlock";
+
 const SubCategories = ({ token, categoryId, level = 0 }) => {
   const categories = useCategoriesById(token, categoryId);
   const [openIds, setOpenIds] = useState([]);
@@ -54,6 +56,7 @@ const SubCategories = ({ token, categoryId, level = 0 }) => {
           </li>
         ))}
       </ul>
+      <FiltersBlock />
     </>
   );
 };
