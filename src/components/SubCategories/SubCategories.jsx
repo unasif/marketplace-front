@@ -4,8 +4,6 @@ import useCategoriesById from "../../hooks/useCategoriesById";
 import AccordionArrow from "../../assets/accordionArrow.svg";
 import styles from "../CategoriesSidebar/CategoriesSidebar.module.scss";
 
-import FiltersBlock from "./FiltersBlock";
-
 const SubCategories = ({ token, categoryId, level = 0 }) => {
   const categories = useCategoriesById(token, categoryId);
   const [openIds, setOpenIds] = useState([]);
@@ -22,31 +20,30 @@ const SubCategories = ({ token, categoryId, level = 0 }) => {
   };
 
   return (
-    <>
-      <ul className={styles.subMenuList} style={{ paddingLeft: level * 16 }}>
-        {categories.map((category) => (
-          <li key={category.id} className={styles.menuItem}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <Link to={`/category/${category.id}`}>{category.name}</Link>
-              <SubCategoriesArrow
-                token={token}
-                categoryId={category.id}
-                open={openIds.includes(category.id)}
-                onClick={() => toggleOpen(category.id)}
-              />
-            </div>
-            {openIds.includes(category.id) && (
-              <SubCategories
-                token={token}
-                categoryId={category.id}
-                level={level + 1}
-              />
-            )}
-          </li>
-        ))}
-      </ul>
-      <FiltersBlock />
-    </>
+    <ul className={styles.subMenuList} style={{ paddingLeft: level * 16 }}>
+      {categories.map((category) => (
+        <li key={category.id} className={styles.menuItem}>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Link to={`/category/${category.id}`}>{category.name}</Link>
+            {/* Стрілка тільки якщо є підкатегорії */}
+            {/* Передаємо category.id як categoryId у дочірній компонент */}
+            <SubCategoriesArrow
+              token={token}
+              categoryId={category.id}
+              open={openIds.includes(category.id)}
+              onClick={() => toggleOpen(category.id)}
+            />
+          </div>
+          {openIds.includes(category.id) && (
+            <SubCategories
+              token={token}
+              categoryId={category.id}
+              level={level + 1}
+            />
+          )}
+        </li>
+      ))}
+    </ul>
   );
 };
 
