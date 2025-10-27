@@ -8,6 +8,36 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ModalCartShopping from '../ModalCartShopping/ModalCartShopping';
 import { useCart } from "../../contexts/CartContext";
 import logo from "../../assets/logo.svg";
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import Badge, { badgeClasses } from '@mui/material/Badge';
+
+const CartBadge = styled(Badge)(({ theme }) => ({
+  [`& .${badgeClasses.badge}`]: {
+    top: -4,
+    right: -6,
+    fontSize: '0.65rem',
+    minWidth: '16px',
+    height: '16px',
+    padding: '0 4px',
+    borderRadius: '50%',
+    backgroundColor: theme.palette.error.main,
+    color: theme.palette.common.white,
+  },
+}));
+
+function CartButton({ cartItemCount, handleCartClick }) {
+  return (
+    <button className={styles.headerButton} onClick={handleCartClick}>
+      <IconButton aria-label="cart" className={styles.headerIcon}>
+        <CartBadge badgeContent={cartItemCount} color="error" overlap="circular">
+          <FontAwesomeIcon icon={faCartShopping} />
+        </CartBadge>
+      </IconButton>
+      <p>Кошик</p>
+    </button>
+  );
+}
 
 const Header = ({ token }) => {
 
@@ -43,15 +73,8 @@ const Header = ({ token }) => {
         </ul>
         <SearchProduct className={styles.searchHeader} token= {token} />
         <form className={styles.iconContainer}>
-          <button className={styles.headerButton} onClick={handleCartClick}>
-            <div className={styles.headerIcon}>
-              <FontAwesomeIcon icon={faCartShopping} />
-              {cartItemCount > 0 && (
-                <span className={styles.cartCount}>{cartItemCount}</span>
-              )}
-              <p>Кошик</p>
-            </div>
-          </button>
+          <CartButton cartItemCount={cartItemCount} handleCartClick={handleCartClick} />
+
           <button className={styles.headerButton}>
             {/* <Link to="/like"> */}
             <div className={styles.headerIcon}>
