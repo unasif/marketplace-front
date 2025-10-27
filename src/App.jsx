@@ -2,7 +2,6 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import React, { useState } from "react";
-import Token from "./contexts/Token";
 import DocumentTitle from "react-document-title";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
@@ -18,7 +17,7 @@ import OrderSuccess from "./pages/OrderSuccess/OrderSuccess";
 import OrderFailure from "./pages/OrderFailure/OrderFailure";
 
 function App() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState("nginx-token");
 
   return (
     <CartProvider>
@@ -26,7 +25,6 @@ function App() {
         <div className="wrapper">
           <DocumentTitle title="iShop) 1.0" />
           <ScrollToTop />
-          <Token setToken={setToken} />
           <Header token={token} />
           <div className="content">
             <div className="content__container">

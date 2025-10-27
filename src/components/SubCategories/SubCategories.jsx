@@ -1,13 +1,19 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useCategoriesById from "../../hooks/useCategoriesById";
 import AccordionArrow from "../../assets/accordionArrow.svg";
 import styles from "../CategoriesSidebar/CategoriesSidebar.module.scss";
 
-const SubCategories = ({ token, categoryId, level = 0 }) => {
-  const categories = useCategoriesById(token, categoryId);
+const SubCategories = ({ categories: propCategories, categoryId, level = 0 }) => {
+  // Викликаємо хук тільки для підкатегорій (коли categoryId існує)
+  const fetchedCategories = useCategoriesById(categoryId);
+  
+  // Якщо є propCategories - використовуємо їх, інакше fetchedCategories
+  const categories = propCategories && propCategories.length > 0 
+    ? propCategories 
+    : fetchedCategories;
+  
   const [openIds, setOpenIds] = useState([]);
-  const navigate = useNavigate();
 
   if (!categories || categories.length === 0) {
     return null;
@@ -25,10 +31,7 @@ const SubCategories = ({ token, categoryId, level = 0 }) => {
         <li key={category.id} className={styles.menuItem}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Link to={`/category/${category.id}`}>{category.name}</Link>
-            {/* Стрілка тільки якщо є підкатегорії */}
-            {/* Передаємо category.id як categoryId у дочірній компонент */}
             <SubCategoriesArrow
-              token={token}
               categoryId={category.id}
               open={openIds.includes(category.id)}
               onClick={() => toggleOpen(category.id)}
@@ -36,7 +39,6 @@ const SubCategories = ({ token, categoryId, level = 0 }) => {
           </div>
           {openIds.includes(category.id) && (
             <SubCategories
-              token={token}
               categoryId={category.id}
               level={level + 1}
             />
@@ -47,9 +49,8 @@ const SubCategories = ({ token, categoryId, level = 0 }) => {
   );
 };
 
-// Окремий компонент для стрілки, який сам визначає наявність підкатегорій
-const SubCategoriesArrow = ({ token, categoryId, open, onClick }) => {
-  const subcategories = useCategoriesById(token, categoryId);
+const SubCategoriesArrow = ({ categoryId, open, onClick }) => {
+  const subcategories = useCategoriesById(categoryId);
 
   if (!subcategories || subcategories.length === 0) return null;
 
