@@ -29,12 +29,17 @@ const CartBadge = styled(Badge)(({ theme }) => ({
 function CartButton({ cartItemCount, handleCartClick }) {
   return (
     <button className={styles.headerButton} onClick={handleCartClick}>
-      <IconButton aria-label="cart" className={styles.headerIcon}>
+      <IconButton
+        aria-label="cart"
+        className={styles.headerIconButton}
+        disableRipple
+        disableFocusRipple
+      >
         <CartBadge badgeContent={cartItemCount} color="error" overlap="circular">
-          <FontAwesomeIcon icon={faCartShopping} className={styles.headerIcon}/>
+          <FontAwesomeIcon icon={faCartShopping} className={styles.cartIcon}/>
         </CartBadge>
-        <p>Кошик</p>
       </IconButton>
+      <p className={styles.headerIconLabel}>Кошик</p>
     </button>
   );
 }
