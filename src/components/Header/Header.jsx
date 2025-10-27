@@ -31,10 +31,10 @@ function CartButton({ cartItemCount, handleCartClick }) {
     <button className={styles.headerButton} onClick={handleCartClick}>
       <IconButton aria-label="cart" className={styles.headerIcon}>
         <CartBadge badgeContent={cartItemCount} color="error" overlap="circular">
-          <FontAwesomeIcon icon={faCartShopping} />
+          <FontAwesomeIcon icon={faCartShopping} className={styles.headerIcon}/>
         </CartBadge>
+        <p>Кошик</p>
       </IconButton>
-      <p>Кошик</p>
     </button>
   );
 }
@@ -103,3 +103,4 @@ const Header = ({ token }) => {
 };
 
 export default Header;
+
