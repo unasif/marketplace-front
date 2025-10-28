@@ -26,24 +26,6 @@ const CartBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-function CartButton({ cartItemCount, handleCartClick }) {
-  return (
-    <button className={styles.headerButton} onClick={handleCartClick}>
-      <IconButton
-        aria-label="cart"
-        className={styles.headerIconButton}
-        disableRipple
-        disableFocusRipple
-      >
-        <CartBadge badgeContent={cartItemCount} color="error" overlap="circular">
-          <FontAwesomeIcon icon={faCartShopping} className={styles.cartIcon}/>
-        </CartBadge>
-      </IconButton>
-      <p className={styles.headerIconLabel}>Кошик</p>
-    </button>
-  );
-}
-
 const Header = ({ token }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
@@ -78,7 +60,20 @@ const Header = ({ token }) => {
         </ul>
         <SearchProduct className={styles.searchHeader} token= {token} />
         <form className={styles.iconContainer}>
-          <CartButton cartItemCount={cartItemCount} handleCartClick={handleCartClick} />
+
+          <button className={styles.headerButton} onClick={handleCartClick}>
+            <IconButton
+              aria-label="cart"
+              className={styles.headerIconButton}
+              disableRipple
+              disableFocusRipple
+            >
+              <CartBadge badgeContent={cartItemCount} color="error" overlap="circular">
+                <FontAwesomeIcon icon={faCartShopping} className={styles.cartIcon}/>
+              </CartBadge>
+            </IconButton>
+            <p className={styles.headerIconLabel}>Кошик</p>
+          </button>
 
           <button className={styles.headerButton}>
             {/* <Link to="/like"> */}
