@@ -70,22 +70,33 @@
 /* Новий клас для кнопки-обгортки іконки (MUI IconButton) */
 .headerIconButton {
   position: relative;
-  width: 48px;
-  height: 48px;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  background: none !important;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+
+  &:hover {
+    background: none !important;
+  }
 
   svg {
     font-size: 24px;
-    color: #333;
+    color: #13b3ba;
+    
+    &:hover {
+      color: #9d9d9d;
+      transition: color 0.3s;
+    }
   }
 }
 
 .headerIconLabel {
   margin-top: 4px;
   font-size: 14px;
-  color: #13b3ba;
+  color: #9d9d9d;
   user-select: none;
 }
 

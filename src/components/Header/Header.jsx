@@ -59,6 +59,7 @@ const Header = ({ token }) => {
           </li>
         </ul>
         <SearchProduct className={styles.searchHeader} token= {token} />
+
         <form className={styles.iconContainer}>
 
           <button className={styles.headerButton} onClick={handleCartClick}>
@@ -95,6 +96,7 @@ const Header = ({ token }) => {
             </div>
             {/* </Link> */}
           </button>
+
         </form>
         <ModalCartShopping open={openCartShopping} onClose={closeCartModal} token= {token}/>
       </div>
