@@ -15,6 +15,7 @@ import { CartProvider } from "./contexts/CartContext";
 import OrderPage from "./pages/OrderPage/OrderPage";
 import OrderSuccess from "./pages/OrderSuccess/OrderSuccess";
 import OrderFailure from "./pages/OrderFailure/OrderFailure";
+import { CssBaseline } from '@mui/material'
 
 function App() {
   const [token, setToken] = useState("nginx-token");
@@ -22,6 +23,7 @@ function App() {
   return (
     <CartProvider>
       <CategoryProvider>
+        <CssBaseline /> 
         <div className="wrapper">
           <DocumentTitle title="iShop) 1.0" />
           <ScrollToTop />

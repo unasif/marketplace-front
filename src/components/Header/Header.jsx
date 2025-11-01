@@ -62,19 +62,27 @@ const Header = ({ token }) => {
 
         <form className={styles.iconContainer}>
 
-          <button className={styles.headerButton} onClick={handleCartClick}>
-            <IconButton
-              aria-label="cart"
-              className={styles.headerIconButton}
-              disableRipple
-              disableFocusRipple
-            >
-              <CartBadge badgeContent={cartItemCount} color="error" overlap="circular">
-                <FontAwesomeIcon icon={faCartShopping} className={styles.cartIcon}/>
-              </CartBadge>
-            </IconButton>
+          <IconButton
+            aria-label="cart"
+            onClick={handleCartClick}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: '10px 23px',
+              cursor: 'pointer',
+            }}
+            className ={`${styles.headerButton} ${styles.headerIconButton}`}
+            disableRipple
+            disableTouchRipple
+            disableFocusRipple
+     
+          >
+            <CartBadge badgeContent={cartItemCount} color="error" overlap="circular">
+              <FontAwesomeIcon icon={faCartShopping} className={styles.cartIcon}/>
+            </CartBadge>
             <p className={styles.headerIconLabel}>Кошик</p>
-          </button>
+          </IconButton>
 
           <button className={styles.headerButton}>
             {/* <Link to="/like"> */}
