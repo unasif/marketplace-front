@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Footer.module.scss";
 import { Link } from "react-router-dom";
-import logo2 from "../../assets/logo2.svg";
+// import logo2 from "../../assets/logo2.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -11,14 +11,14 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Footer = () => {
+const Footer = ({ logo2Url }) => {
   return (
     <footer className={styles.footer}>
       <footer className={styles.footer__container}>
         <div className={styles.logoSocial}>
           <div>
             <a href="/">
-              <img src={logo2} alt="logo" />
+              <img src={logo2Url || require('../../assets/logo2.svg')} alt="logo" />
             </a>
           </div>
           <div className={styles.social}>
