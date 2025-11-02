@@ -65,13 +65,6 @@ const Header = ({ token }) => {
           <IconButton
             aria-label="cart"
             onClick={handleCartClick}
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              padding: '10px 23px',
-              cursor: 'pointer',
-            }}
             className ={`${styles.headerButton} ${styles.headerIconButton}`}
             disableRipple
             disableTouchRipple
