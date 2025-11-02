@@ -7,7 +7,7 @@ import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ModalCartShopping from '../ModalCartShopping/ModalCartShopping';
 import { useCart } from "../../contexts/CartContext";
-import logo from "../../assets/logo.svg";
+// import logo from "../../assets/logo.svg";
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import Badge, { badgeClasses } from '@mui/material/Badge';
@@ -26,7 +26,7 @@ const CartBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const Header = ({ token }) => {
+const Header = ({ token, logoUrl }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
 
@@ -47,7 +47,7 @@ const Header = ({ token }) => {
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
           <a href="/">
-            <img src={logo} alt="logo" />
+            <img src={logoUrl || require('../../assets/logo.svg')} alt="logo" />
           </a>
         </div>
         <ul className={styles.linksHeader}>
