@@ -45,7 +45,7 @@ function App() {
               <Routes>
                 <Route path="/order" element={<OrderPage token={token} />} />
                 <Route path="/order-success" element={<OrderSuccess />} />
-                <Route path="/order-failure" element={<OrderFailure />} />
+                 <Route path="/order-failure" element={<OrderFailure />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/communication" element={<Communication />} />
                 <Route

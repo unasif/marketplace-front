@@ -72,31 +72,32 @@ const Header = ({ token, logoUrl }) => {
      
           >
             <CartBadge badgeContent={cartItemCount} color="error" overlap="circular">
-              <FontAwesomeIcon icon={faCartShopping} className={styles.cartIcon}/>
+              <FontAwesomeIcon icon={faCartShopping} className={styles.headerIcon}/>
             </CartBadge>
             <p className={styles.headerIconLabel}>Кошик</p>
           </IconButton>
 
-          <button className={styles.headerButton}>
-            {/* <Link to="/like"> */}
-            <div className={styles.headerIcon}>
-              <FontAwesomeIcon icon={faHeart} />
-              <p>Обране</p>
-              {/* </Link> */}
-            </div>
-          </button>
-
-          <button
-            className={styles.headerButton}
-            // onClick={() =>setOpenUserOffice(true)}>
+          <IconButton
+            aria-label="favorites"
+            className={`${styles.headerButton} ${styles.headerIconButton}`}
+            disableRipple
+            disableTouchRipple
+            disableFocusRipple
           >
-            {/* <Link to="/userOffice"> */}
-            <div className={styles.headerIcon}>
-              <FontAwesomeIcon icon={faUser} />
-              <p>Увійти</p>
-            </div>
-            {/* </Link> */}
-          </button>
+            <FontAwesomeIcon icon={faHeart} className={styles.headerIcon} />
+            <p className={styles.headerIconLabel}>Обране</p>
+          </IconButton>
+
+          <IconButton
+            aria-label="login"
+            className={`${styles.headerButton} ${styles.headerIconButton}`}
+            disableRipple
+            disableTouchRipple
+            disableFocusRipple
+          >
+            <FontAwesomeIcon icon={faUser} className={styles.headerIcon} />
+            <p className={styles.headerIconLabel}>Увійти</p>
+          </IconButton>
 
         </form>
         <ModalCartShopping open={openCartShopping} onClose={closeCartModal} token= {token}/>

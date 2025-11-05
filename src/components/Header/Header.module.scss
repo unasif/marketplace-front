@@ -67,6 +67,11 @@
   align-items: center;
 }
 
+.headerButton:hover {
+  color: #9d9d9d;
+  transition: color 0.3s;
+}
+
 /* Новий клас для кнопки-обгортки іконки (MUI IconButton) */
 .headerIconButton {
   position: relative;
@@ -75,15 +80,24 @@
   align-items: center;
   padding: 10px 23px;
 
-  svg {
-    font-size: 24px;
-    color: #13b3ba;
-    
-    &:hover {
+  &:hover {
       color: #9d9d9d;
       transition: color 0.3s;
-    }
+
+      .headerIcon {
+      color: #9d9d9d;
+      }
+      
+      .headerIconLabel {
+        color: #9d9d9d;
+      }
   }
+}
+
+.headerIconButton:hover
+{
+  color: #9d9d9d;
+  transition: color 0.3s;
 }
 
 .headerIconLabel {
@@ -102,6 +116,9 @@
 .headerIcon {
   color: #13b3ba;
   position: relative;
+  width: 13.33px;
+  height: 13.33px;
+  display: auto;
 }
 
 .headerIcon:hover {
