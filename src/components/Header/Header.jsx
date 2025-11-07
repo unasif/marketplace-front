@@ -26,7 +26,7 @@ const CartBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const Header = ({ token, logoUrl }) => {
+const Header = ({ token, logo }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
 
@@ -47,7 +47,7 @@ const Header = ({ token, logoUrl }) => {
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
           <a href="/">
-            <img src={logoUrl || require('../../assets/logo.svg')} alt="logo" />
+            <img src={logo || require('../../assets/logo.svg')} alt="logo" />
           </a>
         </div>
         <ul className={styles.linksHeader}>

@@ -11,14 +11,14 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Footer = ({ logo2Url }) => {
+const Footer = ({ logo }) => {
   return (
     <footer className={styles.footer}>
       <footer className={styles.footer__container}>
         <div className={styles.logoSocial}>
           <div>
             <a href="/">
-              <img src={logo2Url || require('../../assets/logo2.svg')} alt="logo" />
+              <img src={logo || require('../../assets/logo2.svg')} alt="logo" />
             </a>
           </div>
           <div className={styles.social}>

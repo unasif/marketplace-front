@@ -22,14 +22,14 @@ import { instance } from "./api";
 
 function App() {
   const [token, setToken] = useState("nginx-token");
-  const [baseInfo, setBaseInfo] = useState({ logo_url: '', logo2_url: '' });
+  const [baseInfo, setBaseInfo] = useState({ logo: '' });
 
   useEffect(() => {
     instance.get('base_info')
       .then(res => {
         setBaseInfo(res.data);
       })
-      .catch(() => setBaseInfo({ logo_url: '', logo2_url: '' }));
+      .catch(() => setBaseInfo({ logo: '' }));
   }, []);
 
   return (
@@ -39,7 +39,7 @@ function App() {
         <div className="wrapper">
           <DocumentTitle title="iShop) 1.0" />
           <ScrollToTop />
-          <Header token={token} logoUrl={baseInfo.logo_url} />
+          <Header token={token} logo={baseInfo.logo} />
           <div className="content">
             <div className="content__container">
               <Routes>
@@ -62,7 +62,7 @@ function App() {
               </Routes>
             </div>
           </div>
-          <Footer logo2Url={baseInfo.logo2_url} />
+          <Footer logo={baseInfo.logo} />
         </div>
       </CategoryProvider>
     </CartProvider>
