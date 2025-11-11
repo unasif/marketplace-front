@@ -1,3 +1,4 @@
+
 .content__container {
     background-color: #F8F8F8;
 }
@@ -14,7 +15,6 @@
     line-height: 1.2;
     padding-top: 30px;
     padding-bottom: 40px;
-    font-family: var(--main-font-family);
 }
 
 .orderForm {
@@ -29,7 +29,6 @@
     font-size: 26px;
     font-weight: 400;
     line-height: 1.3;
-    font-family: var(--main-font-family);
 }
 
 .formInfo {
@@ -102,7 +101,6 @@
     font-size: 24px;
     font-weight: 500;
     color: #535353;
-    font-family: var(--main-font-family);
 }
 
 .orderItems {
@@ -130,7 +128,6 @@
     font-size: 16px;
     background-color: #F8F8F8;
     color: #2b2929;
-    font-family: var(--main-font-family);
 }
 
 .orderItems .orderItem div {
@@ -139,7 +136,6 @@
     vertical-align: middle;
     font-size: 14px;
     color: #535353;
-    font-family: var(--main-font-family);
 }
 
 .orderItems .itemImageWrapper img {
@@ -152,7 +148,6 @@
 .orderItems .itemName {
     font-weight: 500;
     color: #2b2929;
-    font-family: var(--main-font-family);
 }
 
 .orderItems .itemQuantity,
@@ -176,7 +171,6 @@
     border-radius: 228px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-family: var(--main-font-family);
 }
 
 .submitButton:hover {
@@ -194,5 +188,4 @@
 .totalAmount{
     padding: 10px 0;
     color: #2b2929;
-    font-family: var(--main-font-family);
   }
