@@ -1,15 +1,9 @@
 import { instance } from "../api";
 
 const useSubmitOrder = () => {
-  const submitOrder = async (orderData, token) => {
+  const submitOrder = async (orderData) => {
     try {
-      const response = await instance.post("/orders", orderData, {
-        headers: {
-          Authorization: token, 
-          "Content-Type": "application/json",
-        },
-      });
-
+      const response = await instance.post("/orders", orderData);
       return response;
     } catch (error) {
       console.error("Помилка при відправці замовлення:", error);

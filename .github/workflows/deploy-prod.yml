@@ -1,0 +1,36 @@
+name: Deploy to Production Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build React App
+        run: npm run build
+        env:
+          CI: false
+
+      - name: Deploy to Target Directory
+        run: |
+          echo "Syncing files to ${{ secrets.PROD_TARGET_PATH }}"
+          
+          rsync -a --delete ./build/ ${{ secrets.PROD_TARGET_PATH }}/
+          
+          echo "Deployment complete."

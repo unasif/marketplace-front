@@ -1,8 +1,7 @@
 import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import React, { useEffect, useState } from "react";
-import Token from "./contexts/Token";
+import React, { useState, useEffect } from "react";
 import DocumentTitle from "react-document-title";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
@@ -16,35 +15,37 @@ import { CartProvider } from "./contexts/CartContext";
 import OrderPage from "./pages/OrderPage/OrderPage";
 import OrderSuccess from "./pages/OrderSuccess/OrderSuccess";
 import OrderFailure from "./pages/OrderFailure/OrderFailure";
-import useBaseInfo from "./hooks/useBaseInfo";
+import { CssBaseline } from '@mui/material'
+import { instance } from "./api";
+
+
 
 function App() {
-  const [token, setToken] = useState("");
-  const baseInfo = useBaseInfo();
-  const primaryColor = baseInfo.primary_color;
-  const secondaryColor = baseInfo.secondary_color;
-  const logoUrl = baseInfo.logo_url;
-  const logo2Url = baseInfo.logo2_url;
-  const fontFamily = baseInfo.font_family;
+  const [token, setToken] = useState("nginx-token");
+  const [baseInfo, setBaseInfo] = useState({ logo: '' });
 
   useEffect(() => {
-    document.documentElement.style.setProperty('--main-font-family', fontFamily);
-  }, [fontFamily]);
+    instance.get('base_info')
+      .then(res => {
+        setBaseInfo(res.data);
+      })
+      .catch(() => setBaseInfo({ logo: '' }));
+  }, []);
 
   return (
     <CartProvider>
       <CategoryProvider>
+        <CssBaseline /> 
         <div className="wrapper">
           <DocumentTitle title="iShop) 1.0" />
           <ScrollToTop />
-          <Token setToken={setToken} />
-          <Header primaryColor={primaryColor} token={token} logoUrl={logoUrl} />
+          <Header token={token} logo={baseInfo.logo} />
           <div className="content">
             <div className="content__container">
               <Routes>
                 <Route path="/order" element={<OrderPage token={token} />} />
                 <Route path="/order-success" element={<OrderSuccess />} />
-                <Route path="/order-failure" element={<OrderFailure />} />
+                 <Route path="/order-failure" element={<OrderFailure />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/communication" element={<Communication />} />
                 <Route
@@ -61,7 +62,7 @@ function App() {
               </Routes>
             </div>
           </div>
-          <Footer secondaryColor={secondaryColor} logo2Url={logo2Url} />
+          <Footer logo={baseInfo.logo} />
         </div>
       </CategoryProvider>
     </CartProvider>

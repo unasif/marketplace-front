@@ -1,49 +1,16 @@
 import React from "react";
-import AccordionArrow from "../../assets/accordionArrow.svg";
-import SubCategories from "../SubCategories/SubCategories";
 import styles from "./CategoriesSidebar.module.scss";
-import useCategoriesById from "../../hooks/useCategoriesById";
-import { useCategoryContext } from "../../contexts/CategoryContext";
+import SubCategories from "../SubCategories/SubCategories";
+import useCategories from "../../hooks/useCategories";
 
-const CategoriesSidebar = ({ token }) => {
-  const categories = useCategoriesById(token, null);
-  const { openId, updateOpenId } = useCategoryContext();
+const CategoriesSidebar = () => {
+  const categories = useCategories();
 
   return (
     <nav className={styles.linksSidebar}>
       <p>Категорії</p>
-      <ul>
-        {categories.map((category) => (
-          <li className={styles.menuItem} key={category.id}>
-            <button
-              className={styles.menuHeader}
-              onClick={() => updateOpenId(category.id)}
-            >
-              {category.name}
-              <img
-                src={AccordionArrow}
-                alt="Accordion Arrow"
-                className={
-                  category.id === openId
-                    ? `${styles.accordionArrow} ${styles.active}`
-                    : styles.accordionArrow
-                }
-              />
-            </button>
-            <div
-              className={
-                category.id === openId ? styles.subMenuOpen : styles.subMenu
-              }
-            >
-              <SubCategories
-                className={styles.subMenuList}
-                token={token}
-                categoryId={category.id}
-              />
-            </div>
-          </li>
-        ))}
-      </ul>
+      {/* НЕ передаємо categoryId для кореневих категорій */}
+      <SubCategories categories={categories} level={0} />
     </nav>
   );
 };

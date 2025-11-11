@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { instance } from "../api";
 
-const useProductsByCategory = (token, id) => {
+const useProductsByCategory = (id) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -9,12 +9,7 @@ const useProductsByCategory = (token, id) => {
     const fetchProducts = async () => {
       try {
         const response = await instance.get(
-          `product/by_categories_id/?categories_id=${id}`,
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
+          `product/by_categories_id/?categories_id=${id}`
         );
         setProducts(response.data);
       } catch (error) {
@@ -22,10 +17,10 @@ const useProductsByCategory = (token, id) => {
       }
     };
 
-    if (token && id) {
+    if (id) {
       fetchProducts();
     }
-  }, [token, id]);
+  }, [id]);
 
   return products;
 };

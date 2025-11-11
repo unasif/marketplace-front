@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { instance } from "../api";
 
-const useTotalPrice = (cart, token) => {
+const useTotalPrice = (cart) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -12,12 +12,8 @@ const useTotalPrice = (cart, token) => {
         try {
           // Запит для отримання ціни
           const response = await instance.get(
-            `/products_price/?id_bas_product=${item.id_bas}`,
-            {
-              headers: { Authorization: token },
-            }
+            `/products_price/?id_bas_product=${item.id_bas}`
           );
-
           const priceData = response.data[0];
           const price = priceData?.action_price || priceData?.price || 0;
 
@@ -38,7 +34,7 @@ const useTotalPrice = (cart, token) => {
     } else {
       setTotal(0);
     }
-  }, [cart, token]);
+  }, [cart]);
 
   return total;
 };
