@@ -39,14 +39,11 @@ const Header = ({ token, logo }) => {
     setOpenCartShopping(false);
   };
   
-  const { cart } = useCart();
-  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+  const { cart } = useCart(); // Отримуємо кошик з контексту
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0); // Підрахунок загальної кількості товарів
 
   return (
-    <header
-      className={styles.header}
-      style={{ backgroundColor: primaryColor }}
-    >
+    <header className={styles.header}>
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
           <a href="/">
