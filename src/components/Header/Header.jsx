@@ -54,7 +54,6 @@ const Header = ({ token, logo }) => {
         <ul className={styles.linksHeader}>
           <li>
             <Button
-              component={RouterLink}
               variant="text"
               to="/about"
               className={styles.linksHeaderButtons}
@@ -64,7 +63,6 @@ const Header = ({ token, logo }) => {
           </li>
           <li>
             <Button
-              component={RouterLink}
               variant="text"
               to="/communication"
               className={styles.linksHeaderButtons}
