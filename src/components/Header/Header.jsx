@@ -59,7 +59,8 @@ const Header = ({ token, logo }) => {
               to="/about"
               style={{ 
                 textTransform: "none",
-                fontFamily: "Roboto, Helvetica, Arial, sans-serif"  
+                fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                fontSize: "16px" 
               }}  
             >
               Про нас
@@ -72,7 +73,8 @@ const Header = ({ token, logo }) => {
               to="/communication"
               style={{ 
                 textTransform: "none",
-                fontFamily: "Roboto, Helvetica, Arial, sans-serif"  
+                fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                fontSize: "16px"
               }}
             >
               Контакти
