@@ -10,6 +10,7 @@ import { useCart } from "../../contexts/CartContext";
 // import logo from "../../assets/logo.svg";
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
+import { Button } from '@mui/material';
 import Badge, { badgeClasses } from '@mui/material/Badge';
 
 const CartBadge = styled(Badge)(({ theme }) => ({
@@ -52,10 +53,20 @@ const Header = ({ token, logo }) => {
         </div>
         <ul className={styles.linksHeader}>
           <li>
-            <Link to="/about">Про нас</Link>
+            <Button
+              variant="text"
+              to="/about"
+            >
+              Про нас
+            </Button>
           </li>
           <li>
-            <Link to="/communication">Контакти</Link>
+            <Button
+              variant="text"
+              to="/communication"
+            >
+              Контакти
+            </Button>
           </li>
         </ul>
         <SearchProduct className={styles.searchHeader} token= {token} />
