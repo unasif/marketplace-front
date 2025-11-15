@@ -56,7 +56,7 @@ const Header = ({ token, logo }) => {
             <Button
               variant="text"
               to="/about"
-              sx={{ textTransform: "none" }} 
+              style={{ textTransform: "none" }} 
             >
               Про нас
             </Button>
@@ -65,7 +65,7 @@ const Header = ({ token, logo }) => {
             <Button
               variant="text"
               to="/communication"
-              sx={{ textTransform: "none" }}
+              style={{ textTransform: "none" }}
             >
               Контакти
             </Button>
