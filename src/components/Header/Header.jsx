@@ -57,10 +57,10 @@ const Header = ({ token, logo }) => {
               component={RouterLink}
               variant="text"
               to="/about"
-              style={{ 
-                textTransform: "none",
+              style={{
                 fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-                fontSize: "16px" 
+                fontSize: "16px",
+                textTransform: "none"
               }}  
             >
               Про нас
@@ -72,9 +72,9 @@ const Header = ({ token, logo }) => {
               variant="text"
               to="/communication"
               style={{ 
-                textTransform: "none",
                 fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-                fontSize: "16px"
+                fontSize: "16px",
+                textTransform: "none"
               }}
             >
               Контакти
