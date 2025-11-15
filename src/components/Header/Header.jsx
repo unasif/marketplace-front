@@ -54,18 +54,26 @@ const Header = ({ token, logo }) => {
         <ul className={styles.linksHeader}>
           <li>
             <Button
+              component={RouterLink}
               variant="text"
               to="/about"
-              style={{ textTransform: "none" }} 
+              style={{ 
+                textTransform: "none",
+                fontFamily: "Roboto, Helvetica, Arial, sans-serif"  
+              }}  
             >
               Про нас
             </Button>
           </li>
           <li>
             <Button
+              component={RouterLink}
               variant="text"
               to="/communication"
-              style={{ textTransform: "none" }}
+              style={{ 
+                textTransform: "none",
+                fontFamily: "Roboto, Helvetica, Arial, sans-serif"  
+              }}
             >
               Контакти
             </Button>
