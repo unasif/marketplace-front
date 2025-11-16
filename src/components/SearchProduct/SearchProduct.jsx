@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -57,7 +57,7 @@ const SearchProduct = ({ token }) => {
         <TextField
           {...params}
           placeholder="Search"
-          variant="outlined"
+          variant="outlined"  
           size="small"
           slotProps={{
             input: {
