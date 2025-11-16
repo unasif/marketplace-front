@@ -53,6 +53,11 @@
   text-transform: none;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-size: 16px;
+  font-weight: 400;
+  background-color: "transparent";
+  &:hover {
+   background-color: transparent;
+  }
 }
 
 .iconContainer {

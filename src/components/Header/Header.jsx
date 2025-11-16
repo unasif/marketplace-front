@@ -57,7 +57,6 @@ const Header = ({ token, logo }) => {
               variant="text"
               to="/about"
               className={styles.linksHeaderButtons}
-              sx={{fontSize: '16px'}}
             >
               Про нас
             </Button>
@@ -67,7 +66,6 @@ const Header = ({ token, logo }) => {
               variant="text"
               to="/communication"
               className={styles.linksHeaderButtons}
-              sx={{fontSize: '16px'}}
             >
               Контакти
             </Button>
