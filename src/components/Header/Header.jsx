@@ -71,6 +71,7 @@ const Header = ({ token, logo }) => {
             </Button>
           </li>
         </ul>
+        
         <SearchProduct className={styles.searchHeader} token= {token} />
 
         <form className={styles.iconContainer}>
