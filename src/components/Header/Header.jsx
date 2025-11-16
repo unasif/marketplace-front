@@ -12,7 +12,6 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import { Button } from '@mui/material';
 import Badge, { badgeClasses } from '@mui/material/Badge';
-import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
 const CartBadge = styled(Badge)(({ theme }) => ({
   [`& .${badgeClasses.badge}`]: {
@@ -49,7 +48,7 @@ const Header = ({ token, logo }) => {
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
           <a href="/">
-            <img src={logo || noPhotoAvailable} alt="logo" />
+            <img src={logo || require('../../assets/no-photo-available.svg')} alt="logo" />
           </a>
         </div>
         <ul className={styles.linksHeader}>

@@ -9,7 +9,6 @@ import {
   faPhone,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
-import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
 const Footer = ({ logo, adress, phonenumber, gmail }) => {
   return (
@@ -18,7 +17,7 @@ const Footer = ({ logo, adress, phonenumber, gmail }) => {
         <div className={styles.logoSocial}>
           <div>
             <a href="/">
-              <img src={logo || noPhotoAvailable} alt="logo" />
+              <img src={logo || require('../../assets/no-photo-available.svg')} alt="logo" />
             </a>
           </div>
           <div className={styles.social}>
