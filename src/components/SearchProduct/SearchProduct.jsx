@@ -67,8 +67,8 @@ const SearchProduct = ({ token }) => {
             '& .MuiOutlinedInput-input': {
               padding: 0,
             },
-            '& .MuiAutocomplete-input': {
-              padding: 0,
+            '& .MuiOutlinedInput-root .MuiAutocomplete-input': {
+              padding: '0px 0px 0px 5px',
             }
           }}  
           slotProps={{
