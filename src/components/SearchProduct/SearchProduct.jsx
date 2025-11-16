@@ -59,6 +59,15 @@ const SearchProduct = ({ token }) => {
           placeholder="Search"
           variant="outlined"  
           size="medium"
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              padding: '12px 24px',
+              gap: '12px',
+            },
+            '& .MuiOutlinedInput-input': {
+              padding: 0,
+            },
+          }}  
           slotProps={{
             input: {
               startAdornment: (
