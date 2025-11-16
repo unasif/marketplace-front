@@ -12,7 +12,7 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import { Button } from '@mui/material';
 import Badge, { badgeClasses } from '@mui/material/Badge';
-import noPhotoAvailable from "../src/assets/no-photo-available.svg";
+import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
 const CartBadge = styled(Badge)(({ theme }) => ({
   [`& .${badgeClasses.badge}`]: {
