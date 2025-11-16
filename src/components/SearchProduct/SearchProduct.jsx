@@ -58,7 +58,7 @@ const SearchProduct = ({ token }) => {
           {...params}
           placeholder="Search"
           variant="outlined"  
-          size="small"
+          size="medium"
           slotProps={{
             input: {
               startAdornment: (
