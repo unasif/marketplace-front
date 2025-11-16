@@ -18,7 +18,7 @@ const Footer = ({ logo, adress, phonenumber, gmail }) => {
         <div className={styles.logoSocial}>
           <div>
             <a href="/">
-              <img src={logo || require(noPhotoAvailable)} alt="logo" />
+              <img src={logo || noPhotoAvailable} alt="logo" />
             </a>
           </div>
           <div className={styles.social}>

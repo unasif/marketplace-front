@@ -49,7 +49,7 @@ const Header = ({ token, logo }) => {
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
           <a href="/">
-            <img src={logo || require(noPhotoAvailable)} alt="logo" />
+            <img src={logo || noPhotoAvailable} alt="logo" />
           </a>
         </div>
         <ul className={styles.linksHeader}>
