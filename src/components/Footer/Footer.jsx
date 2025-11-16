@@ -17,7 +17,7 @@ const Footer = ({ logo, adress, phonenumber, gmail }) => {
         <div className={styles.logoSocial}>
           <div>
             <a href="/">
-              <img src={logo || require('../../assets/no-photo-available.svg')} alt="logo" />
+              <img src={logo || require('../../assets/logo2.svg')} alt="logo" />
             </a>
           </div>
           <div className={styles.social}>
