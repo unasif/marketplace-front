@@ -62,7 +62,12 @@ function App() {
               </Routes>
             </div>
           </div>
-          <Footer logo={baseInfo.logo} />
+          <Footer 
+            logo={baseInfo.logo}
+            adress={baseInfo.adress}
+            phonenumber={baseInfo.phonenumber}
+            gmail={baseInfo.gmail}
+          />
         </div>
       </CategoryProvider>
     </CartProvider>
