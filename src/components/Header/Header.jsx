@@ -57,6 +57,7 @@ const Header = ({ token, logo }) => {
               variant="text"
               to="/about"
               className={styles.linksHeaderButtons}
+              disableRipple
             >
               Про нас
             </Button>
@@ -66,6 +67,7 @@ const Header = ({ token, logo }) => {
               variant="text"
               to="/communication"
               className={styles.linksHeaderButtons}
+              disableRipple
             >
               Контакти
             </Button>
