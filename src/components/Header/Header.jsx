@@ -105,6 +105,9 @@ const Header = ({ token, logo }) => {
           <IconButton
             aria-label="login"
             className={`${styles.headerButton} ${styles.headerIconButton}`}
+             style={{
+              display:'none'
+             }}
             disableRipple
             disableTouchRipple
             disableFocusRipple
