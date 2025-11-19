@@ -7,7 +7,7 @@ import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ModalCartShopping from '../ModalCartShopping/ModalCartShopping';
 import { useCart } from "../../contexts/CartContext";
-// import logo from "../../assets/logo.svg";
+import logo from "../../assets/no-photo-available.svg";
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import { Button } from '@mui/material';
@@ -49,7 +49,7 @@ const Header = ({ token, logo }) => {
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
           <a href="/">
-            <img src={no_logo} alt="logo" />
+            <img src={logo} alt="logo" />
           </a>
         </div>
         <ul className={styles.linksHeader}>
