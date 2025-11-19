@@ -48,7 +48,7 @@ const Header = ({ token, logo }) => {
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
           <a href="/">
-            <img src={logo ||  require('../../assets/logo2.svg')} alt="logo" />
+            <img src="../../assets/no-photo-available.svg" alt="logo" />
           </a>
         </div>
         <ul className={styles.linksHeader}>
