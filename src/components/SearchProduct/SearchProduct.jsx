@@ -63,7 +63,17 @@ const SearchProduct = ({ token }) => {
             '& .MuiOutlinedInput-root': {
               padding: '12px 24px',
               gap: '12px',
-              borderRadius: '100px'
+              borderRadius: '100px',
+              '& fieldset': {
+                borderColor: '#45525c',
+              },
+              '&:hover fieldset': {
+                borderColor: '#45525c',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#45525c',
+                borderWidth: '1px',
+      }, 
             },
             '& .MuiOutlinedInput-input': {
               padding: 0,
@@ -88,7 +98,7 @@ const SearchProduct = ({ token }) => {
           {option.name}
         </li>
       )}
-      sx={{ width: 345 }}
+      sx={{ width: 345 }} 
     />
   );
 };
