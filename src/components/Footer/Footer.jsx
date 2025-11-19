@@ -10,16 +10,18 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import no_logo from "../../assets/no-photo-available.svg";
-import logo from "../../assets/no-photo-available.svg";
+import defaultLogo from "../../assets/no-photo-available.svg";
 
 const Footer = ({ logo, adress, phonenumber, gmail }) => {
+
+  const displayLogo = logo || defaultLogo;
   return (
     <footer className={styles.footer}>
       <footer className={styles.footer__container}>
         <div className={styles.logoSocial}>
           <div>
             <a href="/">
-              <img src={logo} alt="logo" />
+              <img src={displayLogo} alt="logo" />
             </a>
           </div>
           <div className={styles.social}>
