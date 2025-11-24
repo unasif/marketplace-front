@@ -51,7 +51,6 @@ const Header = ({ token, logo }) => {
         <div className={styles.logoHeader}>
           <a href="/">
             <img src={displayLogo} alt="logo" />
-            Логотип відсутній
           </a>
         </div>
         <ul className={styles.linksHeader}>
@@ -129,4 +128,5 @@ const Header = ({ token, logo }) => {
 };
 
 export default Header;
+
 
