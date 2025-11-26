@@ -10,9 +10,9 @@ import { useCart } from "../../contexts/CartContext";
 import defaultLogo from "../../assets/no-photo-available.svg";
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
+import LogoImage from "../LogoImage/LogoImage";
 import { Button } from '@mui/material';
 import Badge, { badgeClasses } from '@mui/material/Badge';
-import no_logo from "../../assets/no-photo-available.svg";
 
 const CartBadge = styled(Badge)(({ theme }) => ({
   [`& .${badgeClasses.badge}`]: {
