@@ -1,7 +1,7 @@
 import React from "react";
 import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
-const LogoImage = ({ logoim }) => {
+const LogoImage = ({ logoim = {} }) => { 
   const { logo } = logoim;
   const baseURL = "https://unas.if.ua/api/";
   const imageUrl = logoim.logo
