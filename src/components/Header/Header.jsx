@@ -28,10 +28,10 @@ const CartBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const Header = ({ token, logo }) => {
+const Header = ({ token, logoim }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
-  const displayLogo = logo || defaultLogo;
+  const displayLogo = logoim || defaultLogo;
 
   const handleCartClick = (event) => {
     event.preventDefault();
