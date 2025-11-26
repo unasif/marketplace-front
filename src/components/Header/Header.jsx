@@ -49,9 +49,7 @@ const Header = ({ token, logo }) => {
     <header className={styles.header}>
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
-          <a href="/">
-            <img src={displayLogo} alt="logo" />
-          </a>
+          <LogoImage product={logoim} />
         </div>
         <ul className={styles.linksHeader}>
           <li>
