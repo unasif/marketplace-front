@@ -49,7 +49,7 @@ const Header = ({ token, logoim }) => {
     <header className={styles.header}>
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
-          <LogoImage product={logoim} />
+          <LogoImage logoim={logoim} />
         </div>
         <ul className={styles.linksHeader}>
           <li>
