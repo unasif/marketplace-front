@@ -12,7 +12,6 @@ const LogoImage = ({ logoim = {} }) => {
     <a href="/"
        style={{
         display: 'flex',
-        flexDirection: 'column',
         alignItems: 'center',
        }}
     >
