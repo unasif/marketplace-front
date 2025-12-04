@@ -18,7 +18,12 @@ const LogoImage = ({ logoIm = {} }) => {
       {logo ? (
         <img src={imageUrl} alt={"Поки в базі alt немає"} />
       ) : (
-        <div>
+        <div 
+          style={{
+            display: 'flex', 
+            alignItems: 'center'
+          }}
+          >
           <img src={noPhotoAvailable} alt='No pictures' />
           <span>Логотип відсутній</span>
         </div>
