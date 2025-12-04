@@ -28,10 +28,10 @@ const CartBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const Header = ({ token, logoim }) => {
+const Header = ({ token, logoIm }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
-  const displayLogo = logoim || defaultLogo;
+  const displayLogo = logoIm || defaultLogo;
 
   const handleCartClick = (event) => {
     event.preventDefault();
@@ -49,11 +49,12 @@ const Header = ({ token, logoim }) => {
     <header className={styles.header}>
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
-          <LogoImage logoim={logoim} />
+          <LogoImage logoIm={logoIm} />
         </div>
         <ul className={styles.linksHeader}>
           <li>
             <Button
+              component={Link}
               variant="text"
               to="/about"
               className={styles.linksHeaderButtons}
@@ -64,6 +65,7 @@ const Header = ({ token, logoim }) => {
           </li>
           <li>
             <Button
+              component={Link}
               variant="text"
               to="/communication"
               className={styles.linksHeaderButtons}

@@ -1,11 +1,11 @@
 import React from "react";
 import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
-const LogoImage = ({ logoim = {} }) => { 
-  const { logo } = logoim;
+const LogoImage = ({ logoIm = {} }) => { 
+  const { logo } = logoIm;
   const baseURL = "https://unas.if.ua/api/";
-  const imageUrl = logoim.logo
-    ? `${baseURL}${logoim.logo.replace(/\\/g, "/")}`
+  const imageUrl = logoIm.logo
+    ? `${baseURL}${logoIm.logo.replace(/\\/g, "/")}`
     : null;
 
   return (
@@ -18,10 +18,10 @@ const LogoImage = ({ logoim = {} }) => {
       {logo ? (
         <img src={imageUrl} alt={"Поки в базі alt немає"} />
       ) : (
-        <>
+        <div>
           <img src={noPhotoAvailable} alt='No pictures' />
-          <p>Логотип відсутній</p>
-        </>
+          <span>Логотип відсутній</span>
+        </div>
       )}
     </a>
   );
