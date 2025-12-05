@@ -25,7 +25,6 @@ function App() {
         <div className="wrapper">
           <DocumentTitle title="iShop) 1.0" />
           <ScrollToTop />
-          <Token setToken={setToken} />
           <Header token={token} />
           <div className="content">
             <div className="content__container">
