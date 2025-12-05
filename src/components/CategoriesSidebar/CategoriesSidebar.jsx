@@ -5,8 +5,8 @@ import styles from "./CategoriesSidebar.module.scss";
 import useCategoriesById from "../../hooks/useCategoriesById";
 import { useCategoryContext } from "../../contexts/CategoryContext";
 
-const CategoriesSidebar = ({ token }) => {
-  const categories = useCategoriesById(token, null);
+const CategoriesSidebar = () => {
+  const categories = useCategoriesById(null);
   const { openId, updateOpenId } = useCategoryContext();
 
   return (
@@ -37,7 +37,6 @@ const CategoriesSidebar = ({ token }) => {
             >
               <SubCategories
                 className={styles.subMenuList}
-                token={token}
                 categoryId={category.id}
               />
             </div>

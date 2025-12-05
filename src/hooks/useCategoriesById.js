@@ -15,7 +15,7 @@ const useCategoriesById = (id) => {
     };
 
       fetchCategories();
-  }, []);
+  }, [id]);
 
   return categories;
 };
