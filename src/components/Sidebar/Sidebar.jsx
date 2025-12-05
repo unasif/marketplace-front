@@ -9,6 +9,7 @@ const Sidebar = ({ token, categoryId }) => {
     <aside className={styles.sidebar}>
       <BreadCrumbs token={token} categoryId={categoryId} />
       <CategoriesSidebar token={token} />
+      <CategoriesSidebar onOpenCatalog={onOpenCatalog} />
     </aside>
   );
 };
