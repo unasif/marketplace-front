@@ -11,18 +11,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import no_logo from "../../assets/no-photo-available.svg";
 import defaultLogo from "../../assets/no-photo-available.svg";
+import LogoImage from "../LogoImage/LogoImage";
 
-const Footer = ({ logo, adress, phonenumber, gmail }) => {
+const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 
-  const displayLogo = logo || defaultLogo;
+  const displayLogo = logoIm || defaultLogo;
   return (
     <footer className={styles.footer}>
       <footer className={styles.footer__container}>
         <div className={styles.logoSocial}>
           <div>
-            <a href="/">
-              <img src={displayLogo} alt="logo" />
-            </a>
+            <div>
+              <LogoImage logoIm={logoIm} />
+            </div>
           </div>
           <div className={styles.social}>
             <div className={styles.socialIcon}>
