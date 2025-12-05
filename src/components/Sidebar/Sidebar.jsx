@@ -4,7 +4,7 @@ import CategoriesSidebar from "../CategoriesSidebar/CategoriesSidebar";
 import BreadCrumbs from "../BreadCrumbs/BreadCrumbs";
 import PropTypes from "prop-types";
 
-const Sidebar = ({ token, categoryId }) => {
+const Sidebar = ({ token, categoryId, onOpenCatalog }) => {
   return (
     <aside className={styles.sidebar}>
       <BreadCrumbs token={token} categoryId={categoryId} />
