@@ -7,26 +7,9 @@ import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ModalCartShopping from '../ModalCartShopping/ModalCartShopping';
 import { useCart } from "../../contexts/CartContext";
-// import logo from "../../assets/logo.svg";
-import { styled } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import Badge, { badgeClasses } from '@mui/material/Badge';
+import logo from "../../assets/logo.svg";
 
-const CartBadge = styled(Badge)(({ theme }) => ({
-  [`& .${badgeClasses.badge}`]: {
-    top: -4,
-    right: -6,
-    fontSize: '0.65rem',
-    minWidth: '16px',
-    height: '16px',
-    padding: '0 4px',
-    borderRadius: '50%',
-    backgroundColor: theme.palette.error.main,
-    color: theme.palette.common.white,
-  },
-}));
-
-const Header = ({ token, logo }) => {
+const Header = ({ token }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
 
@@ -47,7 +30,7 @@ const Header = ({ token, logo }) => {
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
           <a href="/">
-            <img src={logo || require('../../assets/logo.svg')} alt="logo" />
+            <img src={logo} alt="logo" />
           </a>
         </div>
         <ul className={styles.linksHeader}>
@@ -59,46 +42,36 @@ const Header = ({ token, logo }) => {
           </li>
         </ul>
         <SearchProduct className={styles.searchHeader} token= {token} />
-
         <form className={styles.iconContainer}>
+          <button className={styles.headerButton} onClick={handleCartClick}>
+            <div className={styles.headerIcon}>
+              <FontAwesomeIcon icon={faCartShopping} />
+              {cartItemCount > 0 && (
+                <span className={styles.cartCount}>{cartItemCount}</span>
+              )}
+              <p>Кошик</p>
+            </div>
+          </button>
+          <button className={styles.headerButton}>
+            {/* <Link to="/like"> */}
+            <div className={styles.headerIcon}>
+              <FontAwesomeIcon icon={faHeart} />
+              <p>Обране</p>
+              {/* </Link> */}
+            </div>
+          </button>
 
-          <IconButton
-            aria-label="cart"
-            onClick={handleCartClick}
-            className ={`${styles.headerButton} ${styles.headerIconButton}`}
-            disableRipple
-            disableTouchRipple
-            disableFocusRipple
-     
+          <button
+            className={styles.headerButton}
+            // onClick={() =>setOpenUserOffice(true)}>
           >
-            <CartBadge badgeContent={cartItemCount} color="error" overlap="circular">
-              <FontAwesomeIcon icon={faCartShopping} className={styles.headerIcon}/>
-            </CartBadge>
-            <p className={styles.headerIconLabel}>Кошик</p>
-          </IconButton>
-
-          <IconButton
-            aria-label="favorites"
-            className={`${styles.headerButton} ${styles.headerIconButton}`}
-            disableRipple
-            disableTouchRipple
-            disableFocusRipple
-          >
-            <FontAwesomeIcon icon={faHeart} className={styles.headerIcon} />
-            <p className={styles.headerIconLabel}>Обране</p>
-          </IconButton>
-
-          <IconButton
-            aria-label="login"
-            className={`${styles.headerButton} ${styles.headerIconButton}`}
-            disableRipple
-            disableTouchRipple
-            disableFocusRipple
-          >
-            <FontAwesomeIcon icon={faUser} className={styles.headerIcon} />
-            <p className={styles.headerIconLabel}>Увійти</p>
-          </IconButton>
-
+            {/* <Link to="/userOffice"> */}
+            <div className={styles.headerIcon}>
+              <FontAwesomeIcon icon={faUser} />
+              <p>Увійти</p>
+            </div>
+            {/* </Link> */}
+          </button>
         </form>
         <ModalCartShopping open={openCartShopping} onClose={closeCartModal} token= {token}/>
       </div>
@@ -107,4 +80,3 @@ const Header = ({ token, logo }) => {
 };
 
 export default Header;
-

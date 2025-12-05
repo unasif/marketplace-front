@@ -57,73 +57,33 @@
 }
 
 .headerButton {
-  background: none;
-  border: none;
   padding: 10px 23px;
-  margin: 0;
+  border-radius: 200px;
+  background-color: #ffffff;
+  border: 0px solid #ffffff;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-size: 14px;
+  font-weight: 400;  
 }
 
 .headerButton:hover {
-  color: #9d9d9d;
-  transition: color 0.3s;
-}
-
-/* Новий клас для кнопки-обгортки іконки (MUI IconButton) */
-.headerIconButton {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 23px;
-
-  &:hover {
-      color: #9d9d9d;
-      transition: color 0.3s;
-
-      .headerIcon {
-      color: #9d9d9d;
-      }
-      
-      .headerIconLabel {
-        color: #9d9d9d;
-      }
-  }
-}
-
-.headerIconButton:hover
-{
-  color: #9d9d9d;
-  transition: color 0.3s;
-}
-
-.headerIconLabel {
-  margin-top: 4px;
-  font-size: 14px;
-  color: #9d9d9d;
-  user-select: none;
-}
-
-.headerIcon p {
-  margin-top: 4px;
-  font-size: 14px;
-  color: #9d9d9d;
+  background-color: rgba(19, 179, 186, 0.2);
+  transition:  0.3s;
 }
 
 .headerIcon {
   color: #13b3ba;
   position: relative;
-  width: 13.33px;
-  height: 13.33px;
-  display: auto;
 }
 
 .headerIcon:hover {
   color: #9d9d9d;
   transition: color 0.3s;
+}
+
+.headerButton p {
+  color: #9d9d9d;
+  margin-top: 4px;
 }
 
 .iconContainer p :hover {
@@ -145,11 +105,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-/* Іконка кошика — точні розміри 13.33 x 13.33 */
-.cartIcon {
-  width: 13.33px;
-  height: 13.33px;
-  display: auto;
 }
