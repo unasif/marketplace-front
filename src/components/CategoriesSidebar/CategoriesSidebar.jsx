@@ -3,12 +3,8 @@ import styles from "./CategoriesSidebar.module.scss";
 import SubCategories from "../SubCategories/SubCategories";
 import useCategories from "../../hooks/useCategories";
 
-import CategoriesModal from "../../components/CategoriesModal/CategoriesModal";
-
 const CategoriesSidebar = () => {
   const categories = useCategories();
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <nav className={styles.linksSidebar}>
@@ -32,11 +28,6 @@ const CategoriesSidebar = () => {
       >
         КАТЕГОРІЇ
       </button>
-      
-      <CategoriesModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
     </nav>
     
   );
