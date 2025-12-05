@@ -21,9 +21,7 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
       <footer className={styles.footer__container}>
         <div className={styles.logoSocial}>
           <div>
-            <div>
-              <LogoImage logoIm={logoIm} />
-            </div>
+            <LogoImage logoIm={logoIm} />
           </div>
           <div className={styles.social}>
             <div className={styles.socialIcon}>
