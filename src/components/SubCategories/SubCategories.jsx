@@ -2,8 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useCategoriesById from "../../hooks/useCategoriesById";
 
-const SubCategories = ({ token, categoryId }) => {
-  const categories = useCategoriesById(token, categoryId);
+const SubCategories = ({ categoryId }) => {
+  const categories = useCategoriesById(categoryId);
   const navigate = useNavigate();
 
   if (!categories || categories.length === 0) {
