@@ -46,19 +46,19 @@ const CategoriesModal = ({ isOpen, onClose }) => {
 
     if (!isOpen) return null;
     return (
-        <div className={styles.overlay} onClick={onClose}>
-            <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-                <div className={styles.sidebar}>
+        <div /*className={styles.overlay}*/ onClick={onClose}>
+            <div /*className={styles.modal}*/ onClick={(e) => e.stopPropagation()}>
+                <div /*className={styles.sidebar}*/>
                     {catalogData.map((category) => (
                         <div
                             key={category.id}
-                            className={`${styles.categoryItem} ${   
-                                activeCategories === category.id ? styles.active : ""
-                            }`}
+                            // className={`${styles.categoryItem} ${   
+                            //     activeCategories === category.id ? styles.active : ""
+                            // }`}
                             onMouseEnter={() => setActiveCategory(category)}
                         >
-                            <div className={styles.itemLeft}>
-                                <span className={styles.icon}>{category.icon}</span>
+                            <div /*className={styles.itemLeft}*/>
+                                <span /*className={styles.icon}*/>{category.icon}</span>
                                 {category.name}
                             </div>
                             
@@ -67,19 +67,19 @@ const CategoriesModal = ({ isOpen, onClose }) => {
                     ))}
                 </div>
                 {activeCategories && (
-                    <div className={styles.rightPanel}>
-                        <button className={styles.closeButton} onClick={onClose}>
+                    <div /*className={styles.rightPanel}*/>
+                        <button /*className={styles.closeButton}*/ onClick={onClose}>
                             ×
                         </button> {/* Зробити через іконку Close */}
 
-                        <h2 className={styles.categoryTitle}>{activeCategories.name}</h2>
+                        <h2 /*className={styles.categoryTitle} */>{activeCategories.name}</h2>
 
-                        <div className={styles.subGrid}>
+                        <div /*className={styles.subGrid}*/>
                             {activeCategories.items.map((item, index) => (
                                 <Link
                                     to={`/category/${item}`}
                                     key={index}
-                                    className={styles.subLink}
+                                    // className={styles.subLink}
                                     onClick={onClose}
                                 >
                                     {item}
