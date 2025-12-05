@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CategoriesSidebar.module.scss";
 import SubCategories from "../SubCategories/SubCategories";
 import useCategories from "../../hooks/useCategories";
