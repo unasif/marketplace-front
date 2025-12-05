@@ -3,7 +3,7 @@ import styles from "./CategoriesSidebar.module.scss";
 import SubCategories from "../SubCategories/SubCategories";
 import useCategories from "../../hooks/useCategories";
 
-const CategoriesSidebar = () => {
+const CategoriesSidebar = ({ onOpenCatalog }) => {
   const categories = useCategories();
 
   return (
@@ -24,7 +24,7 @@ const CategoriesSidebar = () => {
           width: '150px',
           cursor: 'pointer'
         }}
-        onClick={() => setIsModalOpen(true)}
+        onClick={onOpenCatalog}
       >
         КАТЕГОРІЇ
       </button>
