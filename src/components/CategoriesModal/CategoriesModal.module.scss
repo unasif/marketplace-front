@@ -16,7 +16,7 @@
 .modal {
   background: white;
   height: 500px;
-  width: fit-content; /* 🔥 ГОЛОВНЕ: Ширина підлаштовується під контент */
+  width: fit-content;
   border-radius: 8px;
   display: flex;
   overflow: hidden;
@@ -24,7 +24,7 @@
 }
 
 .sidebar {
-  width: 300px; /* Фіксована ширина лівої частини */
+  width: 300px;
   background-color: #fff;
   border-right: 1px solid #eee;
   overflow-y: auto;
@@ -36,10 +36,10 @@
   padding: 12px 25px;
   cursor: pointer;
   display: flex; justify-content: space-between; align-items: center;
-  font-size: 15px; color: #333; transition: background-color 0.1s;
+  font-size: 15px; color: #fff; transition: background-color 0.1s;
 
   &:hover, &.active {
-    background-color: #ffb347;
+    background-color: #136aba;
     color: white;
   }
   
@@ -47,7 +47,7 @@
 }
 
 .rightPanel {
-  width: 600px; /* Ширина правої частини при появі */
+  width: 600px;
   padding: 30px 40px;
   overflow-y: auto;
   background-color: #fdfdfd;
@@ -61,8 +61,8 @@
 }
 
 .subLink {
-  text-decoration: none; color: #444; font-size: 14px; padding: 5px 0; display: block;
-  &:hover { color: #ffb347; text-decoration: underline; }
+  text-decoration: none; color: #fff; font-size: 14px; padding: 5px 0; display: block;
+  &:hover { color: #136aba; text-decoration: underline; }
 }
 
 .closeButton {
