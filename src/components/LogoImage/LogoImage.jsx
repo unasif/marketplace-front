@@ -9,12 +9,7 @@ const LogoImage = ({ logoIm = {} }) => {
     : null;
 
   return (
-    <a href="/"
-       style={{
-        display: 'flex',
-        alignItems: 'center',
-       }}
-    >
+    <a href="/">
       {logo ? (
         <img src={imageUrl} alt={"Поки в базі alt немає"} />
       ) : (
