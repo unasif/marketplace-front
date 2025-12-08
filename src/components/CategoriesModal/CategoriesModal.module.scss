@@ -69,5 +69,74 @@
   &:hover { color: #333; }
 }
 
+.rightPanel {
+  width: 800px; /* Збільшимо ширину, бо тепер 3 колонки */
+  padding: 30px 40px;
+  overflow-y: auto;
+  background-color: #fff;
+  border-left: 1px solid #eee;
+  position: relative;
+}
+
+.mainTitle {
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 25px;
+  color: #333;
+  border-bottom: 2px solid #136aba;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+/* Сітка для груп (колонок) */
+.groupsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 колонки, як на фото */
+  gap: 40px; /* Відступ між колонками */
+  align-items: start;
+}
+
+.groupBlock {
+  margin-bottom: 20px;
+}
+
+.groupTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+.linksList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subLink {
+  text-decoration: none;
+  color: #555;
+  font-size: 14px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #136aba;
+    text-decoration: underline;
+  }
+}
+
+.viewMore {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #0099ff;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 @keyframes fadeIn { to { opacity: 1; } }
 @keyframes slideIn { from { opacity: 0; } to { opacity: 1; } }
