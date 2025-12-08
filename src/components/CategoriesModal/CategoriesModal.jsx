@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { use } from "react";
 import { Link } from "react-router-dom";
 import styles from "../CategoriesModal/CategoriesModal.module.scss";
+//тимчасові іконки
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const catalogData = [
   {
@@ -90,7 +93,7 @@ const CategoriesModal = ({ isOpen, onClose }) => {
                         <div
                             key={category.id}
                             className={`${styles.categoryItem} ${   
-                                activeCategories === category.id ? styles.active : ""
+                                activeCategories?.id === category.id ? styles.active : ""
                             }`}
                             onMouseEnter={() => setActiveCategory(category)}
                         >
@@ -103,17 +106,17 @@ const CategoriesModal = ({ isOpen, onClose }) => {
                         </div>
                     ))}
                 </div>
-                {activeCategory && (
+                {activeCategories && (
                     <div className={styles.rightPanel}>
                         <button className={styles.closeButton} onClick={onClose}>
                              <FontAwesomeIcon icon={faXmark} />
                         </button>
 
-                        <h2 className={styles.mainTitle}>{activeCategory.name}</h2>
+                        <h2 className={styles.mainTitle}>{activeCategories.name}</h2>
 
                         {/* Сітка для груп категорій */}
                         <div className={styles.groupsGrid}>
-                            {activeCategory.items.map((group, index) => (
+                            {activeCategories.items.map((group, index) => (
                                 <div key={index} className={styles.groupBlock}>
                                     {/* Заголовок підкатегорії */}
                                     <h3 className={styles.groupTitle}>{group.title}</h3>
