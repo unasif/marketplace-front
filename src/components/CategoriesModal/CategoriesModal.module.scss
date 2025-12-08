@@ -83,16 +83,13 @@
   margin-top: 0;
   margin-bottom: 25px;
   color: #333;
-  border-bottom: 2px solid #136aba;
-  padding-bottom: 10px;
   display: inline-block;
 }
 
-/* Сітка для груп (колонок) */
 .groupsGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 колонки, як на фото */
-  gap: 40px; /* Відступ між колонками */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
   align-items: start;
 }
 
@@ -122,18 +119,6 @@
 
   &:hover {
     color: #136aba;
-    text-decoration: underline;
-  }
-}
-
-.viewMore {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 14px;
-  color: #0099ff;
-  text-decoration: none;
-  
-  &:hover {
     text-decoration: underline;
   }
 }
