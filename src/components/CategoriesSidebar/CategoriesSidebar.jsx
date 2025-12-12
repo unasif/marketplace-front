@@ -3,6 +3,9 @@ import styles from "./CategoriesSidebar.module.scss";
 import SubCategories from "../SubCategories/SubCategories";
 import useCategories from "../../hooks/useCategories";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+
 const catalogData = [
   {
     id: 1,
