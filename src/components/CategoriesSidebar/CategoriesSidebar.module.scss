@@ -1,85 +1,208 @@
-.linksSidebar {
-  padding-top: 30px;
+.sidebarContainer {
+  position: relative; // База для позиціонування випадаючого вікна
+  width: 280px;       // Фіксована ширина сайдбару
+  background-color: #fff;
+  padding: 10px 0;
+  // border-right: 1px solid #eee; // Можна додати, якщо треба лінія
 }
 
-.linksSidebar p {
-  font-weight: 700;
-  font-style: 400;
-  line-height: 1.4;
-  padding-bottom: 10px;
-  font-size: 20px;
-  color: #001f3d;
+.sidebarHeader {
+    padding: 0 16px 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
 }
 
-.linksSidebar {
-  ul {
-    list-style: none;
-    li {
-      padding: 10px 20px;
-      a {
-        text-decoration: none;
-        color: #45525c;
-        font-size: 18px;
-        font-weight: 600;
-        line-height: 1.4;
-        cursor: pointer;
-      }
+/* --- Список категорій (Зліва) --- */
+.rootList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rootItem {
+  transition: all 0.2s;
+  
+  &.active {
+    background-color: #fff;
+    color: #792c9b; // Фіолетовий (як у Prom)
+    
+    // Щоб перекрити лінію справа (ефект єдиного цілого)
+    position: relative;
+    z-index: 102; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.05); // Легка тінь
+
+    .rootLink {
+      color: #792c9b;
+      font-weight: 600;
     }
   }
-}
 
-.menuHeader {
-  color: #45525c;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.4;
-  cursor: pointer;
-  border: 0;
-  background: transparent;
-}
-
-.menuHeader:hover {
-  color: #13b3ba;
-  transition: color 0.3s;
-  cursor: pointer;
-}
-
-.subMenu {
-  height: 0;
-  overflow: hidden;
-  transition: height 0.3s;
-}
-
-.subMenu.open {
-  height: auto;
-}
-
-.menuItem {
-  position: relative;
-  a:hover {
-    color: #13b3ba;
-    transition: color 0.3s;
-    cursor: pointer;
+  &:hover:not(.active) {
+    background-color: #f5f5f5;
   }
 }
 
-.accordionArrow {
+.rootLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+.arrowIcon {
+  font-size: 10px;
+  color: #ccc;
+}
+
+/* --- Випадаюча панель (Справа) --- */
+.flyoutPanel {
   position: absolute;
-  top: 50%;
-  right: 20px;
-  display: block;
-  width: 30px;
-  height: 17px;
-  transform: translateY(-50%);
-  @media (max-width: 1199.98px) {
-    display: none;
+  top: 0;
+  left: 100%; // Зсуваємо вправо на 100% ширини sidebarContainer
+  width: 800px; // Ширина випадаючого вікна (налаштуйте під себе)
+  min-height: 100%; // Висота не менше сайдбару
+  background-color: #fff;
+  
+  // Тінь для ефекту "поверх всього"
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.1); 
+  border: 1px solid #eee;
+  border-left: none; // Щоб зливалося з активним пунктом
+  
+  padding: 24px;
+  z-index: 100; // Найвищий пріоритет відображення
+  box-sizing: border-box;
+}
+
+.flyoutTitle {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  color: #333;
+}
+
+.groupsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 колонки підкатегорій
+  gap: 30px;
+}
+
+.groupBlock {
+  margin-bottom: 20px;
+}
+
+.groupTitle {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.linksList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subLink {
+  font-size: 13px;
+  color: #555;
+  text-decoration: none;
+  
+  &:hover {
+    color: #136aba;
+    text-decoration: underline;
   }
 }
 
-.accordionArrow.active {
-  top: 25px;
-  transform: translateY(-50%) rotate(180deg);
-  @media (max-width: 1199.98px) {
-    display: none;
-  }
-}
+
+// .linksSidebar {
+//   padding-top: 30px;
+// }
+
+// .linksSidebar p {
+//   font-weight: 700;
+//   font-style: 400;
+//   line-height: 1.4;
+//   padding-bottom: 10px;
+//   font-size: 20px;
+//   color: #001f3d;
+// }
+
+// .linksSidebar {
+//   ul {
+//     list-style: none;
+//     li {
+//       padding: 10px 20px;
+//       a {
+//         text-decoration: none;
+//         color: #45525c;
+//         font-size: 18px;
+//         font-weight: 600;
+//         line-height: 1.4;
+//         cursor: pointer;
+//       }
+//     }
+//   }
+// }
+
+// .menuHeader {
+//   color: #45525c;
+//   font-size: 18px;
+//   font-weight: 600;
+//   line-height: 1.4;
+//   cursor: pointer;
+//   border: 0;
+//   background: transparent;
+// }
+
+// .menuHeader:hover {
+//   color: #13b3ba;
+//   transition: color 0.3s;
+//   cursor: pointer;
+// }
+
+// .subMenu {
+//   height: 0;
+//   overflow: hidden;
+//   transition: height 0.3s;
+// }
+
+// .subMenu.open {
+//   height: auto;
+// }
+
+// .menuItem {
+//   position: relative;
+//   a:hover {
+//     color: #13b3ba;
+//     transition: color 0.3s;
+//     cursor: pointer;
+//   }
+// }
+
+// .accordionArrow {
+//   position: absolute;
+//   top: 50%;
+//   right: 20px;
+//   display: block;
+//   width: 30px;
+//   height: 17px;
+//   transform: translateY(-50%);
+//   @media (max-width: 1199.98px) {
+//     display: none;
+//   }
+// }
+
+// .accordionArrow.active {
+//   top: 25px;
+//   transform: translateY(-50%) rotate(180deg);
+//   @media (max-width: 1199.98px) {
+//     display: none;
+//   }
+// }
