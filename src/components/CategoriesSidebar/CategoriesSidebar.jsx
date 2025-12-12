@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./CategoriesSidebar.module.scss";
+import { Link } from "react-router-dom";
 import SubCategories from "../SubCategories/SubCategories";
 import useCategories from "../../hooks/useCategories";
 
