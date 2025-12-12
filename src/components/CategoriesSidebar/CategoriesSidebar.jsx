@@ -69,25 +69,26 @@ const CategoriesSidebar = () => {
         <div className={styles.backdrop} onClick={handleClose}></div>
       )}
 
-      <nav className={styles.sidebarContainer}>
-        <div className={styles.sidebarHeader}>Категорії</div>
+      <nav className={styles.linksSidebar}>
+        <p className={styles.sidebarHeader}>Категорії</p>
         
         <ul className={styles.rootList}>
           {catalogData.map((category) => (
             <li 
               key={category.id} 
               className={`${styles.rootItem} ${activeCategory?.id === category.id ? styles.active : ''}`}
-              // Просто перемикаємо категорію при наведенні
               onMouseEnter={() => setActiveCategory(category)}
             >
               <Link to={`/category/${category.id}`} className={styles.rootLink}>
                 <span>{category.name}</span>
+                {/* Стрілочка */}
                 <FontAwesomeIcon icon={faChevronRight} className={styles.arrowIcon} />
               </Link>
             </li>
           ))}
         </ul>
 
+        {/* Права панель (Mega Menu) */}
         {activeCategory && (
           <div className={styles.flyoutPanel}>
             <h2 className={styles.flyoutTitle}>{activeCategory.name}</h2>
@@ -103,6 +104,7 @@ const CategoriesSidebar = () => {
                         to={`/category/${link}`} 
                         key={linkIndex}
                         className={styles.subLink}
+                        onClick={handleClose}
                       >
                         {link}
                       </Link>
