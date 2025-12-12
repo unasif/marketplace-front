@@ -59,6 +59,10 @@ const catalogData = [
 const CategoriesSidebar = () => {
   const [activeCategory, setActiveCategory] = useState(null);
 
+  const handleClose = () => {
+    setActiveCategory(null);
+  };
+
   return (
     <>
       {activeCategory && (
