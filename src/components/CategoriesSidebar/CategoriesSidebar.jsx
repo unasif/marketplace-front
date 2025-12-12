@@ -60,55 +60,57 @@ const CategoriesSidebar = () => {
   const [activeCategory, setActiveCategory] = useState(null);
 
   return (
-    // relative тут важливий, щоб права панель знала від чого відштовхуватись
-    <nav 
-      className={styles.sidebarContainer} 
-      onMouseLeave={() => setActiveCategory(null)}
-    >
-      <div className={styles.sidebarHeader}>Категорії</div>
-      
-      <ul className={styles.rootList}>
-        {catalogData.map((category) => (
-          <li 
-            key={category.id} 
-            className={`${styles.rootItem} ${activeCategory?.id === category.id ? styles.active : ''}`}
-            onMouseEnter={() => setActiveCategory(category)}
-          >
-            <Link to={`/category/${category.id}`} className={styles.rootLink}>
-              <span>{category.name}</span>
-              <FontAwesomeIcon icon={faChevronRight} className={styles.arrowIcon} />
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      {/* ПРАВА ЧАСТИНА (Випадаюче меню) */}
+    <>
       {activeCategory && (
-        <div className={styles.flyoutPanel}>
-          <h2 className={styles.flyoutTitle}>{activeCategory.name}</h2>
-          
-          <div className={styles.groupsGrid}>
-            {activeCategory.items.map((group, index) => (
-              <div key={index} className={styles.groupBlock}>
-                <h3 className={styles.groupTitle}>{group.title}</h3>
-                
-                <div className={styles.linksList}>
-                  {group.links.map((link, linkIndex) => (
-                    <Link
-                      to={`/category/${link}`} 
-                      key={linkIndex}
-                      className={styles.subLink}
-                    >
-                      {link}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <div className={styles.backdrop} onClick={handleClose}></div>
       )}
-    </nav>
+
+      <nav className={styles.sidebarContainer}>
+        <div className={styles.sidebarHeader}>Категорії</div>
+        
+        <ul className={styles.rootList}>
+          {catalogData.map((category) => (
+            <li 
+              key={category.id} 
+              className={`${styles.rootItem} ${activeCategory?.id === category.id ? styles.active : ''}`}
+              // Просто перемикаємо категорію при наведенні
+              onMouseEnter={() => setActiveCategory(category)}
+            >
+              <Link to={`/category/${category.id}`} className={styles.rootLink}>
+                <span>{category.name}</span>
+                <FontAwesomeIcon icon={faChevronRight} className={styles.arrowIcon} />
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {activeCategory && (
+          <div className={styles.flyoutPanel}>
+            <h2 className={styles.flyoutTitle}>{activeCategory.name}</h2>
+            
+            <div className={styles.groupsGrid}>
+              {activeCategory.items.map((group, index) => (
+                <div key={index} className={styles.groupBlock}>
+                  <h3 className={styles.groupTitle}>{group.title}</h3>
+                  
+                  <div className={styles.linksList}>
+                    {group.links.map((link, linkIndex) => (
+                      <Link
+                        to={`/category/${link}`} 
+                        key={linkIndex}
+                        className={styles.subLink}
+                      >
+                        {link}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
+    </>
   );
 };
 

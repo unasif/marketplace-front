@@ -1,9 +1,24 @@
+/* --- Новий клас для фону --- */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent; // Напівпрозорий чорний (затемнення сайту)
+  // Якщо хочете повністю прозорий фон (просто для перехоплення кліку), поставте: background-color: transparent;
+  z-index: 90; // Нижче ніж сайдбар, але вище за контент сторінки
+  cursor: default;
+}
+
 .sidebarContainer {
-  position: relative; // База для позиціонування випадаючого вікна
-  width: 280px;       // Фіксована ширина сайдбару
+  position: relative;
+  width: 280px;
   background-color: #fff;
   padding: 10px 0;
-  // border-right: 1px solid #eee; // Можна додати, якщо треба лінія
+  
+  // ВАЖЛИВО: Сайдбар має бути вище за backdrop, щоб по ньому можна було клікати
+  z-index: 100; 
 }
 
 .sidebarHeader {
@@ -25,13 +40,12 @@
   
   &.active {
     background-color: #fff;
-    color: #792c9b; // Фіолетовий (як у Prom)
+    color: #792c9b;
     
-    // Щоб перекрити лінію справа (ефект єдиного цілого)
     position: relative;
     z-index: 102; 
-    box-shadow: 0 0 10px rgba(0,0,0,0.05); // Легка тінь
-
+    // box-shadow прибрав, бо з backdrop це виглядає краще без нього, або можна лишити
+    
     .rootLink {
       color: #792c9b;
       font-weight: 600;
@@ -62,18 +76,17 @@
 .flyoutPanel {
   position: absolute;
   top: 0;
-  left: 100%; // Зсуваємо вправо на 100% ширини sidebarContainer
-  width: 800px; // Ширина випадаючого вікна (налаштуйте під себе)
-  min-height: 100%; // Висота не менше сайдбару
+  left: 100%; 
+  width: 800px;
+  min-height: 100%;
   background-color: #fff;
   
-  // Тінь для ефекту "поверх всього"
   box-shadow: 5px 5px 15px rgba(0,0,0,0.1); 
   border: 1px solid #eee;
-  border-left: none; // Щоб зливалося з активним пунктом
+  border-left: none;
   
   padding: 24px;
-  z-index: 100; // Найвищий пріоритет відображення
+  z-index: 100;
   box-sizing: border-box;
 }
 
@@ -88,7 +101,7 @@
 
 .groupsGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); // 3 колонки підкатегорій
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
 
@@ -119,7 +132,6 @@
     text-decoration: underline;
   }
 }
-
 
 // .linksSidebar {
 //   padding-top: 30px;
