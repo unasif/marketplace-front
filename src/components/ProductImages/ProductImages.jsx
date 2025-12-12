@@ -5,9 +5,16 @@ import ModalImage from "../../components/ModalImage/ModalImage";
 const ProductImages = ({ productPhotoInfo }) => {
   const { photo, name } = productPhotoInfo;
   const baseURL = "https://unas.if.ua/api/";
-  const imageUrl = productPhotoInfo.photo
-    ? `${baseURL}${productPhotoInfo.photo.replace(/\\/g, "/")}`
-    : null;
+
+  let imageUrl = null;
+
+  if (photo) {
+    if (photo.startsWith("http") || photo.startsWith("https")) {
+      imageUrl = photo;
+    } else {
+      imageUrl = `${baseURL}${photo.replace(/\\/g, "/")}`;
+    }
+  }
 
   const [open, setOpen] = useState(false);
 
@@ -28,7 +35,7 @@ const ProductImages = ({ productPhotoInfo }) => {
         <img src={noPhotoAvailable} alt="No pictures" />
       )}
       <ModalImage
-        open={open} 
+        open={open}
         onClose={closeModalImage}
         productPhotoInfo={productPhotoInfo}
       />
