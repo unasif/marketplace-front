@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import styles from "./CategoriesSidebar.module.scss";
 import SubCategories from "../SubCategories/SubCategories";
 import useCategories from "../../hooks/useCategories";
+import CategoriesModal from "../CategoriesModal/CategoriesModal";
 
 const CategoriesSidebar = ({ onOpenCatalog }) => {
   const categories = useCategories();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   return (
     <nav className={styles.linksSidebar}>
@@ -28,6 +34,11 @@ const CategoriesSidebar = ({ onOpenCatalog }) => {
       >
         КАТЕГОРІЇ
       </button>
+
+      <CategoriesModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+      />
     </nav>
     
   );
