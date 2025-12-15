@@ -15,15 +15,27 @@ const catalogData = [
     name: "Категорія 1",
     items: [
       {
-        title: "Підкатегорія 1 (заголовок)",
+        title: "Підкатегорія 1",
+        links: ["Під-підкатегорія 1", "Під-підкатегорія 2", "Під-підкатегорія 3", "Під-підкатегорія 4", "Під-підкатегорія 5",  "Під-підкатегорія 6"]
+      },
+      {
+        title: "Під категорія 2",
         links: ["Під-підкатегорія 1", "Під-підкатегорія 2", "Під-підкатегорія 3", "Під-підкатегорія 4", "Під-підкатегорія 5"]
       },
       {
-        title: "Під категорія 2 (заголовок)",
-        links: ["Під-підкатегорія 1", "Під-підкатегорія 2", "Під-підкатегорія 3", "Під-підкатегорія 4", "Під-підкатегорія 5"]
+        title: "Під категорія 3",
+        links: ["Під-підкатегорія 1", "Під-підкатегорія 2", "Під-підкатегорія 3", "Під-підкатегорія 4"]
       },
       {
-        title: "Підкатегорія 3 (заголовок)",
+        title: "Під категорія 4",
+        links: ["Під-підкатегорія 1", "Під-підкатегорія 2", "Під-підкатегорія 3", "Під-підкатегорія 4"]
+      },
+      {
+        title: "Під категорія 5",
+        links: ["Під-підкатегорія 1", "Під-підкатегорія 2", "Під-підкатегорія 3", "Під-підкатегорія 4"]
+      },
+      {
+        title: "Під категорія 6",
         links: ["Під-підкатегорія 1", "Під-підкатегорія 2", "Під-підкатегорія 3", "Під-підкатегорія 4"]
       }
     ]
@@ -65,6 +77,7 @@ const CategoriesSidebar = () => {
     setActiveCategory(null);
   };
   
+  const LINKS_LIMIT = 5;
 
   return (
     <>
@@ -94,38 +107,58 @@ const CategoriesSidebar = () => {
 
         {/* Права панель (Mega Menu) */}
         {activeCategory && (
-          <div className={styles.flyoutPanel}>
+          <Paper 
+          elevation={4} 
+          className={styles.flyoutPanel}
+          >
             <h2 className={styles.flyoutTitle}>{activeCategory.name}</h2>
             
-            <div className={styles.groupsGrid}>
-              {activeCategory.items.map((group, index) => (
-                <div key={index} className={styles.groupBlock}>
+            <Grid container spacing={3}>
+              {activeCategory.items.map((group, index) => {
+                const visibleLinks = group.links.slice(0, LINKS_LIMIT);
+                const hasMore = group.links.length > LINKS_LIMIT;
+                return (
+                  <Grid item xs={12} sm={6} md={3} key={index}>
+                    <div className={styles.groupBlock}>
+                      
+                      <h3 className={styles.groupTitle}>
+                        <Link 
+                            to={`/category/${group.title}`} 
+                            onClick={handleClose}
+                          >
+                            {group.title}
+                          </Link>
+                      </h3>
+                      
+                      <div className={styles.linksList}>
+                        {visibleLinks.map((link, linkIndex) => (
+                          <Link
+                            to={`/category/${link}`} 
+                            key={linkIndex}
+                            className={styles.subLink}
+                            onClick={handleClose}
+                          >
+                            {link}
+                          </Link>
+                        ))}
 
-                  <h3 className={styles.groupTitle}>
-                    <Link 
-                      to={`/category/${group.title}`} 
-                      onClick={handleClose}
-                    >
-                      {group.title}
-                    </Link>
-                  </h3>
-
-                  <div className={styles.linksList}>
-                    {group.links.map((link, linkIndex) => (
-                      <Link
-                        to={`/category/${link}`} 
-                        key={linkIndex}
-                        className={styles.subLink}
-                        onClick={handleClose}
-                      >
-                        {link}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+                        {/* Посилання "Переглянути всі" */}
+                        {hasMore && (
+                          <Link
+                            to={`/category/${group.title}`}
+                            className={styles.viewMoreLink}
+                            onClick={handleClose}
+                          >
+                            Переглянути всі...
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Paper>
         )}
       </Paper>
     </>
