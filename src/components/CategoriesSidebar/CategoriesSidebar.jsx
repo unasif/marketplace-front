@@ -62,16 +62,15 @@ const CategoriesSidebar = () => {
   const handleClose = () => {
     setActiveCategory(null);
   };
+  
 
   return (
     <>
-      {activeCategory && (
-        <div className={styles.backdrop} onClick={handleClose}></div>
-      )}
-
-      <nav className={styles.linksSidebar}>
+      <nav 
+      className={styles.linksSidebar} 
+      onMouseLeave={handleClose}
+      >
         <p className={styles.sidebarHeader}>Категорії</p>
-        
         <ul className={styles.rootList}>
           {catalogData.map((category) => (
             <li 
@@ -96,7 +95,7 @@ const CategoriesSidebar = () => {
             <div className={styles.groupsGrid}>
               {activeCategory.items.map((group, index) => (
                 <div key={index} className={styles.groupBlock}>
-                  
+
                   <h3 className={styles.groupTitle}>
                     <Link 
                       to={`/category/${group.title}`} 
