@@ -7,6 +7,11 @@ import useCategories from "../../hooks/useCategories";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+
 const catalogData = [
   {
     id: 1,
@@ -71,21 +76,65 @@ const CategoriesSidebar = () => {
       onMouseLeave={handleClose}
       >
         <p className={styles.sidebarHeader}>Категорії</p>
-        <ul className={styles.rootList}>
-          {catalogData.map((category) => (
-            <li 
+        <List component="nav" disablePadding>
+        {catalogData.map((category) => {
+          const isActive = activeCategory?.id === category.id;
+
+          return (
+            <ListItem 
               key={category.id} 
-              className={`${styles.rootItem} ${activeCategory?.id === category.id ? styles.active : ''}`}
+              disablePadding
+              // Важливо: переносимо onMouseEnter на ListItem, щоб ловити наведення на всю ширину
               onMouseEnter={() => setActiveCategory(category)}
+              sx={{
+                // Якщо активна категорія - додаємо білий фон, щоб перекрити бордер справа (як було в CSS)
+                backgroundColor: isActive ? '#fff' : 'transparent',
+                zIndex: isActive ? 102 : 'auto',
+              }}
             >
-              <Link to={`/category/${category.id}`} className={styles.rootLink}>
-                <span>{category.name}</span>
-                {/* Стрілочка */}
-                <FontAwesomeIcon icon={faChevronRight} className={styles.arrowIcon} />
-              </Link>
-            </li>
-          ))}
-        </ul>
+              <ListItemButton
+                component={Link}
+                to={`/category/${category.id}`}
+
+                sx={{
+                  padding: '10px 20px', // Ваші відступи з CSS
+                  color: isActive ? '#13b3ba' : '#45525c', // Логіка кольорів
+                  transition: 'color 0.3s',
+                  '&:hover': {
+                    backgroundColor: '#f5f5f5', // Легкий фон при наведенні (опціонально)
+                    color: '#13b3ba', // Колір тексту при наведенні
+                    '& .arrow-icon': { // Звертаємось до іконки при наведенні на кнопку
+                       color: '#13b3ba'
+                    }
+                  }
+                }}
+              >
+                {/* Текст категорії */}
+                <ListItemText 
+                  primary={category.name} 
+                  primaryTypographyProps={{
+                    fontSize: '18px',
+                    fontWeight: 600,
+                    lineHeight: 1.4,
+                    fontFamily: 'sans-serif' // Або inherit
+                  }}
+                />
+
+                {/* Іконка FontAwesome */}
+                <FontAwesomeIcon 
+                  icon={faChevronRight} 
+                  className="arrow-icon" // Клас для таргетингу через sx
+                  style={{
+                    fontSize: '14px',
+                    color: isActive ? '#13b3ba' : '#45525c', // Колір залежить від активності
+                    transition: 'color 0.3s'
+                  }} 
+                />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
 
         {/* Права панель (Mega Menu) */}
         {activeCategory && (
