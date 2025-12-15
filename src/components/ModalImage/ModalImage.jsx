@@ -5,11 +5,18 @@ import noPhotoAvailable from "../../assets/no-photo-available.svg";
 import styles from "./ModalImage.module.scss";
 
 const ModalImage = ({ open, onClose, productPhotoInfo }) => {
-  const { name } = productPhotoInfo;
+  const { name, photo } = productPhotoInfo;
   const baseURL = "https://unas.if.ua/api/";
-  const imageUrl = productPhotoInfo.photo
-    ? `${baseURL}${productPhotoInfo.photo.replace(/\\/g, "/")}`
-    : null;
+
+  let imageUrl = null;
+
+  if (photo) {
+    if (photo.startsWith("http") || photo.startsWith("https")) {
+      imageUrl = photo;
+    } else {
+      imageUrl = `${baseURL}${photo.replace(/\\/g, "/")}`;
+    }
+  }
 
   if (!open) return null;
 
