@@ -37,7 +37,7 @@
 
 .rootItem {
   position: relative;
-  padding: 10px 20px;
+  padding: 10px 20px 0px 30px;
   transition: background-color 0.3s;
   cursor: pointer;
 
@@ -69,7 +69,6 @@
     
     .arrowIcon {
       color: #13b3ba;
-      transform: rotate(180deg); 
     }
   }
 
@@ -136,6 +135,24 @@
   &:hover {
     color: #13b3ba;
     text-decoration: none;
+  }
+}
+
+.groupTitle {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  
+  /* Стилізуємо посилання всередині заголовка */
+  a {
+    text-decoration: none;
+    color: #001f3d; /* Основний темний колір */
+    transition: color 0.3s;
+
+    &:hover {
+      color: #13b3ba; /* Бірюзовий при наведенні */
+      cursor: pointer;
+    }
   }
 }
 

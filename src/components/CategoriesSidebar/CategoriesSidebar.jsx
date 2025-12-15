@@ -96,8 +96,16 @@ const CategoriesSidebar = () => {
             <div className={styles.groupsGrid}>
               {activeCategory.items.map((group, index) => (
                 <div key={index} className={styles.groupBlock}>
-                  <h3 className={styles.groupTitle}>{group.title}</h3>
                   
+                  <h3 className={styles.groupTitle}>
+                    <Link 
+                      to={`/category/${group.title}`} 
+                      onClick={handleClose}
+                    >
+                      {group.title}
+                    </Link>
+                  </h3>
+
                   <div className={styles.linksList}>
                     {group.links.map((link, linkIndex) => (
                       <Link
