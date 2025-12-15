@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
 const catalogData = [
   {
