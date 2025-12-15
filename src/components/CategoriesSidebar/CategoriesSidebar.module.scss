@@ -64,6 +64,16 @@
     background-color: #fff; 
     z-index: 102;
   }
+  &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -2px;
+      width: 5px;
+      height: 100%; 
+      background-color: #fff;
+      z-index: 103;
+    }
 }
 
 .flyoutPanel {
