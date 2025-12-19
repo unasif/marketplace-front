@@ -131,7 +131,7 @@ const CategoriesSidebar = () => {
                 const visibleLinks = group.links.slice(0, LINKS_LIMIT);
                 const hasMore = group.links.length > LINKS_LIMIT;
                 return (
-                  <Grid item xs={12} sm={6} md={3} key={index} zeroMinWidth>
+                  <Grid item xs={12} sm={6} md={3} key={index} style={{ minWidth: '250px' }}>
                     <div className={styles.groupBlock}>
                       
                       <h3 className={styles.groupTitle}>
