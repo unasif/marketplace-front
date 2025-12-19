@@ -131,8 +131,8 @@
 // }
 
 .groupBlock {
-  width: 100%;
-  max-width: 250px;
+  width: 250px;
+  flex-shrink: 0;
   overflow: hidden;
   box-sizing: border-box;
   margin-bottom: 20px;
