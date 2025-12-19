@@ -150,6 +150,7 @@ const CategoriesSidebar = () => {
                             key={linkIndex}
                             className={styles.subLink}
                             onClick={handleClose}
+                            title={link}
                           >
                             {link}
                           </Link>
