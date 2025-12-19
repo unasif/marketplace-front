@@ -18,6 +18,14 @@
   color: #001f3d;
 }
 
+@mixin truncate {
+  white-space: nowrap;      /* Забороняємо перенесення рядків */
+  overflow: hidden;         /* Ховаємо все, що вилазить */
+  text-overflow: ellipsis;  /* Додаємо три крапки (...) */
+  display: block;           /* Елемент має бути блоковим або inline-block */
+  max-width: 100%;          /* Обмеження ширини батьківським блоком */
+}
+
 .rootList {
   list-style: none;
   padding: 0;
@@ -139,6 +147,7 @@
 }
 
 .subLink {
+  @include truncate;
   font-size: 15px;
   color: #45525c;
   text-decoration: none;
