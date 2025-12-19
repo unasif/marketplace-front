@@ -131,6 +131,10 @@
 // }
 
 .groupBlock {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
   margin-bottom: 20px;
 }
 
@@ -138,13 +142,18 @@
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 12px;
+  width: 100%;
   color: #001f3d;
+  a {
+    @include truncate;
+  }
 }
 
 .linksList {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
 }
 
 .subLink {
@@ -156,7 +165,7 @@
   font-weight: 400;
   transition: color 0.3s;
   width: 100%;
-  
+
   &:hover {
     color: #13b3ba;
     text-decoration: none;
