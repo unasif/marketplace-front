@@ -19,11 +19,11 @@
 }
 
 @mixin truncate {
-  white-space: nowrap;      /* Забороняємо перенесення рядків */
-  overflow: hidden;         /* Ховаємо все, що вилазить */
-  text-overflow: ellipsis;  /* Додаємо три крапки (...) */
-  display: block;           /* Елемент має бути блоковим або inline-block */
-  max-width: 100%;          /* Обмеження ширини батьківським блоком */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 100%;
 }
 
 .rootList {
@@ -131,6 +131,7 @@
 
 .groupBlock {
   margin-bottom: 20px;
+  width: 100%;
   overflow: hidden;
 }
 
