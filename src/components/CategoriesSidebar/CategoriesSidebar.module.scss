@@ -89,12 +89,12 @@
   position: absolute;
   top: 0;
   left: 100%; 
-  width: 700px; 
+  width: 870px; 
   height: 250%;
   overflow-y: auto;
   min-height: 100%;
   border-left: 1px solid #eee;
-  padding: 30px 40px;
+  padding: 30px 0px 30px 40px;
   z-index: 100;
   box-sizing: border-box;
 
@@ -124,12 +124,6 @@
   padding-bottom: 15px;
 }
 
-// .groupsGrid {
-//   display: grid;
-//   grid-template-columns: repeat(3, 1fr);
-//   gap: 30px;
-// }
-
 .groupBlock {
   width: 250px;
   flex-shrink: 0;
@@ -144,8 +138,15 @@
   margin-bottom: 12px;
   width: 100%;
   color: #001f3d;
+  
   a {
-    @include truncate;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -177,14 +178,13 @@
   font-weight: 700;
   margin-bottom: 12px;
   
-  /* Стилізуємо посилання всередині заголовка */
   a {
     text-decoration: none;
-    color: #001f3d; /* Основний темний колір */
+    color: #001f3d;
     transition: color 0.3s;
 
     &:hover {
-      color: #13b3ba; /* Бірюзовий при наведенні */
+      color: #13b3ba;
       cursor: pointer;
     }
   }
