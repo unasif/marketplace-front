@@ -121,7 +121,7 @@ const CategoriesSidebar = () => {
         {/* Права панель (Mega Menu) */}
         {activeCategory && (
           <Paper 
-          elevation={2}
+          elevation={0}
           className={styles.flyoutPanel}
           >
             <h2 className={styles.flyoutTitle}>{activeCategory.name}</h2>
