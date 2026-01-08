@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Footer.module.scss";
+import { styled } from '@mui/material/styles';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
@@ -13,6 +14,24 @@ import no_logo from "../../assets/no-photo-available.svg";
 import defaultLogo from "../../assets/no-photo-available.svg";
 import LogoImage from "../LogoImage/LogoImage";
 
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import XIcon from '@mui/icons-material/X';
+
+import IconButton from '@mui/material/IconButton';
+
+const SocialIconButton = styled(IconButton)(({ theme }) => ({
+  width: 34,
+  height: 34,
+  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  color: '#fff',
+  transition: 'color 0.3s ease',
+  '&:hover': {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    color: '#13b3ba',
+  },
+}));
+
 const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 
   const displayLogo = logoIm || defaultLogo;
@@ -25,19 +44,19 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
           </div>
           <div className={styles.social}>
             <div className={styles.socialIcon}>
-              <a href="https://www.instagram.com/" target="blank">
-                <FontAwesomeIcon icon={faInstagram} />
-              </a>
+              <SocialIconButton component="a" href="https://instagram.com" target="_blank">
+                <InstagramIcon fontSize="small" />
+              </SocialIconButton>
             </div>
             <div className={styles.socialIcon}>
-              <a href="https://www.facebook.com/" target="blank">
-                <FontAwesomeIcon icon={faFacebook} />
-              </a>
+              <SocialIconButton component="a" href="https://facebook.com" target="_blank">
+                <FacebookIcon fontSize="small" />
+              </SocialIconButton>
             </div>
             <div className={styles.socialIcon}>
-              <a href="https://twitter.com/" target="blank">
-                <FontAwesomeIcon icon={faX} />
-              </a>
+              <SocialIconButton component="a" href="https://x.com" target="_blank">
+                <XIcon fontSize="small" />
+              </SocialIconButton>
             </div>
           </div>
         </div>
