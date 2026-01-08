@@ -49,14 +49,14 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
               </SocialIconButton>
             </div>
             <div className={styles.socialIcon}>
-              <a href="https://www.facebook.com/" target="blank">
-                <FontAwesomeIcon icon={faFacebook} />
-              </a>
+              <SocialIconButton component="a" href="https://facebook.com" target="_blank">
+                <FacebookIcon fontSize="small" />
+              </SocialIconButton>
             </div>
             <div className={styles.socialIcon}>
-              <a href="https://twitter.com/" target="blank">
-                <FontAwesomeIcon icon={faX} />
-              </a>
+              <SocialIconButton component="a" href="https://x.com" target="_blank">
+                <XIcon fontSize="small" />
+              </SocialIconButton>
             </div>
           </div>
         </div>
