@@ -13,6 +13,12 @@ import no_logo from "../../assets/no-photo-available.svg";
 import defaultLogo from "../../assets/no-photo-available.svg";
 import LogoImage from "../LogoImage/LogoImage";
 
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import XIcon from '@mui/icons-material/X';
+
+import IconButton from '@mui/material/IconButton';
+
 const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 
   const displayLogo = logoIm || defaultLogo;
@@ -25,9 +31,9 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
           </div>
           <div className={styles.social}>
             <div className={styles.socialIcon}>
-              <a href="https://www.instagram.com/" target="blank">
-                <FontAwesomeIcon icon={faInstagram} />
-              </a>
+              <SocialIconButton component="a" href="https://instagram.com" target="_blank">
+                <InstagramIcon fontSize="small" />
+              </SocialIconButton>
             </div>
             <div className={styles.socialIcon}>
               <a href="https://www.facebook.com/" target="blank">
