@@ -19,6 +19,18 @@ import XIcon from '@mui/icons-material/X';
 
 import IconButton from '@mui/material/IconButton';
 
+const SocialIconButton = styled(IconButton)(({ theme }) => ({
+  width: 34,
+  height: 34,
+  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  color: '#fff',
+  transition: 'color 0.3s ease',
+  '&:hover': {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    color: '#13b3ba',
+  },
+}));
+
 const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 
   const displayLogo = logoIm || defaultLogo;
