@@ -40,7 +40,7 @@ const FooterMenuButton = styled(Button)(({ theme }) => ({
   fontSize: '16px',
   fontWeight: 400,
   padding: '4px 0',
-  justifyContent: 'flex-start',
+  justifyContent: 'center',
   transition: 'color 0.3s ease',
   '&:hover': {
     backgroundColor: 'transparent',
@@ -79,14 +79,21 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 
         <div className={styles.linksPrivacyPolicy}>
           <div className={styles.linksFooter}>
-           <ul>
-              <li>
-                <Link to="/about">Про нас</Link>
-              </li>
-              <li>
-                <Link to="/communication">Контакти</Link>
-              </li>
-            </ul>
+           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
+              <FooterMenuButton 
+                component={RouterLink} 
+                to="/about"
+              >
+                Про нас
+              </FooterMenuButton>
+              
+              <FooterMenuButton 
+                component={RouterLink} 
+                to="/communication"
+              >
+                Контакти
+              </FooterMenuButton>
+            </div>
           </div>
 
           <div className={styles.privacyPolicy}>
