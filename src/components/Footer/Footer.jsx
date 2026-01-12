@@ -84,9 +84,6 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
                 <Link to="/about">Про нас</Link>
               </li>
               <li>
-                <Link to="/">Новини</Link>
-              </li>
-              <li>
                 <Link to="/communication">Контакти</Link>
               </li>
             </ul>
