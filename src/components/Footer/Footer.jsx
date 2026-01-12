@@ -121,57 +121,6 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
         </div>
 
         <div className={styles.contacts}>
-          <div className={styles.location}>
-            <div className={styles.contactsIcon}>
-              <span>
-                <FontAwesomeIcon icon={faLocation} />
-              </span>
-            </div>
-            <div className={styles.contactsLabel}>
-              {adress ? (
-                <p>{adress}</p>
-              ) : (
-                <p>Адреса не вказана</p>
-              )}
-            </div>
-          </div>
-
-          <div className={styles.phones}>
-            <div className={styles.contactsIcon}>
-              <span>
-                <FontAwesomeIcon icon={faPhone} />
-              </span>
-            </div>
-            <div className={styles.contactsLabel}>
-              {phonenumber ? (
-                <a href={`tel:${phonenumber}`} target="blank">
-                  <span>{phonenumber}</span>
-                </a>
-              ) : (
-                <span>Телефон не вказано</span>
-              )}
-            </div>
-          </div>
-
-          <div className={styles.email}>
-            <div className={styles.contactsIcon}>
-              <span>
-                <FontAwesomeIcon icon={faEnvelope} />
-              </span>
-            </div>
-            <div className={styles.contactsLabel}>
-              {gmail ? (
-                <a href={`mailto:${gmail}`} target="blank">
-                  <span>{gmail}</span>
-                </a>
-              ) : (
-                <span>Email не вказано</span>
-              )}
-            
-            </div>
-          </div>
-
-
           <div className={styles.contactItem}>
             <ContactCircle>
               <LocationOnIcon />
