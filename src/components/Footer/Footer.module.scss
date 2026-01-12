@@ -101,4 +101,11 @@
   a:hover {
     color: #13b3ba;
   }
+
+  .contactItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;           
+  }
+
 }

@@ -18,9 +18,13 @@ import LogoImage from "../LogoImage/LogoImage";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import XIcon from '@mui/icons-material/X';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
 
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button'
+import Button from '@mui/material/Button';
+
 
 const SocialIconButton = styled(IconButton)(({ theme }) => ({
   width: 34,
@@ -47,6 +51,21 @@ const FooterMenuButton = styled(Button)(({ theme }) => ({
     color: '#13b3ba',
   },
 }));
+
+const ContactCircle = styled('div')({
+  width: 32,
+  height: 32,
+  backgroundColor: '#136aba',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '50%',
+  color: '#fff',
+  flexShrink: 0,
+  '& svg': {
+    fontSize: '18px',
+  },
+});
 
 const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 
@@ -147,6 +166,45 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
                 </a>
               ) : (
                 <span>Email не вказано</span>
+              )}
+            
+            </div>
+          </div>
+
+
+          <div className={styles.contactItem}>
+            <ContactCircle>
+              <LocationOnIcon />
+            </ContactCircle>
+            <div className={styles.contactsLabel}>
+              {adress || "Адреса не вказана"}
+            </div>
+          </div>
+
+          {/* Телефон */}
+          <div className={styles.contactItem}>
+            <ContactCircle>
+              <PhoneIcon />
+            </ContactCircle>
+            <div className={styles.contactsLabel}>
+              {phonenumber ? (
+                <a href={`tel:${phonenumber}`}>{phonenumber}</a>
+              ) : (
+                "Телефон не вказано"
+              )}
+            </div>
+          </div>
+
+          {/* Пошта */}
+          <div className={styles.contactItem}>
+            <ContactCircle>
+              <EmailIcon />
+            </ContactCircle>
+            <div className={styles.contactsLabel}>
+              {gmail ? (
+                <a href={`mailto:${gmail}`}>{gmail}</a>
+              ) : (
+                "Email не вказано"
               )}
             </div>
           </div>
