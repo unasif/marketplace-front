@@ -126,7 +126,11 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
               <LocationOnIcon />
             </ContactCircle>
             <div className={styles.contactsLabel}>
-              {adress || "Адреса не вказана"}
+               {adress ? (
+                <p>{adress}</p>
+              ) : (
+                <p>Адреса не вказана</p>
+              )}
             </div>
           </div>
 
@@ -136,9 +140,11 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
             </ContactCircle>
             <div className={styles.contactsLabel}>
               {phonenumber ? (
-                <a href={`tel:${phonenumber}`}>{phonenumber}</a>
+                <a href={`tel:${phonenumber}`} target="blank">
+                  <span>{phonenumber}</span>
+                </a>
               ) : (
-                "Телефон не вказано"
+                <span>Телефон не вказано</span>
               )}
             </div>
           </div>
@@ -149,9 +155,11 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
             </ContactCircle>
             <div className={styles.contactsLabel}>
               {gmail ? (
-                <a href={`mailto:${gmail}`}>{gmail}</a>
+                <a href={`mailto:${gmail}`} target="blank">
+                  <span>{gmail}</span>
+                </a>
               ) : (
-                "Email не вказано"
+                <span>Email не вказано</span>
               )}
             </div>
           </div>
@@ -162,4 +170,3 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 };
 
 export default Footer;
-
