@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Footer.module.scss";
 import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -78,7 +79,7 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 
         <div className={styles.linksPrivacyPolicy}>
           <div className={styles.linksFooter}>
-            <ul>
+           <ul>
               <li>
                 <Link to="/about">Про нас</Link>
               </li>
