@@ -130,7 +130,6 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
             </div>
           </div>
 
-          {/* Телефон */}
           <div className={styles.contactItem}>
             <ContactCircle>
               <PhoneIcon />
@@ -144,7 +143,6 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
             </div>
           </div>
 
-          {/* Пошта */}
           <div className={styles.contactItem}>
             <ContactCircle>
               <EmailIcon />
@@ -164,3 +162,4 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 };
 
 export default Footer;
+
