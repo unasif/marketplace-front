@@ -78,21 +78,17 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 
         <div className={styles.linksPrivacyPolicy}>
           <div className={styles.linksFooter}>
-           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
-              <FooterMenuButton 
-                component={RouterLink} 
-                to="/about"
-              >
-                Про нас
-              </FooterMenuButton>
-              
-              <FooterMenuButton 
-                component={RouterLink} 
-                to="/communication"
-              >
-                Контакти
-              </FooterMenuButton>
-            </div>
+            <ul>
+              <li>
+                <Link to="/about">Про нас</Link>
+              </li>
+              <li>
+                <Link to="/">Новини</Link>
+              </li>
+              <li>
+                <Link to="/communication">Контакти</Link>
+              </li>
+            </ul>
           </div>
 
           <div className={styles.privacyPolicy}>
