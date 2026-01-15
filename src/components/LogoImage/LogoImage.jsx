@@ -9,7 +9,7 @@ const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
     : null;
 
   return (
-    <a href="/">
+    <a href="/" style={{ textDecoration: 'none' }}>
       {logo ? (
         <img src={imageUrl} alt={"Поки в базі alt немає"} />
       ) : (
