@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Footer.module.scss";
 import { styled } from '@mui/material/styles';
+import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
@@ -17,8 +18,13 @@ import LogoImage from "../LogoImage/LogoImage";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import XIcon from '@mui/icons-material/X';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
 
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+
 
 const SocialIconButton = styled(IconButton)(({ theme }) => ({
   width: 34,
@@ -32,6 +38,35 @@ const SocialIconButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
+const FooterMenuButton = styled(Button)(({ theme }) => ({
+  color: '#fff',
+  textTransform: 'none',
+  fontSize: '16px',
+  fontWeight: 400,
+  padding: '4px 0',
+  justifyContent: 'center',
+  transition: 'color 0.3s ease',
+  '&:hover': {
+    backgroundColor: 'transparent',
+    color: '#13b3ba',
+  },
+}));
+
+const ContactCircle = styled('div')({
+  width: 32,
+  height: 32,
+  backgroundColor: '#136aba',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '50%',
+  color: '#fff',
+  flexShrink: 0,
+  '& svg': {
+    fontSize: '18px',
+  },
+});
+
 const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 
   const displayLogo = logoIm || defaultLogo;
@@ -40,7 +75,7 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
       <footer className={styles.footer__container}>
         <div className={styles.logoSocial}>
           <div>
-            <LogoImage logoIm={logoIm} />
+            <LogoImage logoIm={logoIm} textColor="#fff" />
           </div>
           <div className={styles.social}>
             <div className={styles.socialIcon}>
@@ -63,17 +98,21 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 
         <div className={styles.linksPrivacyPolicy}>
           <div className={styles.linksFooter}>
-            <ul>
-              <li>
-                <Link to="/about">Про нас</Link>
-              </li>
-              <li>
-                <Link to="/">Новини</Link>
-              </li>
-              <li>
-                <Link to="/communication">Контакти</Link>
-              </li>
-            </ul>
+           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
+              <FooterMenuButton 
+                component={RouterLink} 
+                to="/about"
+              >
+                Про нас
+              </FooterMenuButton>
+              
+              <FooterMenuButton 
+                component={RouterLink} 
+                to="/communication"
+              >
+                Контакти
+              </FooterMenuButton>
+            </div>
           </div>
 
           <div className={styles.privacyPolicy}>
@@ -82,14 +121,12 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
         </div>
 
         <div className={styles.contacts}>
-          <div className={styles.location}>
-            <div className={styles.contactsIcon}>
-              <span>
-                <FontAwesomeIcon icon={faLocation} />
-              </span>
-            </div>
+          <div className={styles.contactItem}>
+            <ContactCircle>
+              <LocationOnIcon />
+            </ContactCircle>
             <div className={styles.contactsLabel}>
-              {adress ? (
+               {adress ? (
                 <p>{adress}</p>
               ) : (
                 <p>Адреса не вказана</p>
@@ -97,12 +134,10 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
             </div>
           </div>
 
-          <div className={styles.phones}>
-            <div className={styles.contactsIcon}>
-              <span>
-                <FontAwesomeIcon icon={faPhone} />
-              </span>
-            </div>
+          <div className={styles.contactItem}>
+            <ContactCircle>
+              <PhoneIcon />
+            </ContactCircle>
             <div className={styles.contactsLabel}>
               {phonenumber ? (
                 <a href={`tel:${phonenumber}`} target="blank">
@@ -114,12 +149,10 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
             </div>
           </div>
 
-          <div className={styles.email}>
-            <div className={styles.contactsIcon}>
-              <span>
-                <FontAwesomeIcon icon={faEnvelope} />
-              </span>
-            </div>
+          <div className={styles.contactItem}>
+            <ContactCircle>
+              <EmailIcon />
+            </ContactCircle>
             <div className={styles.contactsLabel}>
               {gmail ? (
                 <a href={`mailto:${gmail}`} target="blank">
