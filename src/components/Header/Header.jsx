@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Header.module.scss";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import SearchProduct from "../SearchProduct/SearchProduct";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
