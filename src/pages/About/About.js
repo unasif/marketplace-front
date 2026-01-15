@@ -26,7 +26,7 @@ export const About = () => {
         {loading ? (
           <p>Завантаження...</p>
         ) : error ? (
-          <p style={{color: 'red'}}>{error}</p>
+          <p >{error}</p>
         ) : (
           <p>{about || "Інформація відсутня."}</p>
         )}

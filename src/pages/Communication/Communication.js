@@ -26,7 +26,7 @@ export const Communication = () => {
         {loading ? (
           <p>Завантаження...</p>
         ) : error ? (
-          <p style={{color: 'red'}}>{error}</p>
+          <p >{error}</p>
         ) : (
           <p>{contact || "Інформація відсутня."}</p>
         )}
