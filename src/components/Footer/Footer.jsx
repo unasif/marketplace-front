@@ -2,16 +2,6 @@ import React from "react";
 import styles from "./Footer.module.scss";
 import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
-import {
-  faX,
-  faLocation,
-  faPhone,
-  faEnvelope,
-} from "@fortawesome/free-solid-svg-icons";
-import no_logo from "../../assets/no-photo-available.svg";
 import defaultLogo from "../../assets/no-photo-available.svg";
 import LogoImage from "../LogoImage/LogoImage";
 
@@ -24,9 +14,10 @@ import EmailIcon from '@mui/icons-material/Email';
 
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import { Link as MuiLink } from "@mui/material";
 
 
-const SocialIconButton = styled(IconButton)(({ theme }) => ({
+const SocialIcon = styled(IconButton)(({ theme }) => ({
   width: 34,
   height: 34,
   backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -38,7 +29,7 @@ const SocialIconButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-const FooterMenuButton = styled(Button)(({ theme }) => ({
+const FooterLink = styled(MuiLink)(({ theme }) => ({
   color: '#fff',
   textTransform: 'none',
   fontSize: '16px',
@@ -72,26 +63,26 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
   const displayLogo = logoIm || defaultLogo;
   return (
     <footer className={styles.footer}>
-      <footer className={styles.footer__container}>
+      <div className={styles.footer__container}>
         <div className={styles.logoSocial}>
           <div>
             <LogoImage logoIm={logoIm} textColor="#fff" />
           </div>
           <div className={styles.social}>
             <div className={styles.socialIcon}>
-              <SocialIconButton component="a" href="https://instagram.com" target="_blank">
+              <SocialIcon component="a" href="https://instagram.com" target="_blank" aria-label="Instagram">
                 <InstagramIcon fontSize="small" />
-              </SocialIconButton>
+              </SocialIcon>
             </div>
             <div className={styles.socialIcon}>
-              <SocialIconButton component="a" href="https://facebook.com" target="_blank">
+              <SocialIcon component="a" href="https://facebook.com" target="_blank" aria-label="Facebook">
                 <FacebookIcon fontSize="small" />
-              </SocialIconButton>
+              </SocialIcon>
             </div>
             <div className={styles.socialIcon}>
-              <SocialIconButton component="a" href="https://x.com" target="_blank">
+              <SocialIcon component="a" href="https://x.com" target="_blank" aria-label="X">
                 <XIcon fontSize="small" />
-              </SocialIconButton>
+              </SocialIcon>
             </div>
           </div>
         </div>
@@ -99,19 +90,19 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
         <div className={styles.linksPrivacyPolicy}>
           <div className={styles.linksFooter}>
            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
-              <FooterMenuButton 
+              <FooterLink  
                 component={RouterLink} 
                 to="/about"
               >
                 Про нас
-              </FooterMenuButton>
+              </FooterLink>
               
-              <FooterMenuButton 
+              <FooterLink 
                 component={RouterLink} 
                 to="/communication"
               >
                 Контакти
-              </FooterMenuButton>
+              </FooterLink>
             </div>
           </div>
 
@@ -164,7 +155,7 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
             </div>
           </div>
         </div>
-      </footer>
+      </div>
     </footer>
   );
 };
