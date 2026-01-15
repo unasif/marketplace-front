@@ -1,7 +1,7 @@
 import React from "react";
 import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
-const LogoImage = ({ logoIm = {} }) => { 
+const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
   const { logo } = logoIm;
   const baseURL = "https://unas.if.ua/api/";
   const imageUrl = logoIm.logo
@@ -20,7 +20,9 @@ const LogoImage = ({ logoIm = {} }) => {
           }}
           >
           <img src={noPhotoAvailable} alt='No pictures' />
-          <span>Логотип відсутній</span>
+          <span style={{ color: textColor, marginLeft: '10px' }}>
+            Логотип
+          </span>
         </div>
       )}
     </a>

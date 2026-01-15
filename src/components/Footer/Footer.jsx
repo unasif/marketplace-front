@@ -75,7 +75,7 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
       <footer className={styles.footer__container}>
         <div className={styles.logoSocial}>
           <div>
-            <LogoImage logoIm={logoIm} />
+            <LogoImage logoIm={logoIm} textColor="#fff" />
           </div>
           <div className={styles.social}>
             <div className={styles.socialIcon}>
