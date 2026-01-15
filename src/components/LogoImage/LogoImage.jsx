@@ -20,7 +20,7 @@ const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
           }}
           >
           <img src={noPhotoAvailable} alt='No pictures' />
-          <span style={{ color: textColor, marginLeft: '10px' }}>
+          <span style={{ color: textColor, marginLeft: '10px', fontFamily: 'Roboto, Helvetica, Arial, sans-serif' }}>
             Логотип
           </span>
         </div>
