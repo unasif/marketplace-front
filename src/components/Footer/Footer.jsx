@@ -129,7 +129,7 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
                {adress ? (
                 <p>{adress}</p>
               ) : (
-                <p>Адреса не вказана</p>
+                <p>Адреса</p>
               )}
             </div>
           </div>
@@ -144,7 +144,7 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
                   <span>{phonenumber}</span>
                 </a>
               ) : (
-                <span>Телефон не вказано</span>
+                <span>Телефон</span>
               )}
             </div>
           </div>
@@ -159,7 +159,7 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
                   <span>{gmail}</span>
                 </a>
               ) : (
-                <span>Email не вказано</span>
+                <span>Email</span>
               )}
             </div>
           </div>

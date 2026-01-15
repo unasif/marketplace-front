@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import LogoImage from "../LogoImage/LogoImage";
 import { Button } from '@mui/material';
+import { Link as MuiLink } from "@mui/material";
 import Badge, { badgeClasses } from '@mui/material/Badge';
 
 const CartBadge = styled(Badge)(({ theme }) => ({
@@ -53,32 +54,20 @@ const Header = ({ token, logoIm }) => {
         </div>
         <ul className={styles.linksHeader}>
           <li>
-            <Button
-              component={Link}
-              variant="text"
-              to="/about"
-              className={styles.linksHeaderButtons}
-              disableRipple
-            >
-              Про нас
-            </Button>
+            <NavLink component={RouterLink} to="/about" className={styles.linksHeaderButtons}>
+                Про нас
+            </NavLink>
           </li>
           <li>
-            <Button
-              component={Link}
-              variant="text"
-              to="/communication"
-              className={styles.linksHeaderButtons}
-              disableRipple
-            >
-              Контакти
-            </Button>
+            <NavLink component={RouterLink} to="/communication" className={styles.linksHeaderButtons}>
+                Контакти
+            </NavLink>
           </li>
         </ul>
 
         <SearchProduct className={styles.searchHeader} token= {token} />
 
-        <form className={styles.iconContainer}>
+        <div className={styles.iconContainer}>
 
           <IconButton
             aria-label="cart"
@@ -120,7 +109,7 @@ const Header = ({ token, logoIm }) => {
             <p className={styles.headerIconLabel}>Увійти</p>
           </IconButton>
 
-        </form>
+        </div>
         <ModalCartShopping open={openCartShopping} onClose={closeCartModal} token= {token}/>
       </div>
     </header>
