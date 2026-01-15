@@ -54,14 +54,14 @@ const Header = ({ token, logoIm }) => {
         </div>
         <ul className={styles.linksHeader}>
           <li>
-            <NavLink component={RouterLink} to="/about" className={styles.linksHeaderButtons}>
+            <MuiLink component={RouterLink} to="/about" className={styles.linksHeaderButtons}>
                 Про нас
-            </NavLink>
+            </MuiLink>
           </li>
           <li>
-            <NavLink component={RouterLink} to="/communication" className={styles.linksHeaderButtons}>
+            <MuiLink component={RouterLink} to="/communication" className={styles.linksHeaderButtons}>
                 Контакти
-            </NavLink>
+            </MuiLink>
           </li>
         </ul>
 
