@@ -132,7 +132,7 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
                   {phonenumber}
                 </a>
               ) : (
-                <p className={styles.contactText}>Телефон</p>
+                <p className={styles.contactsLabel}>Телефон</p>
               )}
           </div>
 
@@ -141,11 +141,11 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
               <EmailIcon />
             </ContactCircle>
               {gmail ? (
-                <a href={`mailto:${gmail}`} target="blank" className={styles.contactText}>
+                <a href={`mailto:${gmail}`} target="blank" className={styles.contactsLabel}>
                   {gmail}
                 </a>
               ) : (
-                <p className={styles.contactText}>Email</p>
+                <p className={styles.contactsLabel}>Email</p>
               )}
           </div>
         </div>
