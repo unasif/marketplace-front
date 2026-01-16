@@ -132,7 +132,7 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
                   {phonenumber}
                 </a>
               ) : (
-                <span className={styles.contactText}>Телефон</span>
+                <p className={styles.contactText}>Телефон</p>
               )}
           </div>
 
@@ -145,7 +145,7 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
                   {gmail}
                 </a>
               ) : (
-                <span className={styles.contactText}>Email</span>
+                <p className={styles.contactText}>Email</p>
               )}
           </div>
         </div>
