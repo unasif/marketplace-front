@@ -69,21 +69,21 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
             <LogoImage logoIm={logoIm} textColor="#fff" />
           </div>
           <div className={styles.social}>
-            <div className={styles.socialIcon}>
+            {/* <div className={styles.socialIcon}> */}
               <SocialIcon component="a" href="https://instagram.com" target="_blank" aria-label="Instagram">
                 <InstagramIcon fontSize="small" />
               </SocialIcon>
-            </div>
-            <div className={styles.socialIcon}>
+            {/* </div>
+            <div className={styles.socialIcon}> */}
               <SocialIcon component="a" href="https://facebook.com" target="_blank" aria-label="Facebook">
                 <FacebookIcon fontSize="small" />
               </SocialIcon>
-            </div>
-            <div className={styles.socialIcon}>
+            {/* </div>
+            <div className={styles.socialIcon}> */}
               <SocialIcon component="a" href="https://x.com" target="_blank" aria-label="X">
                 <XIcon fontSize="small" />
               </SocialIcon>
-            </div>
+            {/* </div> */}
           </div>
         </div>
 
