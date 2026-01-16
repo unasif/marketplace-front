@@ -116,43 +116,37 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
             <ContactCircle>
               <LocationOnIcon />
             </ContactCircle>
-            <div className={styles.contactsLabel}>
                {adress ? (
-                <p>{adress}</p>
+                <p className={styles.contactsLabel}>{adress}</p>
               ) : (
-                <p>Адреса</p>
+                <p className={styles.contactsLabel}>Адреса</p>
               )}
-            </div>
           </div>
 
           <div className={styles.contactItem}>
             <ContactCircle>
               <PhoneIcon />
             </ContactCircle>
-            <div className={styles.contactsLabel}>
               {phonenumber ? (
-                <a href={`tel:${phonenumber}`} target="blank">
-                  <span>{phonenumber}</span>
+                <a href={`tel:${phonenumber}`} target="blank" className={styles.contactsLabel}>
+                  {phonenumber}
                 </a>
               ) : (
                 <span>Телефон</span>
               )}
-            </div>
           </div>
 
           <div className={styles.contactItem}>
             <ContactCircle>
               <EmailIcon />
             </ContactCircle>
-            <div className={styles.contactsLabel}>
               {gmail ? (
-                <a href={`mailto:${gmail}`} target="blank">
-                  <span>{gmail}</span>
+                <a href={`mailto:${gmail}`} target="blank" className={styles.contactText}>
+                  {gmail}
                 </a>
               ) : (
                 <span>Email</span>
               )}
-            </div>
           </div>
         </div>
       </div>
