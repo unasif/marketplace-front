@@ -13,7 +13,12 @@
   align-items: center;
 }
 
-.logoSocial, .contacts {
+.logoSocial {
+  display: flex;
+  flex-direction: column;
+}
+
+.contacts {
   display: flex;
   flex-direction: column;
   gap: 20px;
