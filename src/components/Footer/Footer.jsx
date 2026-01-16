@@ -111,8 +111,8 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
           </div>
         </div>
 
-        <div className={styles.contacts}>
-          <div className={styles.contactItem}>
+        <ul className={styles.contacts}>
+          <li className={styles.contactItem}>
             <ContactCircle>
               <LocationOnIcon />
             </ContactCircle>
@@ -121,9 +121,9 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
               ) : (
                 <p className={styles.contactsLabel}>Адреса</p>
               )}
-          </div>
+          </li>
 
-          <div className={styles.contactItem}>
+          <li className={styles.contactItem}>
             <ContactCircle>
               <PhoneIcon />
             </ContactCircle>
@@ -134,9 +134,9 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
               ) : (
                 <p className={styles.contactsLabel}>Телефон</p>
               )}
-          </div>
+          </li>
 
-          <div className={styles.contactItem}>
+          <li className={styles.contactItem}>
             <ContactCircle>
               <EmailIcon />
             </ContactCircle>
@@ -147,8 +147,8 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
               ) : (
                 <p className={styles.contactsLabel}>Email</p>
               )}
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </footer>
   );
