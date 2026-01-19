@@ -1,0 +1,23 @@
+.logoLink {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.logoPlaceholder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoText {
+  color: var(--logo-text-color); 
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  user-select: none;
+}
+
+.logoImage {
+  
+  max-height: 50px; 
+  display: block;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./LogoImage.module.scss";
 import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
 const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
@@ -9,18 +10,21 @@ const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
     : null;
 
   return (
-    <a href="/" style={{ textDecoration: 'none' }}>
+    <a 
+      href="/" 
+      className={styles.logoLink}
+      style={{ "--logo-text-color": textColor }}
+    >
       {logo ? (
-        <img src={imageUrl} alt={"Поки в базі alt немає"} />
+        <img 
+          src={imageUrl} 
+          className={styles.logoImage} 
+          alt="Логотип компанії" 
+        />
       ) : (
-        <div 
-          style={{
-            display: 'flex', 
-            alignItems: 'center'
-          }}
-          >
-          <img src={noPhotoAvailable} alt='No pictures' />
-          <span style={{ color: textColor, marginLeft: '10px', fontFamily: 'Roboto, Helvetica, Arial, sans-serif' }}>
+        <div className={styles.logoPlaceholder}>
+          <img src={noPhotoAvailable} alt="Немає фото" />
+          <span className={styles.logoText}>
             Логотип
           </span>
         </div>
