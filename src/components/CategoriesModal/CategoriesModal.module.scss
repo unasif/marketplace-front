@@ -1,0 +1,306 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); // Напівпрозорий фон
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center; // Центруємо модалку
+  padding: 20px;
+}
+
+.modal {
+  width: 100%;
+  max-width: 1100px; // Обмежуємо ширину, щоб було як на скрінах
+  height: 80vh; // Фіксуємо висоту (80% від екрану)
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex; // Робимо flex-контейнер для двох колонок
+  overflow: hidden; // Щоб скруглення кутів працювало
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+  z-index: 10;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #333;
+  }
+}
+
+/* --- ЛІВА КОЛОНКА (Sidebar) --- */
+.sidebar {
+  width: 300px; // Фіксована ширина списку
+  background-color: #fff;
+  border-right: 1px solid #e0e0e0;
+  overflow-y: auto; // Скрол, якщо категорій багато
+  padding: 20px 0;
+  flex-shrink: 0; // Не стискати
+}
+
+.sidebarHeader {
+    padding: 0 20px 10px;
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.categoryList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.categoryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 3px solid transparent; // Для активного стану
+
+  &:hover, &.active {
+    background-color: #f0f7fe; // Світло-блакитний фон при наведенні
+    color: #136aba; // Синій колір тексту
+    
+    .arrowIcon {
+        color: #136aba;
+    }
+  }
+
+  &.active {
+    border-left-color: #136aba; // Синя смужка зліва для активного
+    font-weight: 600;
+  }
+}
+
+.categoryName {
+    font-size: 15px;
+}
+
+.arrowIcon {
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* --- ПРАВА КОЛОНКА (Content) --- */
+.rightPanel {
+  flex-grow: 1; // Займає весь вільний простір
+  padding: 30px 40px;
+  overflow-y: auto; // Свій скрол для контенту
+  background-color: #fff;
+}
+
+.mainTitle {
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 24px;
+  color: #333;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.groupsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 колонки для підкатегорій
+  gap: 40px;
+  align-items: start;
+}
+
+.groupBlock {
+  margin-bottom: 10px;
+}
+
+.groupTitle {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #000;
+}
+
+.linksList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subLink {
+  font-size: 14px;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #136aba;
+    text-decoration: underline;
+  }
+}
+
+.emptyState {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 18px;
+}
+
+/* Адаптивність (опціонально) */
+@media (max-width: 768px) {
+    .modal {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: 40%;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    .rightPanel {
+        height: 60%;
+    }
+    .groupsGrid {
+        grid-template-columns: 1fr; // Одна колонка на мобільних
+    }
+}
+
+// .overlay {
+//   position: fixed;
+//   top: 0; left: 0; width: 100%; height: 100%;
+//   background-color: rgba(0, 0, 0, 0.6);
+//   z-index: 1000;
+//   display: flex;
+//   align-items: flex-start;
+//   padding-top: 85px;
+//   padding-left: 40px;
+//   opacity: 0;
+//   animation: fadeIn 0.2s forwards;
+// }
+
+// .modal {
+//   background: white;
+//   height: 500px;
+//   width: fit-content;
+//   border-radius: 8px;
+//   display: flex;
+//   overflow: hidden;
+//   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+// }
+
+// .sidebar {
+//   width: 300px;
+//   background-color: #fff;
+//   border-right: 1px solid #eee;
+//   overflow-y: auto;
+//   flex-shrink: 0;
+//   padding: 10px 0;
+// }
+
+// .categoryItem {
+//   padding: 12px 25px;
+//   cursor: pointer;
+//   display: flex; justify-content: space-between; align-items: center;
+//   font-size: 15px; color: #333; transition: background-color 0.1s;
+
+//   &:hover, &.active {
+//     background-color: #136aba;
+//     color: white;
+//   }
+  
+//   .itemLeft { display: flex; align-items: center; gap: 10px; }
+// }
+
+// .rightPanel {
+//   width: 600px;
+//   padding: 30px 40px;
+//   overflow-y: auto;
+//   background-color: #fdfdfd;
+//   border-left: 1px solid #eee;
+//   animation: slideIn 0.2s ease-out;
+//   position: relative;
+// }
+
+// .subGrid {
+//   display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;
+// }
+
+// .subLink {
+//   text-decoration: none; color: #444; font-size: 14px; padding: 5px 0; display: block;
+//   &:hover { color: #136aba; text-decoration: underline; }
+// }
+
+// .closeButton {
+//   position: absolute; top: 15px; right: 15px; border: none; background: none;
+//   font-size: 24px; color: #aaa; cursor: pointer;
+//   &:hover { color: #333; }
+// }
+
+// .rightPanel {
+//   padding: 30px 40px;
+//   overflow-y: auto;
+//   background-color: #fff;
+//   border-left: 1px solid #eee;
+//   position: relative;
+// }
+
+// .mainTitle {
+//   font-size: 24px;
+//   margin-top: 0;
+//   margin-bottom: 25px;
+//   color: #333;
+//   display: inline-block;
+// }
+
+// .groupsGrid {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   gap: 40px;
+//   align-items: start;
+// }
+
+// .groupBlock {
+//   margin-bottom: 20px;
+// }
+
+// .groupTitle {
+//   font-size: 16px;
+//   font-weight: 700;
+//   color: #000;
+//   margin-bottom: 15px;
+//   margin-top: 0;
+// }
+
+// .linksList {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+// }
+
+// .subLink {
+//   text-decoration: none;
+//   color: #555;
+//   font-size: 14px;
+//   transition: color 0.2s;
+
+//   &:hover {
+//     color: #136aba;
+//     text-decoration: underline;
+//   }
+// }
+
+// @keyframes fadeIn { to { opacity: 1; } }
+// @keyframes slideIn { from { opacity: 0; } to { opacity: 1; } }

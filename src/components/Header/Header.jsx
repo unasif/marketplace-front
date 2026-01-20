@@ -1,17 +1,38 @@
 import React, { useState } from "react";
 import styles from "./Header.module.scss";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import SearchProduct from "../SearchProduct/SearchProduct";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ModalCartShopping from '../ModalCartShopping/ModalCartShopping';
 import { useCart } from "../../contexts/CartContext";
-import logo from "../../assets/logo.svg";
+import defaultLogo from "../../assets/no-photo-available.svg";
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import LogoImage from "../LogoImage/LogoImage";
+import { Button } from '@mui/material';
+import { Link as MuiLink } from "@mui/material";
+import Badge, { badgeClasses } from '@mui/material/Badge';
 
-const Header = ({ token }) => {
+const CartBadge = styled(Badge)(({ theme }) => ({
+  [`& .${badgeClasses.badge}`]: {
+    top: -4,
+    right: -6,
+    fontSize: '0.65rem',
+    minWidth: '16px',
+    height: '16px',
+    padding: '0 4px',
+    borderRadius: '50%',
+    backgroundColor: theme.palette.error.main,
+    color: theme.palette.common.white,
+  },
+}));
+
+const Header = ({ token, logoIm }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
+  const displayLogo = logoIm || defaultLogo;
 
   const handleCartClick = (event) => {
     event.preventDefault();
@@ -29,50 +50,66 @@ const Header = ({ token }) => {
     <header className={styles.header}>
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
-          <a href="/">
-            <img src={logo} alt="logo" />
-          </a>
+          <LogoImage logoIm={logoIm} textColor="#45525c" />
         </div>
         <ul className={styles.linksHeader}>
           <li>
-            <Link to="/about">Про нас</Link>
+            <MuiLink component={RouterLink} to="/about" className={styles.linksHeaderButtons}>
+                Про нас
+            </MuiLink>
           </li>
           <li>
-            <Link to="/communication">Контакти</Link>
+            <MuiLink component={RouterLink} to="/communication" className={styles.linksHeaderButtons}>
+                Контакти
+            </MuiLink>
           </li>
         </ul>
-        <SearchProduct className={styles.searchHeader} token= {token} />
-        <form className={styles.iconContainer}>
-          <button className={styles.headerButton} onClick={handleCartClick}>
-            <div className={styles.headerIcon}>
-              <FontAwesomeIcon icon={faCartShopping} />
-              {cartItemCount > 0 && (
-                <span className={styles.cartCount}>{cartItemCount}</span>
-              )}
-              <p>Кошик</p>
-            </div>
-          </button>
-          <button className={styles.headerButton}>
-            {/* <Link to="/like"> */}
-            <div className={styles.headerIcon}>
-              <FontAwesomeIcon icon={faHeart} />
-              <p>Обране</p>
-              {/* </Link> */}
-            </div>
-          </button>
 
-          <button
-            className={styles.headerButton}
-            // onClick={() =>setOpenUserOffice(true)}>
+        <SearchProduct className={styles.searchHeader} token= {token} />
+
+        <div className={styles.iconContainer}>
+
+          <IconButton
+            aria-label="cart"
+            onClick={handleCartClick}
+            className ={`${styles.headerButton} ${styles.headerIconButton}`}
+            disableRipple
+            disableTouchRipple
+            disableFocusRipple
+     
           >
-            {/* <Link to="/userOffice"> */}
-            <div className={styles.headerIcon}>
-              <FontAwesomeIcon icon={faUser} />
-              <p>Увійти</p>
-            </div>
-            {/* </Link> */}
-          </button>
-        </form>
+            <CartBadge badgeContent={cartItemCount} color="error" overlap="circular">
+              <FontAwesomeIcon icon={faCartShopping} className={styles.headerIcon}/>
+            </CartBadge>
+            <p className={styles.headerIconLabel}>Кошик</p>
+          </IconButton>
+
+          <IconButton
+            aria-label="favorites"
+            className={`${styles.headerButton} ${styles.headerIconButton}`}
+            disableRipple
+            disableTouchRipple
+            disableFocusRipple
+          >
+            <FontAwesomeIcon icon={faHeart} className={styles.headerIcon} />
+            <p className={styles.headerIconLabel}>Обране</p>
+          </IconButton>
+
+          <IconButton
+            aria-label="login"
+            className={`${styles.headerButton} ${styles.headerIconButton}`}
+             style={{
+              display:'none'
+             }}
+            disableRipple
+            disableTouchRipple
+            disableFocusRipple
+          >
+            <FontAwesomeIcon icon={faUser} className={styles.headerIcon} />
+            <p className={styles.headerIconLabel}>Увійти</p>
+          </IconButton>
+
+        </div>
         <ModalCartShopping open={openCartShopping} onClose={closeCartModal} token= {token}/>
       </div>
     </header>
@@ -80,3 +117,5 @@ const Header = ({ token }) => {
 };
 
 export default Header;
+
+

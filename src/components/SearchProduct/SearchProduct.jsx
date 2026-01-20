@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import styles from "./SearchProduct.module.scss";
 import useProducts from "../../hooks/useProducts";
+
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const SearchProduct = ({ token }) => {
   const [input, setInput] = useState("");
@@ -28,29 +32,74 @@ const SearchProduct = ({ token }) => {
     navigate(`/product/${productId}`);
   };
 
+  useEffect(() => {
+  }, [renderProducts]);
+
   return (
-    <div className={styles.searchContainer}>
-      <FontAwesomeIcon className={styles.iconSeach} icon={faMagnifyingGlass} />
-      <input
-        type="text"
-        placeholder="Search"
-        onChange={onChangeHandler}
-        value={input}
-      />
-      {input && (
-        <div className={styles.resultsContainer}>
-          {renderProducts.map((product) => (
-            <div
-              className={styles.nomenclaturaLink}
-              key={product.id_bas}
-              onClick={() => onProductSelect(product.id_bas)}
-            >
-              {product.name}
-            </div>
-          ))}
-        </div>
+    <Autocomplete
+      freeSolo
+      options={renderProducts}
+      getOptionLabel={(option) => option.name}
+      inputValue={input}
+      onInputChange={(event, newInput) => {
+        setInput(newInput);
+        const newProduct = products.filter((product) =>
+          product.name.toLowerCase().includes(newInput.toLowerCase())
+        );
+        setRenderProduct(newProduct);
+      }}
+      onChange={(event, selected) => {
+        if (selected) {
+          onProductSelect(selected.id_bas);
+        }
+      }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          placeholder="Search"
+          variant="outlined"  
+          size="medium"
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              padding: '12px 24px',
+              gap: '12px',
+              borderRadius: '100px',
+              '& fieldset': {
+                borderColor: '#45525c',
+              },
+              '&:hover fieldset': {
+                borderColor: '#45525c',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#45525c',
+                borderWidth: '1px',
+      }, 
+            },
+            '& .MuiOutlinedInput-input': {
+              padding: 0,
+            },
+            '& .MuiOutlinedInput-root .MuiAutocomplete-input': {
+              padding: '0px 0px 0px 5px',
+            }
+          }}  
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
       )}
-    </div>
+      renderOption={(props, option) => (
+        <li {...props} key={option.id_bas}>
+          {option.name}
+        </li>
+      )}
+      sx={{ width: 345 }} 
+    />
   );
 };
 

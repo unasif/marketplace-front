@@ -8,12 +8,14 @@ import { instance } from "../../api";
 import ProductMainImage from "../../components/ProductMainImage/ProductMainImage";
 import ProductPrice from "../../components/ProductPrice/ProductPrice";
 import ProductQuantity from "../../components/ProductQuantity/ProductQuantity";
+import CategoriesModal from "../../components/CategoriesModal/CategoriesModal";
 
 export const Home = ({ token }) => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [fetching, setFetching] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
 
   useEffect(() => {
     if (fetching && token) {
@@ -60,9 +62,13 @@ export const Home = ({ token }) => {
 
   return (
     <div className={styles.homeContainer}>
-      <Sidebar token={token} />
+
+      <Sidebar 
+          token={token} 
+          onOpenCatalog={() => setIsCatalogOpen(true)} 
+      />
       <main>
-        <div className={styles.mainContainer}>
+        <div className={styles.mainContainer}>     
           <div className={styles.productContainer}>
             {products.map((product) => (
               <div key={product.id_bas} className={styles.productCardWrapper}>
@@ -102,6 +108,11 @@ export const Home = ({ token }) => {
           </div>
         </div>
       </main>
+
+      <CategoriesModal 
+        isOpen={isCatalogOpen} 
+        onClose={() => setIsCatalogOpen(false)} 
+      />
     </div>
   );
 };
