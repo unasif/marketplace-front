@@ -4,7 +4,7 @@ import ModalImage from "../../components/ModalImage/ModalImage";
 
 const ProductImages = ({ productPhotoInfo }) => {
   const { photo, name } = productPhotoInfo;
-  const baseURL = "https://unas.if.ua/api/";
+  const baseURL = "https://unas.if.ua/marketdemo/api/";
 
   let imageUrl = null;
 
