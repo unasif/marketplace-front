@@ -6,7 +6,7 @@ import styles from "./ModalImage.module.scss";
 
 const ModalImage = ({ open, onClose, productPhotoInfo }) => {
   const { name, photo } = productPhotoInfo;
-  const baseURL = "https://unas.if.ua/marketdemo/api/";
+  const baseURL = "https://unas.if.ua/api/";
 
   let imageUrl = null;
 

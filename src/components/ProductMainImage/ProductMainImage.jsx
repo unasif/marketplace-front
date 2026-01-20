@@ -3,7 +3,7 @@ import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
 const ProductMainImage = ({ product }) => {
   const { main_photo, name } = product;
-  const baseURL = "https://unas.if.ua/marketdemo/api/";
+  const baseURL = "https://unas.if.ua/api/";
 
   let imageUrl = null;
 

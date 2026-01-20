@@ -69,9 +69,27 @@ const Header = ({ token, logoIm }) => {
 
         <div className={styles.iconContainer}>
 
-          <button
-            className={styles.headerButton}
-            // onClick={() =>setOpenUserOffice(true)}>
+          <IconButton
+            aria-label="cart"
+            onClick={handleCartClick}
+            className ={`${styles.headerButton} ${styles.headerIconButton}`}
+            disableRipple
+            disableTouchRipple
+            disableFocusRipple
+     
+          >
+            <CartBadge badgeContent={cartItemCount} color="error" overlap="circular">
+              <FontAwesomeIcon icon={faCartShopping} className={styles.headerIcon}/>
+            </CartBadge>
+            <p className={styles.headerIconLabel}>Кошик</p>
+          </IconButton>
+
+          <IconButton
+            aria-label="favorites"
+            className={`${styles.headerButton} ${styles.headerIconButton}`}
+            disableRipple
+            disableTouchRipple
+            disableFocusRipple
           >
             <FontAwesomeIcon icon={faHeart} className={styles.headerIcon} />
             <p className={styles.headerIconLabel}>Обране</p>
