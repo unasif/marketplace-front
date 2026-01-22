@@ -53,8 +53,8 @@
   padding: 0;
   margin: 0;
   max-height: 60vh;
+  scrollbar-gutter: stable;
   overflow-y: hidden;
-
   @include custom-scrollbar;
 
   .hasShadow & {

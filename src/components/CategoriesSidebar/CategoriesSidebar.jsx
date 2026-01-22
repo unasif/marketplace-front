@@ -1,5 +1,5 @@
 
-import React, { useStat, useRef } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./CategoriesSidebar.module.scss";
 import { Link } from "react-router-dom";
 import useCategories from "../../hooks/useCategories";
