@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useStat, useRef } from "react";
 import styles from "./CategoriesSidebar.module.scss";
 import { Link } from "react-router-dom";
 import useCategories from "../../hooks/useCategories";
@@ -17,6 +17,7 @@ const CategoriesSidebar = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [loadingSub, setLoadingSub] = useState(false);
   const LINKS_LIMIT = 5;
+  const listRef = useRef(null);
 
   const handleCategoryHover = (category) => {
     setActiveCategory(category);
@@ -41,11 +42,16 @@ const CategoriesSidebar = () => {
     } finally {
       setLoadingSub(false);
     }
+    
   };
 
   const handleClose = () => {
     setActiveCategory(null);
     setSubcategories([]);
+
+    if (listRef.current) {
+      listRef.current.scrollTop = 0;
+    }
   };
 
   return (
@@ -58,7 +64,7 @@ const CategoriesSidebar = () => {
         square
       >
         <p className={styles.sidebarHeader}>Категорії</p>
-        <ul className={styles.rootList}>
+        <ul className={styles.rootList} ref={listRef}>
           {categories.map((category) => (
             <li
               key={category.id}
