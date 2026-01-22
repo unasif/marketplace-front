@@ -6,14 +6,31 @@
   max-width: 100%;
 }
 
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+  }
+}
+
 .linksSidebar {
   position: relative;
+  min-height: 550px;
   width: 280px;
   background-color: #fff;
   padding-top: 30px;
   padding-bottom: 20px;
   z-index: 100;
-  font-family: sans-serif;
   transition: filter 0.3s ease;
 }
 
@@ -35,6 +52,14 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  max-height: 70vh;
+  overflow-y: hidden;
+
+  @include custom-scrollbar;
+
+  .hasShadow & {
+    overflow-y: auto;
+  }
 }
 
 .rootItem {
@@ -85,27 +110,15 @@
   top: 0;
   left: 100%; 
   width: 850px; 
-  height: 210%;
+  min-height: 100%;
+  max-height: 90vh;
   overflow-y: auto;
   min-height: 100%;
   padding: 30px 0px 30px 40px;
   z-index: 100;
   box-sizing: border-box;
 
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 3px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 3px;
-  }
-  &::-webkit-scrollbar-thumb:hover {
-    background: #b3b3b3;
-  }
+  @include custom-scrollbar;
 }
 
 .flyoutTitle {
