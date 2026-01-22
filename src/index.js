@@ -6,10 +6,13 @@ import { BrowserRouter } from "react-router-dom";
 import { StyledEngineProvider } from "@mui/material/styles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const basename = window.location.pathname.startsWith('/marketdemo') 
+  ? '/marketdemo' 
+  : '/';
 root.render(
   // <React.StrictMode>
   <StyledEngineProvider injectFirst>
-    <BrowserRouter basename="/marketdemo">
+    <BrowserRouter basename={basename}>
       <App />
     </BrowserRouter>
   </StyledEngineProvider>
