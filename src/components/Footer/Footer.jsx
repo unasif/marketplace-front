@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from "react-router-dom";
 import defaultLogo from "../../assets/no-photo-available.svg";
 import LogoImage from "../LogoImage/LogoImage";
+import useBaseInfo from "../../hooks/useBaseInfo";
 
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -58,9 +59,19 @@ const ContactCircle = styled('div')({
   },
 });
 
-const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
 
-  const displayLogo = logoIm || defaultLogo;
+const Footer = ({ logoIm }) => {
+  // Отримуємо дані з бази через useBaseInfo
+  const baseInfo = useBaseInfo();
+  // API повертає масив або об'єкт, беремо перший елемент якщо масив
+  const info = Array.isArray(baseInfo) ? baseInfo[0] || {} : baseInfo || {};
+
+  // Витягуємо поля згідно з backend: Adress, Phonenumber, Gmail
+  const address = info.Adress;
+  const phone = info.Phonenumber;
+  const email = info.Gmail;
+  const displayLogo = logoIm || info.logo || defaultLogo;
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footer__container}>
@@ -108,8 +119,8 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
             <ContactCircle>
               <LocationOnIcon />
             </ContactCircle>
-               {adress ? (
-                <p className={styles.contactsLabel}>{adress}</p>
+               {address ? (
+                <p className={styles.contactsLabel}>{address}</p>
               ) : (
                 <p className={styles.contactsLabel}>Адреса</p>
               )}
@@ -119,26 +130,26 @@ const Footer = ({ logoIm, adress, phonenumber, gmail }) => {
             <ContactCircle>
               <PhoneIcon />
             </ContactCircle>
-              {phonenumber ? (
-                <a href={`tel:${phonenumber}`} target="blank" className={styles.contactsLabel}>
-                  {phonenumber}
-                </a>
-              ) : (
-                <p className={styles.contactsLabel}>Телефон</p>
-              )}
+            {phone ? (
+              <a href={`tel:${phone}`} target="_blank" className={styles.contactsLabel}>
+                {phone}
+              </a>
+            ) : (
+              <p className={styles.contactsLabel}>Телефон</p>
+            )}
           </li>
 
           <li className={styles.contactItem}>
             <ContactCircle>
               <EmailIcon />
             </ContactCircle>
-              {gmail ? (
-                <a href={`mailto:${gmail}`} target="blank" className={styles.contactsLabel}>
-                  {gmail}
-                </a>
-              ) : (
-                <p className={styles.contactsLabel}>Email</p>
-              )}
+            {email ? (
+              <a href={`mailto:${email}`} target="_blank" className={styles.contactsLabel}>
+                {email}
+              </a>
+            ) : (
+              <p className={styles.contactsLabel}>Email</p>
+            )}
           </li>
         </ul>
       </div>
