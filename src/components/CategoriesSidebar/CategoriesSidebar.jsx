@@ -3,52 +3,18 @@ import React, { useState, useRef } from "react";
 import styles from "./CategoriesSidebar.module.scss";
 import { Link } from "react-router-dom";
 import useCategories from "../../hooks/useCategories";
-import useCategoriesById from "../../hooks/useCategoriesById";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { Paper, Grid } from "@mui/material";
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
-const SubCategoryGroup = ({ subcat, handleClose, limit }) => {
-  const subSubCategories = useCategoriesById(subcat.id);
+import useCategoriesById from "../../hooks/useCategoriesById";
 
-  return (
-    <div className={styles.groupBlock}>
-      <h3 className={styles.groupTitle}>
-        <Link to={`/category/${subcat.id}`} onClick={handleClose}>
-          {subcat.name}
-        </Link>
-      </h3>
-      
-      {subSubCategories.length > 0 && (
-        <ul className={styles.linksList}>
-          {subSubCategories.slice(0, limit).map((child) => (
-            <li key={child.id}>
-              <Link 
-                to={`/category/${child.id}`} 
-                className={styles.subLink}
-                onClick={handleClose}
-              >
-                {child.name}
-              </Link>
-            </li>
-          ))}
-          {subSubCategories.length > limit && (
-            <li>
-              <Link to={`/category/${subcat.id}`} className={styles.viewAllLink} onClick={handleClose}>
-                Дивитись всі...
-              </Link>
-            </li>
-          )}
-        </ul>
-      )}
-    </div>
-  );
-};
 
 const CategoriesSidebar = () => {
   const [activeCategory, setActiveCategory] = useState(null);
   const categories = useCategories();
-  const subcategories = useCategoriesById(activeCategory?.id);
+  const [subcategories, setSubcategories] = useState([]);
   const [loadingSub, setLoadingSub] = useState(false);
   const LINKS_LIMIT = 5;
   const listRef = useRef(null);
@@ -103,7 +69,7 @@ const CategoriesSidebar = () => {
             <li
               key={category.id}
               className={`${styles.rootItem} ${activeCategory?.id === category.id ? styles.active : ''}`}
-              onMouseEnter={() => setActiveCategory(category)}
+              onMouseEnter={() => handleCategoryHover(category)}
             >
               <Link to={`/category/${category.id}`} className={styles.rootLink}>
                 <span>{category.name}</span>
@@ -130,11 +96,16 @@ const CategoriesSidebar = () => {
                   subcategories.map((subcat, index) => {
                     return (
                       <Grid item xs={12} sm={6} md={3} key={subcat.id || index}>
-                        <SubCategoryGroup 
-                          subcat={subcat} 
-                          handleClose={handleClose} 
-                          limit={LINKS_LIMIT} 
-                        />
+                        <div className={styles.groupBlock}>
+                          <h3 className={styles.groupTitle}>
+                            <Link
+                              to={`/category/${subcat.id_bas}`}
+                              onClick={handleClose}
+                            >
+                              {subcat.name}
+                            </Link>
+                          </h3>
+                        </div>
                       </Grid>
                     );
                   })
