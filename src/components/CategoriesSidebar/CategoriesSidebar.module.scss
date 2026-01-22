@@ -14,7 +14,11 @@
   padding-bottom: 20px;
   z-index: 100;
   font-family: sans-serif;
-  filter: drop-shadow(10px 4px 20px rgba(0, 0, 0, 0.15));
+  transition: filter 0.3s ease;
+}
+
+.hasShadow {
+  filter: drop-shadow(15px 10px 30px rgba(0, 31, 61, 0.15));
 }
 
 .sidebarHeader {
@@ -74,16 +78,6 @@
     background-color: #fff; 
     z-index: 102;
   }
-  &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: -2px;
-      width: 5px;
-      height: 100%; 
-      background-color: #fff;
-      z-index: 103;
-    }
 }
 
 .flyoutPanel {

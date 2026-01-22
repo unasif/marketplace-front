@@ -53,7 +53,7 @@ const CategoriesSidebar = () => {
       <Paper
         component="nav"
         elevation={0}
-        className={styles.linksSidebar}
+        className={`${styles.linksSidebar} ${activeCategory ? styles.hasShadow : ''}`}
         onMouseLeave={handleClose}
         square
       >
