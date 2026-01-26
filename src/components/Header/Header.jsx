@@ -32,7 +32,10 @@ const CartBadge = styled(Badge)(({ theme }) => ({
 const Header = ({ token, logoIm }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
-  const displayLogo = logoIm || defaultLogo;
+  const useBaseInfo = require("../../hooks/useBaseInfo").default;
+  const baseInfo = useBaseInfo();
+  const info = Array.isArray(baseInfo) ? baseInfo[0] || {} : baseInfo || {};
+  const displayLogo = info.logo || logoIm || defaultLogo;
 
   const handleCartClick = (event) => {
     event.preventDefault();
