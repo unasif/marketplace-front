@@ -1,25 +1,36 @@
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./CategoriesSidebar.module.scss";
 import { Link } from "react-router-dom";
-import useCategories from "../../hooks/useCategories";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import { instance } from "../../api";
 
 import useCategoriesById from "../../hooks/useCategoriesById";
 
 
 const CategoriesSidebar = () => {
   const [activeCategory, setActiveCategory] = useState(null);
-  const categories = useCategories();
+  const [topLevelCategories, setTopLevelCategories] = useState([]);
   const subcategories = useCategoriesById(activeCategory?.id);
   const LINKS_LIMIT = 5;
   const listRef = useRef(null);
 
-  // Фільтруємо тільки топ-рівневі категорії (без батьківської категорії)
-  const topLevelCategories = categories.filter(cat => !cat.parent_id || cat.parent_id === null);
+  // Завантажуємо топ-рівневі категорії
+  useEffect(() => {
+    const fetchTopCategories = async () => {
+      try {
+        const response = await instance.get("/category/");
+        const filtered = response.data.filter(cat => !cat.categories_id || cat.categories_id === null);
+        setTopLevelCategories(filtered);
+      } catch (error) {
+        console.error("Помилка отримання топ-рівневих категорій:", error);
+      }
+    };
+    fetchTopCategories();
+  }, []);
 
   const handleCategoryHover = (category) => {
     setActiveCategory(category);
@@ -75,7 +86,7 @@ const CategoriesSidebar = () => {
                           <div className={styles.groupBlock}>
                             <h3 className={styles.groupTitle}>
                               <Link
-                                to={`/category/${subcat.id_bas}`}
+                                to={`/category/${subcat.id}`}
                                 onClick={handleClose}
                               >
                                 {subcat.name}
