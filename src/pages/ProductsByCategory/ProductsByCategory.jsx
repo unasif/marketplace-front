@@ -9,14 +9,19 @@ import ProductMainImage from "../../components/ProductMainImage/ProductMainImage
 import ProductPrice from "../../components/ProductPrice/ProductPrice";
 import ProductQuantity from "../../components/ProductQuantity/ProductQuantity";
 import { instance } from "../../api";
+import useCategoriesById from "../../hooks/useCategoriesById";
 
 export const ProductsByCategory = ({ token }) => {
   const { id } = useParams();
+  const subcategories = useCategoriesById(id);
 
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [fetching, setFetching] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
+
+  // Формуємо масив ID: батьківська категорія + всі підкатегорії
+  const categoryIds = [Number(id), ...subcategories.map(cat => cat.id)];
 
   useEffect(() => {
     // Очищуємо `products` і встановлюємо `currentPage` у 1, а також `fetching` в `true` при зміні категорії
@@ -26,13 +31,14 @@ export const ProductsByCategory = ({ token }) => {
   }, [id]);
 
   useEffect(() => {
-    if (fetching && token && id) {
+    if (fetching && token && id && categoryIds.length > 0) {
       instance
-        .get(`product/by_categories_id/?categories_id=${id}`, {
+        .get(`product/by_categories_id/`, {
           headers: {
             Authorization: token,
           },
           params: {
+            categories_id: categoryIds.join(','),
             page: currentPage,
             limit: 8,
           },
@@ -47,7 +53,7 @@ export const ProductsByCategory = ({ token }) => {
         })
         .finally(() => setFetching(false));
     }
-  }, [fetching, token, id, currentPage]);
+  }, [fetching, token, id, currentPage, categoryIds]);
 
   useEffect(() => {
     document.addEventListener("scroll", scrollHandler);
