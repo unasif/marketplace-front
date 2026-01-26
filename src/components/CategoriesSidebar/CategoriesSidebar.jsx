@@ -18,6 +18,9 @@ const CategoriesSidebar = () => {
   const LINKS_LIMIT = 5;
   const listRef = useRef(null);
 
+  // Фільтруємо тільки топ-рівневі категорії (без батьківської категорії)
+  const topLevelCategories = categories.filter(cat => !cat.parent_id || cat.parent_id === null);
+
   const handleCategoryHover = (category) => {
     setActiveCategory(category);
   };
@@ -41,7 +44,7 @@ const CategoriesSidebar = () => {
       >
         <p className={styles.sidebarHeader}>Категорії</p>
         <ul className={styles.rootList} ref={listRef}>
-          {categories.map((category) => (
+          {topLevelCategories.map((category) => (
             <li
               key={category.id}
               className={`${styles.rootItem} ${activeCategory?.id === category.id ? styles.active : ''}`}
