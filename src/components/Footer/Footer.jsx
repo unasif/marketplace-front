@@ -61,23 +61,20 @@ const ContactCircle = styled('div')({
 
 
 const Footer = ({ logoIm }) => {
-  // Отримуємо дані з бази через useBaseInfo
   const baseInfo = useBaseInfo();
-  // API повертає масив або об'єкт, беремо перший елемент якщо масив
   const info = Array.isArray(baseInfo) ? baseInfo[0] || {} : baseInfo || {};
 
-  // Витягуємо поля згідно з backend: Adress, Phonenumber, Gmail
   const address = info.Adress;
   const phone = info.Phonenumber;
   const email = info.Gmail;
-  const displayLogo = logoIm || info.logo || defaultLogo;
+  const displayLogo = info.logo || logoIm || defaultLogo;
 
   return (
     <footer className={styles.footer}>
       <div className={styles.footer__container}>
         <div className={styles.logoSocial}>
           <div>
-            <LogoImage logoIm={logoIm} textColor="#fff" />
+            <LogoImage logoIm={displayLogo} textColor="#fff" />
           </div>
           <div className={styles.social}>
               <SocialIcon component="a" href="https://instagram.com" target="_blank" aria-label="Instagram">
@@ -131,9 +128,7 @@ const Footer = ({ logoIm }) => {
               <PhoneIcon />
             </ContactCircle>
             {phone ? (
-              <a href={`tel:${phone}`} target="_blank" className={styles.contactsLabel}>
-                {phone}
-              </a>
+              <p className={styles.contactsLabel}>{phone}</p>
             ) : (
               <p className={styles.contactsLabel}>Телефон</p>
             )}
@@ -144,9 +139,7 @@ const Footer = ({ logoIm }) => {
               <EmailIcon />
             </ContactCircle>
             {email ? (
-              <a href={`mailto:${email}`} target="_blank" className={styles.contactsLabel}>
-                {email}
-              </a>
+              <p className={styles.contactsLabel}>{email}</p>
             ) : (
               <p className={styles.contactsLabel}>Email</p>
             )}
