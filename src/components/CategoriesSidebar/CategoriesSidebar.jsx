@@ -14,40 +14,16 @@ import useCategoriesById from "../../hooks/useCategoriesById";
 const CategoriesSidebar = () => {
   const [activeCategory, setActiveCategory] = useState(null);
   const categories = useCategories();
-  const [subcategories, setSubcategories] = useState([]);
-  const [loadingSub, setLoadingSub] = useState(false);
+  const subcategories = useCategoriesById(activeCategory?.id);
   const LINKS_LIMIT = 5;
   const listRef = useRef(null);
 
   const handleCategoryHover = (category) => {
     setActiveCategory(category);
-    setLoadingSub(true);
-    import("../../hooks/useCategoriesById").then(({ default: useCategoriesById }) => {
-      fetchSubcategories(category.id);
-    });
-  };
-
-  const fetchSubcategories = async (id) => {
-    try {
-      const response = await fetch(`/api/category/by_categories_id/?categories_id=${id}`, {
-        headers: {
-          'Authorization': localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''
-        }
-      });
-      if (!response.ok) throw new Error('Network response was not ok');
-      const data = await response.json();
-      setSubcategories(data);
-    } catch (error) {
-      setSubcategories([]);
-    } finally {
-      setLoadingSub(false);
-    }
-    
   };
 
   const handleClose = () => {
     setActiveCategory(null);
-    setSubcategories([]);
 
     if (listRef.current) {
       listRef.current.scrollTop = 0;
@@ -81,38 +57,35 @@ const CategoriesSidebar = () => {
 
         {/* Права панель (Mega Menu) */}
         {activeCategory && (
-          <Paper
-            elevation={0}
-            className={styles.flyoutPanel}
-          >
-            <h2 className={styles.flyoutTitle}>{activeCategory.name}</h2>
-            <Grid container spacing={3}>
-              {loadingSub ? (
-                <Grid item xs={12}><div>Завантаження...</div></Grid>
-              ) : (
-                subcategories.length === 0 ? (
-                  <Grid item xs={12}><div>Немає підкатегорій</div></Grid>
-                ) : (
-                  subcategories.map((subcat, index) => {
-                    return (
-                      <Grid item xs={12} sm={6} md={3} key={subcat.id || index}>
-                        <div className={styles.groupBlock}>
-                          <h3 className={styles.groupTitle}>
-                            <Link
-                              to={`/category/${subcat.id_bas}`}
-                              onClick={handleClose}
-                            >
-                              {subcat.name}
-                            </Link>
-                          </h3>
-                        </div>
-                      </Grid>
-                    );
-                  })
-                )
-              )}
-            </Grid>
-          </Paper>
+            <Paper
+              elevation={0}
+              className={styles.flyoutPanel}
+            >
+              <h2 className={styles.flyoutTitle}>{activeCategory.name}</h2>
+              <Grid container spacing={3}>
+                {subcategories.length === 0 ? (
+                    <Grid item xs={12}><div>Немає підкатегорій</div></Grid>
+                  ) : (
+                    subcategories.map((subcat, index) => {
+                      return (
+                        <Grid item xs={12} sm={6} md={3} key={subcat.id || index}>
+                          <div className={styles.groupBlock}>
+                            <h3 className={styles.groupTitle}>
+                              <Link
+                                to={`/category/${subcat.id_bas}`}
+                                onClick={handleClose}
+                              >
+                                {subcat.name}
+                              </Link>
+                            </h3>
+                          </div>
+                        </Grid>
+                      );
+                    })
+                  )
+                }
+              </Grid>
+            </Paper>
         )}
       </Paper>
     </>
