@@ -13,6 +13,9 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTelegram, faYoutube, faTiktok } from "@fortawesome/free-brands-svg-icons";
+
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import { Link as MuiLink } from "@mui/material";
@@ -85,6 +88,15 @@ const Footer = ({ logoIm }) => {
               </SocialIcon>
               <SocialIcon component="a" href="https://x.com" target="_blank" aria-label="X">
                 <XIcon fontSize="small" />
+              </SocialIcon>
+              <SocialIcon component="a" href="https://t.me/your_channel" target="_blank" aria-label="Telegram">
+                <FontAwesomeIcon icon={faTelegram} style={{ fontSize: '18px' }} />
+              </SocialIcon>
+              <SocialIcon component="a" href="https://youtube.com" target="_blank" aria-label="YouTube">
+                <FontAwesomeIcon icon={faYoutube} style={{ fontSize: '18px' }} />
+              </SocialIcon>
+              <SocialIcon component="a" href="https://tiktok.com" target="_blank" aria-label="TikTok">
+                <FontAwesomeIcon icon={faTiktok} style={{ fontSize: '18px' }} />
               </SocialIcon>
           </div>
         </div>
