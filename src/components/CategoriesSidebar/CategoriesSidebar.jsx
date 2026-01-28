@@ -104,7 +104,7 @@ const SubCategoryItem = ({ subcat, handleClose, styles }) => {
               <Link 
                 to={`/category/${item.id}`} 
                 onClick={handleClose}
-                style={{ fontSize: '14px', color: '#666', textDecoration: 'none' }}
+                className={styles.subcategoryLink}
               >
                 {item.name}
               </Link>
