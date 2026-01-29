@@ -40,6 +40,7 @@ const SearchProduct = ({ token }) => {
       freeSolo
       options={renderProducts}
       getOptionLabel={(option) => option.name}
+      PopperProps={{ style: { zIndex: 2000 } }}
       inputValue={input}
       onInputChange={(event, newInput) => {
         setInput(newInput);
