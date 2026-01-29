@@ -47,8 +47,11 @@ const SearchProduct = ({ token }) => {
           product.name.toLowerCase().includes(newInput.toLowerCase())
         );
         console.log('Всього продуктів:', products.length);
+        console.log('Перший продукт структура:', products[0]);
         console.log('Знайдено результатів:', newProduct.length);
-        console.log('Результати:', newProduct);
+        if (newProduct.length > 0) {
+          console.log('Перший результат:', newProduct[0]);
+        }
         setRenderProduct(newProduct);
       }}
       onChange={(event, selected) => {
