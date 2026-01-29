@@ -36,10 +36,11 @@ const SearchProduct = ({ token }) => {
   }, [renderProducts]);
 
   return (
-    <Autocomplete
+    <div className={styles.searchContainer}>
+      <Autocomplete
       freeSolo
       options={renderProducts}
-      getOptionLabel={(option) => option.name}
+      getOptionLabel={(option) => (typeof option === 'string' ? option : option.name)}
       PopperProps={{ style: { zIndex: 2000 } }}
       inputValue={input}
       open={Boolean(renderProducts.length && input)}
@@ -124,7 +125,23 @@ const SearchProduct = ({ token }) => {
         </li>
       )}
       sx={{ width: 345 }} 
-    />
+      />
+
+      {/* Temporary fallback dropdown for debugging styles/visibility */}
+      {renderProducts.length > 0 && input && (
+        <div className={styles.resultsContainer}>
+          {renderProducts.map((opt) => (
+            <div
+              key={opt.id_bas}
+              className={styles.nomenclaturaLink}
+              onMouseDown={() => onProductSelect(opt.id_bas)}
+            >
+              <a>{opt.name}</a>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 
