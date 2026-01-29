@@ -42,6 +42,8 @@ const SearchProduct = ({ token }) => {
       getOptionLabel={(option) => option.name}
       PopperProps={{ style: { zIndex: 2000 } }}
       inputValue={input}
+      open={Boolean(renderProducts.length && input)}
+      onClose={() => setRenderProduct([])}
       onInputChange={(event, newInput) => {
         setInput(newInput);
         const newProduct = products.filter((product) =>
@@ -56,18 +58,24 @@ const SearchProduct = ({ token }) => {
         setRenderProduct(newProduct);
       }}
       onChange={(event, selected) => {
-        if (selected) {
-          // Перевірка: selected може бути строка (freeSolo) або об'єкт (вибір зі списку)
-          if (typeof selected === 'string') {
-            // freeSolo ввід - користувач написав текст і натиснув Enter
-            console.warn('Пошук за довільним текстом не підтримується');
-            return;
-          }
-          if (selected.id_bas) {
-            onProductSelect(selected.id_bas);
+        if (!selected) return;
+        // selected може бути string (freeSolo) або об'єкт
+        if (typeof selected === 'string') {
+          // Спробуємо знайти точне співпадіння по назві
+          const found = products.find(
+            (p) => p.name.toLowerCase() === selected.toLowerCase()
+          );
+          if (found && found.id_bas) {
+            onProductSelect(found.id_bas);
           } else {
-            console.warn('Продукт без id_bas:', selected);
+            console.warn('Введений текст не відповідає жодному продукту:', selected);
           }
+          return;
+        }
+        if (selected.id_bas) {
+          onProductSelect(selected.id_bas);
+        } else {
+          console.warn('Продукт без id_bas:', selected);
         }
       }}
       renderInput={(params) => (
