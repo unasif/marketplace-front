@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import styles from "./SearchProduct.module.scss";
 import useProducts from "../../hooks/useProducts";
 
 import Autocomplete from "@mui/material/Autocomplete";
@@ -11,119 +10,90 @@ import InputAdornment from "@mui/material/InputAdornment";
 
 const SearchProduct = ({ token }) => {
   const [input, setInput] = useState("");
-  const [renderProducts, setRenderProduct] = useState([]);
   const products = useProducts(token);
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
-  const onChangeHandler = (event) => {
-    const searchValue = event.target.value;
-    setInput(searchValue);
-
-    const newProduct = products.filter((product) =>
-      product.name.toLowerCase().includes(searchValue.toLowerCase())
-    );
-
-    setRenderProduct(newProduct);
-  };
+  // Фільтруємо продукти на основі вводу
+  const filteredOptions = products.filter((product) =>
+    product.name.toLowerCase().includes(input.toLowerCase())
+  );
 
   const onProductSelect = (productId) => {
-    setInput("");
-    setRenderProduct([]);
     navigate(`/product/${productId}`);
+    setInput("");
   };
-
-  useEffect(() => {
-  }, [renderProducts]);
 
   return (
     <Autocomplete
       freeSolo
-      options={renderProducts}
-      getOptionLabel={(option) => option.name}
-      PopperProps={{ style: { zIndex: 2000 } }}
+      // Використовуємо filteredOptions, якщо є текст, інакше пустий масив
+      options={input ? filteredOptions : []}
+      getOptionLabel={(option) => (typeof option === 'string' ? option : option.name || "")}
+      
+      // Керування станом відкритості
+      open={input.length > 0 && filteredOptions.length > 0}
+      onClose={() => {}} // Запобігаємо автоматичному закриттю при кліку, якщо хочемо кастомну логіку
+      
       inputValue={input}
-      open={Boolean(renderProducts.length && input)}
-      onClose={() => setRenderProduct([])}
       onInputChange={(event, newInput) => {
         setInput(newInput);
-        const newProduct = products.filter((product) =>
-          product.name.toLowerCase().includes(newInput.toLowerCase())
-        );
-        console.log('Всього продуктів:', products.length);
-        console.log('Перший продукт структура:', products[0]);
-        console.log('Знайдено результатів:', newProduct.length);
-        if (newProduct.length > 0) {
-          console.log('Перший результат:', newProduct[0]);
-        }
-        setRenderProduct(newProduct);
       }}
+
       onChange={(event, selected) => {
         if (!selected) return;
-        // selected може бути string (freeSolo) або об'єкт
+
         if (typeof selected === 'string') {
-          // Спробуємо знайти точне співпадіння по назві
           const found = products.find(
             (p) => p.name.toLowerCase() === selected.toLowerCase()
           );
-          if (found && found.id_bas) {
-            onProductSelect(found.id_bas);
-          } else {
-            console.warn('Введений текст не відповідає жодному продукту:', selected);
-          }
-          return;
-        }
-        if (selected.id_bas) {
+          if (found && found.id_bas) onProductSelect(found.id_bas);
+        } else if (selected.id_bas) {
           onProductSelect(selected.id_bas);
-        } else {
-          console.warn('Продукт без id_bas:', selected);
         }
       }}
+
+      renderOption={(props, option) => {
+        // ВАЖЛИВО: Витягуємо key з props або призначаємо явно
+        const { key, ...otherProps } = props;
+        return (
+          <li key={option.id_bas || key} {...otherProps} style={{ fontSize: '14px' }}>
+            {option.name}
+          </li>
+        );
+      }}
+
       renderInput={(params) => (
         <TextField
           {...params}
           placeholder="Search"
-          variant="outlined"  
-          size="medium"
+          variant="outlined"
           sx={{
+            width: 345,
             '& .MuiOutlinedInput-root': {
-              padding: '12px 24px',
-              gap: '12px',
+              padding: '4px 24px', // Зменшив padding, бо Autocomplete додає свої відступи
               borderRadius: '100px',
-              '& fieldset': {
-                borderColor: '#45525c',
-              },
-              '&:hover fieldset': {
-                borderColor: '#45525c',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#45525c',
-                borderWidth: '1px',
-      }, 
+              backgroundColor: '#fff',
+              '& fieldset': { borderColor: '#45525c' },
+              '&:hover fieldset': { borderColor: '#45525c' },
+              '&.Mui-focused fieldset': { borderColor: '#45525c', borderWidth: '1px' },
             },
-            '& .MuiOutlinedInput-input': {
-              padding: 0,
-            },
-            '& .MuiOutlinedInput-root .MuiAutocomplete-input': {
-              padding: '0px 0px 0px 5px',
-            }
-          }}  
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="start">
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </InputAdornment>
-              ),
-            },
+          }}
+          InputProps={{
+            ...params.InputProps,
+            startAdornment: (
+              <InputAdornment position="start">
+                <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#45525c' }} />
+              </InputAdornment>
+            ),
           }}
         />
       )}
-      renderOption={(props, option) => (
-        <li {...props} key={option.id_bas}>
-          {option.name}
-        </li>
-      )}
-      sx={{ width: 345 }} 
+      // Щоб випадаючий список не перекривався
+      slotProps={{
+        popper: {
+          sx: { zIndex: 2000 }
+        }
+      }}
     />
   );
 };
