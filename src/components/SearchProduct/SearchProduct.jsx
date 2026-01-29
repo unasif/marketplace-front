@@ -46,11 +46,24 @@ const SearchProduct = ({ token }) => {
         const newProduct = products.filter((product) =>
           product.name.toLowerCase().includes(newInput.toLowerCase())
         );
+        console.log('Всього продуктів:', products.length);
+        console.log('Знайдено результатів:', newProduct.length);
+        console.log('Результати:', newProduct);
         setRenderProduct(newProduct);
       }}
       onChange={(event, selected) => {
         if (selected) {
-          onProductSelect(selected.id_bas);
+          // Перевірка: selected може бути строка (freeSolo) або об'єкт (вибір зі списку)
+          if (typeof selected === 'string') {
+            // freeSolo ввід - користувач написав текст і натиснув Enter
+            console.warn('Пошук за довільним текстом не підтримується');
+            return;
+          }
+          if (selected.id_bas) {
+            onProductSelect(selected.id_bas);
+          } else {
+            console.warn('Продукт без id_bas:', selected);
+          }
         }
       }}
       renderInput={(params) => (
