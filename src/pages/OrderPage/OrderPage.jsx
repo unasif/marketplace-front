@@ -55,7 +55,7 @@ const OrderPage = ({ token }) => {
 
     try {
         const response = await submitOrder(orderData, token);
-        if (response.status === 200) {
+        if (response.status === 201) {
           clearCart(); 
           navigate("/order-success"); 
         } else {

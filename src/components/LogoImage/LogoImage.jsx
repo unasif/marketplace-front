@@ -4,10 +4,16 @@ import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
 const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
   const { logo } = logoIm;
-  const baseURL = "https://unas.if.ua/api/";
-  const imageUrl = logoIm.logo
-    ? `${baseURL}${logoIm.logo.replace(/\\/g, "/")}`
-    : null;
+  const baseURL = "https://unas.if.ua/marketdemo/api/";
+  let imageUrl = null;
+
+  if (logo) {
+    if (logo.startsWith("http") || logo.startsWith("https")) {
+      imageUrl = logo;
+    } else {
+      imageUrl = `${baseURL}${logo.replace(/\\/g, "/")}`;
+    }
+  }
 
   return (
     <a 
