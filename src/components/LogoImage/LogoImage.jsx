@@ -7,11 +7,6 @@ const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
   const baseURL = "https://unas.if.ua/marketdemo";
   let imageUrl = null;
 
-  // Debug logs to trace logo source and computed URL
-  console.log("[LogoImage] props.logoIm:", logoIm);
-  console.log("[LogoImage] logo:", logo);
-  console.log("[LogoImage] baseURL:", baseURL);
-
   if (logo) {
     if (logo.startsWith("http") || logo.startsWith("https")) {
       imageUrl = logo;
@@ -19,8 +14,6 @@ const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
       imageUrl = `${baseURL}${logo.replace(/\\/g, "/")}`;
     }
   }
-
-  console.log("[LogoImage] computed imageUrl:", imageUrl);
 
   return (
     <a 
