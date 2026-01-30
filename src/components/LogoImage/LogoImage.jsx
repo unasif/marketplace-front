@@ -3,20 +3,21 @@ import styles from "./LogoImage.module.scss";
 import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
 const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
-  const { logo } = logoIm;
-  const baseURL = "https://unas.if.ua/marketdemo";
+  // Accept either an object { logo: 'path' } or a string path
+  const logoVal = typeof logoIm === 'string' ? logoIm : logoIm?.logo;
+  const baseURL = "https://unas.if.ua/marketdemo/api/";
   let imageUrl = null;
 
   // Debug logs to trace logo source and computed URL
   console.log("[LogoImage] props.logoIm:", logoIm);
-  console.log("[LogoImage] logo:", logo);
+  console.log("[LogoImage] logoVal:", logoVal);
   console.log("[LogoImage] baseURL:", baseURL);
 
-  if (logo) {
-    if (logo.startsWith("http") || logo.startsWith("https")) {
-      imageUrl = logo;
+  if (logoVal) {
+    if (logoVal.startsWith("http") || logoVal.startsWith("https")) {
+      imageUrl = logoVal;
     } else {
-      imageUrl = `${baseURL}${logo.replace(/\\/g, "/")}`;
+      imageUrl = `${baseURL}${logoVal.replace(/\\/g, "/")}`;
     }
   }
 
@@ -28,7 +29,7 @@ const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
       className={styles.logoLink}
       style={{ "--logo-text-color": textColor }}
     >
-      {logo ? (
+      {imageUrl ? (
         <img 
           src={imageUrl} 
           className={styles.logoImage} 

@@ -29,13 +29,13 @@ const CartBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const Header = ({ token, logoIm }) => {
+const Header = ({ token, logo }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
   const useBaseInfo = require("../../hooks/useBaseInfo").default;
   const baseInfo = useBaseInfo();
   const info = Array.isArray(baseInfo) ? baseInfo[0] || {} : baseInfo || {};
-  const displayLogo = info.logo || logoIm || defaultLogo;
+  const displayLogo = info.logo || logo || defaultLogo;
 
   const handleCartClick = (event) => {
     event.preventDefault();
@@ -53,7 +53,7 @@ const Header = ({ token, logoIm }) => {
     <header className={styles.header}>
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
-          <LogoImage logoIm={logoIm} textColor="#45525c" />
+          <LogoImage logoIm={displayLogo} textColor="#45525c" />
         </div>
         <ul className={styles.linksHeader}>
           <li>
