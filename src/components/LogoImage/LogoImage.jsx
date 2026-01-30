@@ -4,7 +4,7 @@ import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
 const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
   const { logo } = logoIm;
-  const baseURL = "https://unas.if.ua/marketdemo/api/";
+  const baseURL = "https://unas.if.ua/marketdemo";
   let imageUrl = null;
 
   if (logo) {

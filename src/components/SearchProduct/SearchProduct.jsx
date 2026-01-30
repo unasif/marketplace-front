@@ -26,13 +26,11 @@ const SearchProduct = ({ token }) => {
   return (
     <Autocomplete
       freeSolo
-      // Використовуємо filteredOptions, якщо є текст, інакше пустий масив
       options={input ? filteredOptions : []}
       getOptionLabel={(option) => (typeof option === 'string' ? option : option.name || "")}
       
-      // Керування станом відкритості
       open={input.length > 0 && filteredOptions.length > 0}
-      onClose={() => {}} // Запобігаємо автоматичному закриттю при кліку, якщо хочемо кастомну логіку
+      onClose={() => {}}
       
       inputValue={input}
       onInputChange={(event, newInput) => {
@@ -53,7 +51,6 @@ const SearchProduct = ({ token }) => {
       }}
 
       renderOption={(props, option) => {
-        // ВАЖЛИВО: Витягуємо key з props або призначаємо явно
         const { key, ...otherProps } = props;
         return (
           <li key={option.id_bas || key} {...otherProps} style={{ fontSize: '14px' }}>
