@@ -63,14 +63,22 @@ const ContactCircle = styled('div')({
 });
 
 
-const Footer = ({ logoIm }) => {
+const Footer = ({ logo, adress, phonenumber, gmail, logoIm }) => {
   const baseInfo = useBaseInfo();
   const info = Array.isArray(baseInfo) ? baseInfo[0] || {} : baseInfo || {};
 
-  const address = info.Adress;
-  const phone = info.Phonenumber;
-  const email = info.Gmail;
-  const displayLogo = info.logo || logoIm || defaultLogo;
+  const address = info.adress || adress || "";
+  const phone = info.phone || phonenumber || "";
+  const email = info.email || gmail || "";
+  const displayLogo = info.logo || logo || logoIm || defaultLogo;
+
+  // Social links (lowercase keys expected). If link provided without protocol, prepend https://, otherwise fall back to standard pages.
+  const instagramLink = info.instagram ? (info.instagram.startsWith("http") ? info.instagram : `https://${info.instagram}`) : "https://instagram.com";
+  const facebookLink = info.facebook ? (info.facebook.startsWith("http") ? info.facebook : `https://${info.facebook}`) : "https://facebook.com";
+  const xLink = info.x ? (info.x.startsWith("http") ? info.x : `https://${info.x}`) : "https://x.com";
+  const telegramLink = info.telegram ? (info.telegram.startsWith("http") ? info.telegram : `https://${info.telegram}`) : "https://t.me/your_channel";
+  const youtubeLink = info.youtube ? (info.youtube.startsWith("http") ? info.youtube : `https://${info.youtube}`) : "https://youtube.com";
+  const tiktokLink = info.tiktok ? (info.tiktok.startsWith("http") ? info.tiktok : `https://${info.tiktok}`) : "https://tiktok.com";
 
   return (
     <footer className={styles.footer}>
@@ -80,22 +88,22 @@ const Footer = ({ logoIm }) => {
             <LogoImage logoIm={displayLogo} textColor="#fff" />
           </div>
           <div className={styles.social}>
-              <SocialIcon component="a" href="https://instagram.com" target="_blank" aria-label="Instagram">
+              <SocialIcon component="a" href={instagramLink} target="_blank" aria-label="Instagram">
                 <InstagramIcon fontSize="small" />
               </SocialIcon>
-              <SocialIcon component="a" href="https://facebook.com" target="_blank" aria-label="Facebook">
+              <SocialIcon component="a" href={facebookLink} target="_blank" aria-label="Facebook">
                 <FacebookIcon fontSize="small" />
               </SocialIcon>
-              <SocialIcon component="a" href="https://x.com" target="_blank" aria-label="X">
+              <SocialIcon component="a" href={xLink} target="_blank" aria-label="X">
                 <XIcon fontSize="small" />
               </SocialIcon>
-              <SocialIcon component="a" href="https://t.me/your_channel" target="_blank" aria-label="Telegram">
+              <SocialIcon component="a" href={telegramLink} target="_blank" aria-label="Telegram">
                 <FontAwesomeIcon icon={faTelegram} style={{ fontSize: '18px' }} />
               </SocialIcon>
-              <SocialIcon component="a" href="https://youtube.com" target="_blank" aria-label="YouTube">
+              <SocialIcon component="a" href={youtubeLink} target="_blank" aria-label="YouTube">
                 <FontAwesomeIcon icon={faYoutube} style={{ fontSize: '18px' }} />
               </SocialIcon>
-              <SocialIcon component="a" href="https://tiktok.com" target="_blank" aria-label="TikTok">
+              <SocialIcon component="a" href={tiktokLink} target="_blank" aria-label="TikTok">
                 <FontAwesomeIcon icon={faTiktok} style={{ fontSize: '18px' }} />
               </SocialIcon>
           </div>

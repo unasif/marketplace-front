@@ -5,7 +5,7 @@ import useBaseInfo from "../../hooks/useBaseInfo";
 export const About = () => {
   const baseInfo = useBaseInfo();
   const info = Array.isArray(baseInfo) ? baseInfo[0] || {} : baseInfo || {};
-  const about = info.About;
+  const about = info.about || "";
 
   return (
     <div className={styles.mainContainer}>

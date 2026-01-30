@@ -5,7 +5,7 @@ import useBaseInfo from "../../hooks/useBaseInfo";
 export const Communication = () => {
   const baseInfo = useBaseInfo();
   const info = Array.isArray(baseInfo) ? baseInfo[0] || {} : baseInfo || {};
-  const contact = info.Contact;
+  const contact = info.contact || "";
 
   return (
     <div className={styles.mainContainer}>
