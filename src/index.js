@@ -12,7 +12,7 @@ const basename = window.location.pathname.startsWith('/marketdemo')
 root.render(
   // <React.StrictMode>
   <StyledEngineProvider injectFirst>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <App />
     </BrowserRouter>
   </StyledEngineProvider>
