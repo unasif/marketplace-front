@@ -15,6 +15,8 @@ import { Button } from '@mui/material';
 import { Link as MuiLink } from "@mui/material";
 import Badge, { badgeClasses } from '@mui/material/Badge';
 
+import useBaseInfo from "../../hooks/useBaseInfo";
+
 const CartBadge = styled(Badge)(({ theme }) => ({
   [`& .${badgeClasses.badge}`]: {
     top: -4,
@@ -29,13 +31,14 @@ const CartBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const Header = ({ token, logo }) => {
+const Header = ({ token, logo: propLogo }) => {
 
   const [openCartShopping, setOpenCartShopping] = useState(false);
   const useBaseInfo = require("../../hooks/useBaseInfo").default;
   const baseInfo = useBaseInfo();
   const info = Array.isArray(baseInfo) ? baseInfo[0] || {} : baseInfo || {};
-  const displayLogo = info.logo || logo || defaultLogo;
+  const logoPath = info.logo || propLogo || defaultLogo;
+  const logoData = { logo: logoPath };
 
   const handleCartClick = (event) => {
     event.preventDefault();
@@ -53,7 +56,7 @@ const Header = ({ token, logo }) => {
     <header className={styles.header}>
       <div className={styles.header__container}>
         <div className={styles.logoHeader}>
-          <LogoImage logoIm={displayLogo} textColor="#45525c" />
+          <LogoImage logoIm={logoData} textColor="#45525c" />
         </div>
         <ul className={styles.linksHeader}>
           <li>
