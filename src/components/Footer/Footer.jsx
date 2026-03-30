@@ -70,7 +70,9 @@ const Footer = ({ logo, adress, phonenumber, gmail, logoIm }) => {
   const address = info.adress || adress || "";
   const phone = info.phone || phonenumber || "";
   const email = info.email || gmail || "";
-  const displayLogo = info.logo || logo || logoIm || defaultLogo;
+
+  const logoPath = info.logo || logo || logoIm || defaultLogo;
+  const logoData = { logo: logoPath };
 
   // Social links (lowercase keys expected). If link provided without protocol, prepend https://, otherwise fall back to standard pages.
   const instagramLink = info.instagram ? (info.instagram.startsWith("http") ? info.instagram : `https://${info.instagram}`) : "https://instagram.com";
@@ -85,7 +87,7 @@ const Footer = ({ logo, adress, phonenumber, gmail, logoIm }) => {
       <div className={styles.footer__container}>
         <div className={styles.logoSocial}>
           <div>
-            <LogoImage logoIm={displayLogo} textColor="#fff" />
+            <LogoImage logoIm={logoData} textColor="#fff" />
           </div>
           <div className={styles.social}>
               <SocialIcon component="a" href={instagramLink} target="_blank" aria-label="Instagram">
