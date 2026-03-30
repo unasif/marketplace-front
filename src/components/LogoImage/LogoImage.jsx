@@ -18,7 +18,7 @@ const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
 
   return (
     <a 
-      href="/" 
+      href="https://unas.if.ua/marketdemo/" 
       className={styles.logoLink}
       style={{ "--logo-text-color": textColor }}
     >
