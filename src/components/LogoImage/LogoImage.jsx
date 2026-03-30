@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./LogoImage.module.scss";
+import { Link } from "react-router-dom";
 import noPhotoAvailable from "../../assets/no-photo-available.svg";
 
 const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
@@ -17,8 +18,8 @@ const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
   }
 
   return (
-    <a 
-      href="https://unas.if.ua/marketdemo/" 
+    <Link 
+      to="/"
       className={styles.logoLink}
       style={{ "--logo-text-color": textColor }}
     >
@@ -36,7 +37,7 @@ const LogoImage = ({ logoIm = {}, textColor = "#001f3d" }) => {
           </span>
         </div>
       )}
-    </a>
+    </Link>
   );
 };
 
