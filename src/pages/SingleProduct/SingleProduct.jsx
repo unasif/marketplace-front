@@ -15,6 +15,7 @@ import useProductsByCategory from "../../hooks/useProductsByCategory";
 export const SingleProduct = ({ token }) => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [loading, setLoading] = useState(true);
   const ProductsByCategory = useProductsByCategory(
     token,
     product.categories_id
@@ -31,6 +32,8 @@ export const SingleProduct = ({ token }) => {
         setProduct(response.data);
       } catch (error) {
         console.error("Помилка отримання відомостей товару:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -63,10 +66,20 @@ export const SingleProduct = ({ token }) => {
     }
   }, [token, id]);
 
+  if (loading) {
+    return (
+      <div className={styles.mainContainer}>
+        <div className={styles.contentContainer}>
+          <p>Завантаження...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.contentContainer}>
-        <div className={styles.category}>
+        <div className={styles.category}>        
           <BreadCrumbs token={token} categoryId={product.categories_id} />
           {product.name && (
             <span className={styles.productName}>
