@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { StyledEngineProvider } from "@mui/material/styles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const basename = window.location.pathname.startsWith('/marketdemo') 
+const basename = window.location.hostname === 'unas.if.ua' 
   ? '/marketdemo' 
   : '/';
 root.render(
