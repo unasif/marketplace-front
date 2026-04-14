@@ -138,33 +138,38 @@ const Footer = ({ logo, adress, phonenumber, gmail, logoIm }) => {
             <ContactCircle>
               <LocationOnIcon />
             </ContactCircle>
-               {address ? (
-                <p className={styles.contactsLabel}>{address}</p>
-              ) : (
-                <p className={styles.contactsLabel}>Адреса</p>
-              )}
+            <a
+              href={address ? `https://maps.google.com/?q=${encodeURIComponent(address)}` : "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.contactsLabel}
+            >
+              {address || "Адреса"}
+            </a>
           </li>
 
           <li className={styles.contactItem}>
             <ContactCircle>
               <PhoneIcon />
             </ContactCircle>
-            {phone ? (
-              <p className={styles.contactsLabel}>{phone}</p>
-            ) : (
-              <p className={styles.contactsLabel}>Телефон</p>
-            )}
+            <a
+              href={phone ? `tel:${phone.replace(/\s/g, "")}` : "#"}
+              className={styles.contactsLabel}
+              >
+              {phone || "Телефон"}
+            </a>
           </li>
 
           <li className={styles.contactItem}>
             <ContactCircle>
               <EmailIcon />
             </ContactCircle>
-            {email ? (
-              <p className={styles.contactsLabel}>{email}</p>
-            ) : (
-              <p className={styles.contactsLabel}>Email</p>
-            )}
+            <a
+              href={email ? `mailto:${email}` : "#"}
+              className={styles.contactsLabel}
+            >
+              {email || "Email"}
+            </a>
           </li>
         </ul>
       </div>
