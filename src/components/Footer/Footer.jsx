@@ -152,12 +152,21 @@ const Footer = ({ logo, adress, phonenumber, gmail, logoIm }) => {
             <ContactCircle>
               <PhoneIcon />
             </ContactCircle>
-            <a
-              href={phone ? `tel:${phone.replace(/\s/g, "")}` : "#"}
-              className={styles.contactsLabel}
-              >
-              {phone || "Телефон"}
-            </a>
+            <div className={styles.contactsColumn}>
+              {phone ? (
+                phone.split(/[,;]+/).map((p, i) => (
+                  <a
+                    key={i}
+                    href={`tel:${p.trim().replace(/\s/g, "")}`}
+                    className={styles.contactsLabel}
+                  >
+                    {p.trim()}
+                  </a>
+                ))
+              ) : (
+                <span className={styles.contactsLabel}>Телефон</span>
+              )}
+            </div>
           </li>
 
           <li className={styles.contactItem}>

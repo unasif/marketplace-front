@@ -109,6 +109,12 @@
   color: inherit;
 }
 
+.contactsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .contactItem {
   display: flex;
   align-items: center;
