@@ -10,6 +10,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 
 const SearchProduct = ({ token }) => {
   const [input, setInput] = useState("");
+  const [resetKey, setResetKey] = useState(0);
   const products = useProducts(token);
   const navigate = useNavigate();
 
@@ -21,10 +22,12 @@ const SearchProduct = ({ token }) => {
   const onProductSelect = (productId) => {
     navigate(`/product/${productId}`);
     setInput("");
+    setResetKey(prev => prev + 1);
   };
 
   return (
     <Autocomplete
+      key={resetKey}
       freeSolo
       options={input ? filteredOptions : []}
       getOptionLabel={(option) => (typeof option === 'string' ? option : option.name || "")}
