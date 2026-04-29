@@ -13,7 +13,7 @@ import { SingleProduct } from "./pages/SingleProduct/SingleProduct";
 import { CategoryProvider } from "./contexts/CategoryContext";
 import { CartProvider } from "./contexts/CartContext";
 import { PopUpProvider } from "./contexts/PopUpContext";
-import PopUpContainer from "./components/Toast/PopUpContainer";
+import PopUpContainer from "./components/PopUp/PopUpContainer.jsx";
 import OrderPage from "./pages/OrderPage/OrderPage";
 import OrderSuccess from "./pages/OrderSuccess/OrderSuccess";
 import OrderFailure from "./pages/OrderFailure/OrderFailure";

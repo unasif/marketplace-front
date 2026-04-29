@@ -1,6 +1,6 @@
 import React from "react";
-import PopUp from "./PopUp";
-import { usePopUp } from "../../contexts/PopUpContext";
+import PopUp from "./PopUp.jsx";
+import { usePopUp } from "../../contexts/PopUpContext.js";
 import styles from "./PopUpContainer.module.scss";
 
 function PopUpContainer() {

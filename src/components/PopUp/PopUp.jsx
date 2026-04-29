@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "./PopUp.module.scss";
-import { usePopUp } from "../../contexts/PopUpContext";
+import { usePopUp } from "../../contexts/PopUpContext.js";
 
 function PopUp({ id, message, type }) {
   const { removePopUp } = usePopUp();
