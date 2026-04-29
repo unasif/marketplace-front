@@ -10,7 +10,7 @@
   pointer-events: auto;
   z-index: 9999;
   max-height: 80vh;
-  overflow-y: auto;
+  overflow: hidden;
 
   @media (max-width: 768px) {
     bottom: 10px;

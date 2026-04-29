@@ -7,9 +7,8 @@
   font-size: 14px;
   font-weight: 500;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  animation: slideIn 0.3s ease-in-out;
+  animation: slideUp 0.3s ease-in-out;
   min-width: 280px;
-  max-width: 400px;
   margin-bottom: 12px;
 
   &.success {
@@ -69,13 +68,13 @@
   }
 }
 
-@keyframes slideIn {
+@keyframes slideUp {
   from {
-    transform: translateX(400px);
+    transform: translateY(100px);
     opacity: 0;
   }
   to {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }
