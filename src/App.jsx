@@ -12,6 +12,8 @@ import { ProductsByCategory } from "./pages/ProductsByCategory/ProductsByCategor
 import { SingleProduct } from "./pages/SingleProduct/SingleProduct";
 import { CategoryProvider } from "./contexts/CategoryContext";
 import { CartProvider } from "./contexts/CartContext";
+import { PopUpProvider } from "./contexts/PopUpContext";
+import PopUpContainer from "./components/Toast/PopUpContainer";
 import OrderPage from "./pages/OrderPage/OrderPage";
 import OrderSuccess from "./pages/OrderSuccess/OrderSuccess";
 import OrderFailure from "./pages/OrderFailure/OrderFailure";
@@ -33,44 +35,47 @@ function App() {
   }, []);
 
   return (
-    <CartProvider>
-      <CategoryProvider>
-        <CssBaseline /> 
-        <div className="wrapper">
-          <DocumentTitle title="iShop) 1.0" />
-          <ScrollToTop />
-          <Header token={token} logo={baseInfo.logo} />
-          <div className="content">
-            <div className="content__container">
-              <Routes>
-                <Route path="/order" element={<OrderPage token={token} />} />
-                <Route path="/order-success" element={<OrderSuccess />} />
-                 <Route path="/order-failure" element={<OrderFailure />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/communication" element={<Communication />} />
-                <Route
-                  path="/category/:id"
-                  element={<ProductsByCategory token={token} />}
-                />
+    <PopUpProvider>
+      <CartProvider>
+        <CategoryProvider>
+          <CssBaseline /> 
+          <div className="wrapper">
+            <DocumentTitle title="iShop) 1.0" />
+            <ScrollToTop />
+            <Header token={token} logo={baseInfo.logo} />
+            <div className="content">
+              <div className="content__container">
+                <Routes>
+                  <Route path="/order" element={<OrderPage token={token} />} />
+                  <Route path="/order-success" element={<OrderSuccess />} />
+                   <Route path="/order-failure" element={<OrderFailure />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/communication" element={<Communication />} />
+                  <Route
+                    path="/category/:id"
+                    element={<ProductsByCategory token={token} />}
+                  />
 
-                <Route path="/" element={<Home token={token} />} />
-                <Route
-                  path="/product/:id"
-                  element={<SingleProduct token={token} />}
-                />
-                <Route path="*" element={<Navigate to="/" />} />
-              </Routes>
+                  <Route path="/" element={<Home token={token} />} />
+                  <Route
+                    path="/product/:id"
+                    element={<SingleProduct token={token} />}
+                  />
+                  <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+              </div>
             </div>
+            <Footer 
+              logo={baseInfo.logo}
+              adress={baseInfo.adress}
+              phonenumber={baseInfo.phonenumber}
+              gmail={baseInfo.gmail}
+            />
           </div>
-          <Footer 
-            logo={baseInfo.logo}
-            adress={baseInfo.adress}
-            phonenumber={baseInfo.phonenumber}
-            gmail={baseInfo.gmail}
-          />
-        </div>
-      </CategoryProvider>
-    </CartProvider>
+          <PopUpContainer />
+        </CategoryProvider>
+      </CartProvider>
+    </PopUpProvider>
   );
 }
 
