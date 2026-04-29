@@ -63,6 +63,7 @@ const ContactCircle = styled('div')({
 const Footer = ({ logoIm }) => {
   const baseInfo = useBaseInfo();
   const info = Array.isArray(baseInfo) ? baseInfo[0] || {} : baseInfo || {};
+  const currentYear = new Date().getFullYear();
 
   const address = info.Adress;
   const phone = info.Phonenumber;
@@ -107,7 +108,7 @@ const Footer = ({ logoIm }) => {
           </div>
 
           <div className={styles.privacyPolicy}>
-            <span>© 2024 UNAS. All rights reserved.</span>
+            <span>© {currentYear} UNAS. All rights reserved.</span>
           </div>
         </div>
 
