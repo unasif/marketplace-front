@@ -12,59 +12,46 @@ import { instance } from "../../api";
 
 export const ProductsByCategory = ({ token }) => {
   const { id } = useParams();
-
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [fetching, setFetching] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
-    // Очищуємо `products` і встановлюємо `currentPage` у 1, а також `fetching` в `true` при зміні категорії
     setProducts([]);
     setCurrentPage(1);
-    setFetching(true);
+    setTotalCount(0);
   }, [id]);
 
   useEffect(() => {
-    if (fetching && token && id) {
-      instance
-        .get(`product/by_categories_id/?categories_id=${id}`, {
-          headers: {
-            Authorization: token,
-          },
-          params: {
-            page: currentPage,
-            limit: 8,
-          },
-        })
-        .then((response) => {
-          setProducts((prevProducts) => [
-            ...prevProducts,
-            ...response.data.rows,
-          ]);
-          setCurrentPage((prevState) => prevState + 1);
-          setTotalCount(response.data.count);
-        })
-        .finally(() => setFetching(false));
-    }
-  }, [fetching, token, id, currentPage]);
+    if (!token || !id) return;
+    setLoading(true);
+    instance
+      .get(`product/by_categories_id/?categories_id=${id}`, {
+        headers: { Authorization: token },
+        params: { page: 1, limit: 8 },
+      })
+      .then((response) => {
+        setProducts(response.data.rows);
+        setCurrentPage(2);
+        setTotalCount(response.data.count);
+      })
+      .finally(() => setLoading(false));
+  }, [id, token]);
 
-  useEffect(() => {
-    document.addEventListener("scroll", scrollHandler);
-    return function () {
-      document.removeEventListener("scroll", scrollHandler);
-    };
-  }, []);
-
-  const scrollHandler = (e) => {
-    if (
-      e.target.documentElement.scrollHeight -
-        (e.target.documentElement.scrollTop + window.innerHeight) <
-        100 &&
-      products.length < totalCount
-    ) {
-      setFetching(true);
-    }
+  const handleLoadMore = () => {
+    if (loading || products.length >= totalCount) return;
+    setLoading(true);
+    instance
+      .get(`product/by_categories_id/?categories_id=${id}`, {
+        headers: { Authorization: token },
+        params: { page: currentPage, limit: 8 },
+      })
+      .then((response) => {
+        setProducts((prev) => [...prev, ...response.data.rows]);
+        setCurrentPage((prev) => prev + 1);
+      })
+      .finally(() => setLoading(false));
   };
 
   const handleButtonClick = (event) => {
@@ -79,10 +66,7 @@ export const ProductsByCategory = ({ token }) => {
           <div className={styles.productContainer}>
             {products.map((product) => (
               <div key={product.id_bas} className={styles.productCardWrapper}>
-                <Link
-                  to={`/product/${product.id_bas}`}
-                  className={styles.productLink}
-                >
+                <Link to={`/product/${product.id_bas}`} className={styles.productLink}>
                   <div className={styles.productCard}>
                     <div className={styles.picturesCard}>
                       <ProductMainImage product={product} />
@@ -90,11 +74,7 @@ export const ProductsByCategory = ({ token }) => {
                     <div className={styles.name}>{product.name}</div>
                     <ProductQuantity token={token} idProduct={product.id_bas} />
                   </div>
-                  <ProductPrice
-                    token={token}
-                    idProduct={product.id_bas}
-                    className={styles.priceContainer}
-                  />
+                  <ProductPrice token={token} idProduct={product.id_bas} className={styles.priceContainer} />
                 </Link>
                 <div className={styles.buyLike}>
                   <div className={styles.buy}>
@@ -106,12 +86,19 @@ export const ProductsByCategory = ({ token }) => {
                 </div>
               </div>
             ))}
-               {fetching && (
-              <div className={styles.loaderContainer}>
-                <div className={styles.loader}></div>
-              </div>
-            )}
           </div>
+
+          {products.length < totalCount && (
+            <div className={styles.loadMoreContainer}>
+              <button
+                className={styles.loadMoreButton}
+                onClick={handleLoadMore}
+                disabled={loading}
+              >
+                {loading ? "Завантаження..." : "Показати ще"}
+              </button>
+            </div>
+          )}
         </div>
       </main>
     </div>

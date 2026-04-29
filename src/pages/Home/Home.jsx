@@ -13,47 +13,44 @@ import CategoriesModal from "../../components/CategoriesModal/CategoriesModal";
 export const Home = ({ token }) => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [fetching, setFetching] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
 
   useEffect(() => {
-    if (fetching && token) {
+    if (initialLoad && token) {
+      setLoading(true);
       instance
         .get(`/product/`, {
-          headers: {
-            Authorization: token,
-          },
-          params: {
-            page: currentPage,
-            limit: 8,
-          },
+          headers: { Authorization: token },
+          params: { page: currentPage, limit: 8 },
         })
         .then((response) => {
-          setProducts([...products, ...response.data.rows]);
-          setCurrentPage((prevState) => prevState + 1);
+          setProducts(response.data.rows);
+          setCurrentPage(2);
           setTotalCount(response.data.count);
         })
-        .finally(() => setFetching(false));
+        .finally(() => {
+          setLoading(false);
+          setInitialLoad(false);
+        });
     }
-  }, [fetching, token]);
+  }, [initialLoad, token]);
 
-  useEffect(() => {
-    document.addEventListener("scroll", scrollHandler);
-    return function () {
-      document.removeEventListener("scroll", scrollHandler);
-    };
-  }, []);
-
-  const scrollHandler = (e) => {
-    if (
-      e.target.documentElement.scrollHeight -
-        (e.target.documentElement.scrollTop + window.innerHeight) <
-        100 &&
-      products.length <= totalCount
-    ) {
-      setFetching(true);
-    }
+  const handleLoadMore = () => {
+    if (loading || products.length >= totalCount) return;
+    setLoading(true);
+    instance
+      .get(`/product/`, {
+        headers: { Authorization: token },
+        params: { page: currentPage, limit: 8 },
+      })
+      .then((response) => {
+        setProducts((prev) => [...prev, ...response.data.rows]);
+        setCurrentPage((prev) => prev + 1);
+      })
+      .finally(() => setLoading(false));
   };
 
   const handleButtonClick = (event) => {
@@ -62,20 +59,13 @@ export const Home = ({ token }) => {
 
   return (
     <div className={styles.homeContainer}>
-
-      <Sidebar 
-          token={token} 
-          onOpenCatalog={() => setIsCatalogOpen(true)} 
-      />
+      <Sidebar token={token} onOpenCatalog={() => setIsCatalogOpen(true)} />
       <main>
-        <div className={styles.mainContainer}>     
+        <div className={styles.mainContainer}>
           <div className={styles.productContainer}>
             {products.map((product) => (
               <div key={product.id_bas} className={styles.productCardWrapper}>
-                <Link
-                  to={`/product/${product.id_bas}`}
-                  className={styles.productLink}
-                >
+                <Link to={`/product/${product.id_bas}`} className={styles.productLink}>
                   <div className={styles.productCard}>
                     <div className={styles.picturesCard}>
                       <ProductMainImage product={product} />
@@ -83,11 +73,7 @@ export const Home = ({ token }) => {
                     <div className={styles.name}>{product.name}</div>
                     <ProductQuantity token={token} idProduct={product.id_bas} />
                   </div>
-                  <ProductPrice
-                    token={token}
-                    idProduct={product.id_bas}
-                    className={styles.priceContainer}
-                  />
+                  <ProductPrice token={token} idProduct={product.id_bas} className={styles.priceContainer} />
                 </Link>
                 <div className={styles.buyLike}>
                   <div className={styles.buy}>
@@ -99,20 +85,23 @@ export const Home = ({ token }) => {
                 </div>
               </div>
             ))}
-
-            {fetching && (
-              <div className={styles.loaderContainer}>
-                <div className={styles.loader}></div>
-              </div>
-            )}
           </div>
+
+          {products.length < totalCount && (
+            <div className={styles.loadMoreContainer}>
+              <button
+                className={styles.loadMoreButton}
+                onClick={handleLoadMore}
+                disabled={loading}
+              >
+                {loading ? "Завантаження..." : "Показати ще"}
+              </button>
+            </div>
+          )}
         </div>
       </main>
 
-      <CategoriesModal 
-        isOpen={isCatalogOpen} 
-        onClose={() => setIsCatalogOpen(false)} 
-      />
+      <CategoriesModal isOpen={isCatalogOpen} onClose={() => setIsCatalogOpen(false)} />
     </div>
   );
 };

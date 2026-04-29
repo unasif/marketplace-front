@@ -120,3 +120,30 @@
     transform: rotate(360deg);
   }
 }
+
+.loadMoreContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.loadMoreButton {
+  background-color: #136ABA;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 12px 40px;
+  border-radius: 228px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover:not(:disabled) {
+    background-color: #13B3BA;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
