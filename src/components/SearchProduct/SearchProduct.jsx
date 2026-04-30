@@ -92,16 +92,13 @@ const SearchProduct = ({ token }) => {
               style={{
                 fontSize: "13px",
                 color: "#13b3ba",
-                fontWeight: 600,
+                fontWeight: 400,
                 cursor: "pointer",
                 padding: "8px 16px",
                 borderTop: "1px solid #e0e0e0",
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
               }}
             >
-              🔍 Показати ще {option.count} товар{getWordForm(option.count)}
+              Показати ще {option.count} товар{getWordForm(option.count)}
             </li>
           );
         }
