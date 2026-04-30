@@ -90,7 +90,7 @@ const SearchProduct = ({ token }) => {
               {...otherProps}
               onClick={() => onShowMore(option.query)}
               style={{
-                fontSize: "13px",
+                fontSize: "14px",
                 color: "#13b3ba",
                 fontWeight: 400,
                 cursor: "pointer",
