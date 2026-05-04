@@ -4,8 +4,8 @@ import useManufacturers from "../../hooks/useManufacturers";
 
 const VISIBLE_COUNT = 5;
 
-const ManufacturerFilter = ({ categoriesId, onFilterChange }) => {
-  const { manufacturers, loading } = useManufacturers(categoriesId);
+const ManufacturerFilter = ({ onFilterChange }) => {
+  const manufacturers = useManufacturers();
   const [selected, setSelected] = useState([]);
   const [showAll, setShowAll] = useState(false);
 
@@ -19,7 +19,6 @@ const ManufacturerFilter = ({ categoriesId, onFilterChange }) => {
     if (onFilterChange) onFilterChange(updated);
   };
 
-  if (loading) return <p className={styles.loading}>Завантаження...</p>;
   if (manufacturers.length === 0) return null;
 
   return (
