@@ -83,7 +83,8 @@ const CategoriesSidebar = () => {
         )}
       </Paper>
 
-      <div className={styles.divider} />
+      <ManufacturerFilter categoriesId={Number(id)} />
+      
       <ManufacturerFilter />
     </>
   );
