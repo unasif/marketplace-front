@@ -1,6 +1,7 @@
 
 import React, { useState, useRef } from "react";
 import styles from "./CategoriesSidebar.module.scss";
+import ManufacturerFilter from "../ManufacturerFilter/ManufacturerFilter";
 import { Link } from "react-router-dom";
 import useCategories from "../../hooks/useCategories";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -81,6 +82,9 @@ const CategoriesSidebar = () => {
           </Paper>
         )}
       </Paper>
+
+      <div className={styles.divider} />
+      <ManufacturerFilter />
     </>
   );
 };

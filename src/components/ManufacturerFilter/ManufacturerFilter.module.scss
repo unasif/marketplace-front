@@ -1,0 +1,64 @@
+.wrapper {
+  padding-top: 4px;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #45525c;
+  padding: 0 16px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.list {
+  list-style: none;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.item {
+  padding: 4px 0;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+
+  &:hover .name {
+    color: #136ABA;
+  }
+}
+
+.checkbox {
+  accent-color: #136ABA;
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.name {
+  font-size: 13px;
+  color: #001f3d;
+  transition: color 0.2s;
+}
+
+.toggleBtn {
+  margin-top: 6px;
+  padding: 4px 16px;
+  border: none;
+  background: none;
+  color: #136ABA;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover {
+    color: #13B3BA;
+  }
+}
