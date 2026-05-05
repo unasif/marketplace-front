@@ -7,7 +7,11 @@ const useManufacturers = (categoriesId = null) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log("🔄 useManufacturers: Хук ініціалізований");
+    console.log("📋 useManufacturers: categoriesId =", categoriesId);
+
     const fetchManufacturers = async () => {
+      console.log("⏳ useManufacturers: Починаємо завантажувати виробників...");
       setLoading(true);
       setError(null);
       try {
@@ -16,18 +20,41 @@ const useManufacturers = (categoriesId = null) => {
           url += `?categories_id=${categoriesId}`;
         }
 
+        console.log("🌐 useManufacturers: Запит до URL:", url);
         const response = await instance.get(url);
+        
+        console.log("✅ useManufacturers: Успішно отримано виробників");
+        console.log("📊 useManufacturers: Кількість виробників:", response.data?.length || 0);
+        console.log("📦 useManufacturers: Дані відповіді:", response.data);
+        
         setManufacturers(response.data);
       } catch (error) {
-        console.error("Помилка отримання списку виробників:", error);
+        console.error("❌ useManufacturers: Помилка отримання списку виробників:", error);
+        console.error("📝 useManufacturers: Деталі помилки:", {
+          message: error.message,
+          status: error.response?.status,
+          statusText: error.response?.statusText,
+          data: error.response?.data,
+        });
         setError(error);
       } finally {
+        console.log("🏁 useManufacturers: Завершено завантаження");
         setLoading(false);
       }
     };
 
     fetchManufacturers();
+
+    return () => {
+      console.log("🧹 useManufacturers: Хук очищується (cleanup)");
+    };
   }, [categoriesId]);
+
+  console.log("🔍 useManufacturers: Повертаємо стан:", {
+    manufacturersCount: manufacturers.length,
+    loading,
+    error: error?.message || null,
+  });
 
   return { manufacturers, loading, error };
 };
