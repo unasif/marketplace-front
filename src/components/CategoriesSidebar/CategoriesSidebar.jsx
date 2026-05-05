@@ -87,7 +87,7 @@ const CategoriesSidebar = () => {
             return (
               <li key={id} className={styles.rootItem} style={{ padding: '10px 20px' }}>
                 <span className={styles.rootLink} style={{ cursor: 'default' }}>
-                  <span>{m.name}</span>
+                  <span>{typeof m === 'string' ? m : m.name}</span>
                 </span>
               </li>
             );
