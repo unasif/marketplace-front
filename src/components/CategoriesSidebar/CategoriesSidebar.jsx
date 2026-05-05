@@ -79,8 +79,6 @@ const CategoriesSidebar = () => {
         )}
 
         {/* ===== ВИРОБНИКИ ===== */}
-        {manufacturers.length > 0 && (
-          <>
             <p className={styles.sidebarHeader} style={{ marginTop: '16px', borderTop: '1px solid #D5DADF', paddingTop: '16px' }}>
               Виробник
             </p>
@@ -96,8 +94,6 @@ const CategoriesSidebar = () => {
                 );
               })}
             </ul>
-          </>
-        )}
       </Paper>
     </>
   );
