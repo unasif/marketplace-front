@@ -3,7 +3,8 @@ import useManufacturers from "../../hooks/useManufacturers";
 import styles from "./ManufacturerFilter.module.scss";
 
 const ManufacturerFilter = ({ selectedManufacturers = [], onChange }) => {
-  const manufacturers = useManufacturers();
+  const raw = useManufacturers();
+  const manufacturers = Array.isArray(raw) ? raw : [];
   const [isExpanded, setIsExpanded] = useState(true);
 
   const handleToggle = (id) => {
@@ -14,7 +15,7 @@ const ManufacturerFilter = ({ selectedManufacturers = [], onChange }) => {
     onChange(updated);
   };
 
-  if (!manufacturers || manufacturers.length === 0) return null;
+  if (manufacturers.length === 0) return null;
 
   return (
     <div className={styles.filterBlock}>
