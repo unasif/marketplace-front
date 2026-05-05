@@ -1,0 +1,128 @@
+.filterBlock {
+  margin-top: 24px;
+  border-top: 1px solid #D5DADF;
+  padding-top: 16px;
+}
+
+.filterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0 20px 12px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #001f3d;
+  text-align: left;
+
+  &:hover {
+    color: #136aba;
+  }
+}
+
+.arrow {
+  font-size: 14px;
+  color: #45525c;
+  transition: transform 0.25s ease;
+  transform: rotate(90deg);
+  display: inline-block;
+}
+
+.arrowOpen {
+  transform: rotate(270deg);
+}
+
+.manufacturerList {
+  list-style: none;
+  padding: 0 20px;
+  margin: 0;
+  max-height: 280px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #d5dadf;
+    border-radius: 2px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #136aba;
+  }
+}
+
+.manufacturerItem {
+  padding: 6px 0;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover .manufacturerName {
+    color: #13b3ba;
+  }
+
+  &:hover .customCheckbox {
+    border-color: #13b3ba;
+  }
+}
+
+/* Прибираємо стандартний чекбокс */
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Кастомний чекбокс */
+.customCheckbox {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d5dadf;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: border-color 0.2s, background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: "";
+    display: none;
+    width: 5px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translateY(-1px);
+  }
+}
+
+/* Стан checked — через сусідній селектор */
+.checkbox:checked + .customCheckbox {
+  background-color: #136aba;
+  border-color: #136aba;
+
+  &::after {
+    display: block;
+  }
+}
+
+.manufacturerName {
+  font-size: 15px;
+  font-weight: 400;
+  color: #45525c;
+  line-height: 1.4;
+  transition: color 0.2s;
+}
