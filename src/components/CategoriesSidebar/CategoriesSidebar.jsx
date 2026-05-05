@@ -16,7 +16,11 @@ const CategoriesSidebar = () => {
   const listRef = useRef(null);
 
   const raw = useManufacturers();
+  console.log('[Manufacturers] raw:', raw);
+  console.log('[Manufacturers] type:', typeof raw);
+  console.log('[Manufacturers] isArray:', Array.isArray(raw));
   const manufacturers = Array.isArray(raw) ? raw : [];
+  console.log('[Manufacturers] final list:', manufacturers);
 
   const topLevelCategories = categories.filter(cat => !cat.categories_id || cat.categories_id === null);
 
@@ -79,21 +83,27 @@ const CategoriesSidebar = () => {
         )}
 
         {/* ===== ВИРОБНИКИ ===== */}
-            <p className={styles.sidebarHeader} style={{ marginTop: '16px', borderTop: '1px solid #D5DADF', paddingTop: '16px' }}>
-              Виробник
-            </p>
-            <ul className={styles.rootList} style={{ height: 'auto', maxHeight: '300px' }}>
-              {manufacturers.map((m) => {
-                const id = m.id ?? m.id_bas ?? m.name;
-                return (
-                  <li key={id} className={styles.rootItem} style={{ padding: '10px 20px' }}>
-                    <span className={styles.rootLink} style={{ cursor: 'default' }}>
-                      <span>{m.name}</span>
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
+        <p className={styles.sidebarHeader} style={{ marginTop: '16px', borderTop: '1px solid #D5DADF', paddingTop: '16px' }}>
+          Виробник
+        </p>
+        <ul className={styles.rootList} style={{ height: 'auto', maxHeight: '300px' }}>
+          {manufacturers.length === 0 && (
+            <li style={{ padding: '10px 20px', color: '#999', fontSize: '14px' }}>
+              (порожньо — перевір консоль)
+            </li>
+          )}
+          {manufacturers.map((m, index) => {
+            console.log('[Manufacturers] item:', index, m);
+            const id = m.id ?? m.id_bas ?? m.name;
+            return (
+              <li key={id} className={styles.rootItem} style={{ padding: '10px 20px' }}>
+                <span className={styles.rootLink} style={{ cursor: 'default' }}>
+                  <span>{m.name}</span>
+                </span>
+              </li>
+            );
+          })}
+        </ul>
       </Paper>
     </>
   );
