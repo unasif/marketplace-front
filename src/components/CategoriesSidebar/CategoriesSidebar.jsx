@@ -84,13 +84,17 @@ const CategoriesSidebar = () => {
               Виробник
             </p>
             <ul className={styles.rootList} style={{ height: 'auto', maxHeight: '300px' }}>
-              {manufacturers.map((m) => {
-                const id = m.id ?? m.id_bas ?? m.name;
-                const encodedName = encodeURIComponent(m.name);
+              {manufacturers.map((m, index) => {
+                const manufacturerName = typeof m === 'string' ? m : m.name;
+              
+                if (!manufacturerName) return null;
+                const id = m.id ?? m.id_bas ?? index; 
+                const encodedName = encodeURIComponent(manufacturerName);
+
                 return (
                   <li key={id} className={styles.rootItem}>
                     <Link to={`/manufacturer/${encodedName}`} className={styles.rootLink}>
-                      <span>{typeof m === 'string' ? m : m.name}</span>
+                      <span>{manufacturerName}</span>
                       <FontAwesomeIcon icon={faChevronRight} className={styles.arrowIcon} />
                     </Link>
                   </li>
