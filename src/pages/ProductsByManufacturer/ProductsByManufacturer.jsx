@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "../ProductsByCategory/ProductsByCategory.module.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Link, useParams } from "react-router-dom";
@@ -12,7 +12,14 @@ import useProductsByManufacturer from "../../hooks/useProductsByManufacturer";
 export const ProductsByManufacturer = ({ token }) => {
   const { manufacturer } = useParams();
   const decodedManufacturer = decodeURIComponent(manufacturer);
-  const { products } = useProductsByManufacturer(decodedManufacturer);
+
+  console.log("🏭 [ProductsByManufacturer] manufacturer з URL:", manufacturer);
+  console.log("🏭 [ProductsByManufacturer] decoded:", decodedManufacturer);
+
+  const { products, error } = useProductsByManufacturer(decodedManufacturer);
+
+  console.log("📦 [ProductsByManufacturer] products:", products);
+  console.log("❌ [ProductsByManufacturer] error:", error);
 
   const handleButtonClick = (event) => {
     event.stopPropagation();
@@ -51,7 +58,9 @@ export const ProductsByManufacturer = ({ token }) => {
             ))}
 
             {products.length === 0 && (
-              <p style={{ color: '#708292', padding: '20px' }}>Товари не знайдено</p>
+              <p style={{ color: '#708292', padding: '20px' }}>
+                Товари не знайдено для виробника: <b>{decodedManufacturer}</b>
+              </p>
             )}
           </div>
         </div>
