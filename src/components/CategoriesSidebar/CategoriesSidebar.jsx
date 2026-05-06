@@ -78,21 +78,27 @@ const CategoriesSidebar = () => {
         )}
 
         {/* ===== ВИРОБНИКИ ===== */}
-        <p className={styles.sidebarHeader} style={{ marginTop: '16px', borderTop: '1px solid #D5DADF', paddingTop: '16px' }}>
-          Виробник
-        </p>
-        <ul className={styles.rootList} style={{ height: 'auto', maxHeight: '300px' }}>
-          {manufacturers.map((m) => {
-            const id = m.id ?? m.id_bas ?? m.name;
-            return (
-              <li key={id} className={styles.rootItem} style={{ padding: '10px 20px' }}>
-                <span className={styles.rootLink} style={{ cursor: 'default' }}>
-                  <span>{typeof m === 'string' ? m : m.name}</span>
-                </span>
-              </li>
-            );
-          })}
-        </ul>
+        {manufacturers.length > 0 && (
+          <>
+            <p className={styles.sidebarHeader} style={{ marginTop: '16px', borderTop: '1px solid #D5DADF', paddingTop: '16px' }}>
+              Виробник
+            </p>
+            <ul className={styles.rootList} style={{ height: 'auto', maxHeight: '300px' }}>
+              {manufacturers.map((m) => {
+                const id = m.id ?? m.id_bas ?? m.name;
+                const encodedName = encodeURIComponent(m.name);
+                return (
+                  <li key={id} className={styles.rootItem}>
+                    <Link to={`/manufacturer/${encodedName}`} className={styles.rootLink}>
+                      <span>{typeof m === 'string' ? m : m.name}</span>
+                      <FontAwesomeIcon icon={faChevronRight} className={styles.arrowIcon} />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        )}
       </Paper>
     </>
   );

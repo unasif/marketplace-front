@@ -9,6 +9,7 @@ import { Home } from "./pages/Home/Home";
 import { About } from "./pages/About/About";
 import { Communication } from "./pages/Communication/Communication";
 import { ProductsByCategory } from "./pages/ProductsByCategory/ProductsByCategory";
+import { ProductsByManufacturer } from "./pages/ProductsByManufacturer/ProductsByManufacturer";
 import { SingleProduct } from "./pages/SingleProduct/SingleProduct";
 import { CategoryProvider } from "./contexts/CategoryContext";
 import { CartProvider } from "./contexts/CartContext";
@@ -55,7 +56,9 @@ function App() {
                     path="/category/:id"
                     element={<ProductsByCategory token={token} />}
                   />
-
+                  <Route path="/manufacturer/:manufacturer" 
+                   element={<ProductsByManufacturer token={token} />} 
+                  />
                   <Route path="/" element={<Home token={token} />} />
                   <Route
                     path="/product/:id"
