@@ -54,8 +54,10 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  height: auto; 
+  height: 45vh;
   scrollbar-gutter: stable;
+  overflow-y: hidden;
+  @include custom-scrollbar;
 
   .hasShadow & {
     overflow-y: auto;
@@ -86,6 +88,14 @@
     transition: color 0.3s;
     width: 100%;
     overflow: hidden;
+
+    span {
+      display: inline-block; /* Потрібно для того, щоб спрацював ::first-letter */
+      text-transform: lowercase; /* Спочатку робимо все малими */
+      &::first-letter {
+        text-transform: uppercase; /* Першу літеру робимо великою */
+      }
+    }
   }
 
   .arrowIcon {
