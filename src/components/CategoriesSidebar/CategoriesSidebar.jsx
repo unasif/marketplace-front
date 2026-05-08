@@ -17,6 +17,12 @@ const CategoriesSidebar = () => {
 
   const { manufacturers } = useManufacturers();
 
+  const { manufacturer } = useParams();
+  const navigate = useNavigate();
+  const selectedManufacturers = manufacturer 
+    ? decodeURIComponent(manufacturer).split(',') 
+    : [];
+
   const topLevelCategories = categories.filter(cat => !cat.categories_id || cat.categories_id === null);
 
   const handleCategoryHover = (category) => {
@@ -27,6 +33,22 @@ const CategoriesSidebar = () => {
     setActiveCategory(null);
     if (listRef.current) {
       listRef.current.scrollTop = 0;
+    }
+  };
+
+  const handleToggleManufacturer = (name) => {
+    let newSelected;
+    if (selectedManufacturers.includes(name)) {
+      newSelected = selectedManufacturers.filter(m => m !== name); // Видалити, якщо вже є
+    } else {
+      newSelected = [...selectedManufacturers, name]; // Додати, якщо немає
+    }
+
+    if (newSelected.length === 0) {
+      navigate('/'); // Якщо нічого не вибрано, повертаємось на головну (або вкажіть ваш шлях)
+    } else {
+      const encoded = encodeURIComponent(newSelected.join(','));
+      navigate(`/manufacturer/${encoded}`);
     }
   };
 
@@ -81,7 +103,7 @@ const CategoriesSidebar = () => {
         {manufacturers.length > 0 && (
           <>
             <p className={styles.sidebarHeader} style={{ marginTop: '16px', borderTop: '1px solid #D5DADF', paddingTop: '16px' }}>
-              Виробник
+              Виробники
             </p>
             <ul className={styles.rootList} style={{ height: 'auto', maxHeight: '300px' }}>
               {manufacturers.map((m, index) => {
@@ -89,14 +111,24 @@ const CategoriesSidebar = () => {
               
                 if (!manufacturerName) return null;
                 const id = m.id ?? m.id_bas ?? index; 
-                const encodedName = encodeURIComponent(manufacturerName);
 
                 return (
-                  <li key={id} className={styles.rootItem}>
-                    <Link to={`/manufacturer/${encodedName}`} className={styles.rootLink}>
-                      <span>{manufacturerName}</span>
-                      <FontAwesomeIcon icon={faChevronRight} className={styles.arrowIcon} />
-                    </Link>
+                  <li 
+                    key={id} 
+                    className={styles.rootItem}
+                    onClick={() => handleToggleManufacturer(manufacturerName)}
+                  >
+                    <div className={styles.rootLink} style={{ cursor: 'pointer' }}>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', width: '100%', margin: 0 }}>
+                        <input
+                          type="checkbox"
+                          checked={selectedManufacturers.includes(manufacturerName)}
+                          readOnly
+                          style={{ cursor: 'pointer' }}
+                        />
+                        <span>{manufacturerName}</span>
+                      </label>
+                    </div>
                   </li>
                 );
               })}
