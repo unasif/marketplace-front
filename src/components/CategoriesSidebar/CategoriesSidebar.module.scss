@@ -31,7 +31,10 @@
   padding-bottom: 20px;
   z-index: 100;
   transition: filter 0.3s ease;
-  max-height: 100vh; /* Висота екрану */
+}
+
+.sidebarScrollArea {
+  max-height: 100vh;
   overflow-y: auto;
   @include custom-scrollbar;
 }
