@@ -118,13 +118,14 @@ const CategoriesSidebar = () => {
                     className={styles.rootItem}
                     onClick={() => handleToggleManufacturer(manufacturerName)}
                   >
-                    <div className={styles.rootLink} style={{ cursor: 'pointer' }}>
+                    <div className={styles.rootLink}>
+                      {/* Тег label обгортає input та текст, тому клік по тексту автоматично перемикає input */}
                       <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', width: '100%', margin: 0 }}>
                         <input
                           type="checkbox"
+                          className={styles.customCheckbox}
                           checked={selectedManufacturers.includes(manufacturerName)}
-                          readOnly
-                          style={{ cursor: 'pointer' }}
+                          onChange={() => handleToggleManufacturer(manufacturerName)}
                         />
                         <span>{manufacturerName}</span>
                       </label>
