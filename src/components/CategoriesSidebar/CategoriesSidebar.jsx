@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import styles from "./CategoriesSidebar.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useCategories from "../../hooks/useCategories";
 import useManufacturers from "../../hooks/useManufacturers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
