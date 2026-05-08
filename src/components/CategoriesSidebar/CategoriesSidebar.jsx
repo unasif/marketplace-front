@@ -61,6 +61,7 @@ const CategoriesSidebar = () => {
         onMouseLeave={handleClose}
         square
       >
+        <div className={styles.sidebarScrollArea}>
         {/* ===== КАТЕГОРІЇ ===== */}
         <p className={styles.sidebarHeader}>Категорії</p>
         <ul className={styles.rootList} ref={listRef}>
@@ -78,6 +79,43 @@ const CategoriesSidebar = () => {
           ))}
         </ul>
 
+        {/* ===== ВИРОБНИКИ ===== */}
+        {manufacturers.length > 0 && (
+          <>
+            <p className={styles.sidebarHeader} style={{ marginTop: '16px', borderTop: '1px solid #D5DADF', paddingTop: '16px' }}>
+              Виробники
+            </p>
+            <ul className={`${styles.rootList} ${styles.manufacturersList}`}>
+              {manufacturers.map((m, index) => {
+                const manufacturerName = typeof m === 'string' ? m : m.name;
+              
+                if (!manufacturerName) return null;
+                const id = m.id ?? m.id_bas ?? index; 
+
+                return (
+                  <li 
+                    key={id} 
+                    className={styles.rootItem}
+                  >
+                    <div className={styles.rootLink}>
+                      {/* Тег label обгортає input та текст, тому клік по тексту автоматично перемикає input */}
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', width: '100%', margin: 0 }}>
+                        <input
+                          type="checkbox"
+                          className={styles.customCheckbox}
+                          checked={selectedManufacturers.includes(manufacturerName)}
+                          onChange={() => handleToggleManufacturer(manufacturerName)}
+                        />
+                        <span>{manufacturerName}</span>
+                      </label>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        )}
+        </div>
         {/* Flyout панель підкатегорій */}
         {activeCategory && (
           <Paper elevation={0} className={styles.flyoutPanel}>
@@ -99,43 +137,6 @@ const CategoriesSidebar = () => {
           </Paper>
         )}
 
-        {/* ===== ВИРОБНИКИ ===== */}
-        {manufacturers.length > 0 && (
-          <>
-            <p className={styles.sidebarHeader} style={{ marginTop: '16px', borderTop: '1px solid #D5DADF', paddingTop: '16px' }}>
-              Виробники
-            </p>
-            <ul className={`${styles.rootList} ${styles.manufacturersList}`}>
-              {manufacturers.map((m, index) => {
-                const manufacturerName = typeof m === 'string' ? m : m.name;
-              
-                if (!manufacturerName) return null;
-                const id = m.id ?? m.id_bas ?? index; 
-
-                return (
-                  <li 
-                    key={id} 
-                    className={styles.rootItem}
-                    onClick={() => handleToggleManufacturer(manufacturerName)}
-                  >
-                    <div className={styles.rootLink}>
-                      {/* Тег label обгортає input та текст, тому клік по тексту автоматично перемикає input */}
-                      <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', width: '100%', margin: 0 }}>
-                        <input
-                          type="checkbox"
-                          className={styles.customCheckbox}
-                          checked={selectedManufacturers.includes(manufacturerName)}
-                          onChange={() => handleToggleManufacturer(manufacturerName)}
-                        />
-                        <span>{manufacturerName}</span>
-                      </label>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </>
-        )}
       </Paper>
     </>
   );
