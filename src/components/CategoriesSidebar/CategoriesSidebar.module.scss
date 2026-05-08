@@ -31,6 +31,9 @@
   padding-bottom: 20px;
   z-index: 100;
   transition: filter 0.3s ease;
+  max-height: 100vh; /* Висота екрану */
+  overflow-y: auto;
+  @include custom-scrollbar;
 }
 
 .hasShadow {
@@ -51,19 +54,23 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  height: 45vh;
+  height: auto; 
   scrollbar-gutter: stable;
-  overflow-y: hidden;
-  @include custom-scrollbar;
 
   .hasShadow & {
     overflow-y: auto;
   }
 }
 
+.manufacturersList {
+  max-height: 300px;
+  overflow-y: auto;
+  @include custom-scrollbar;
+}
+
 .rootItem {
   position: relative;
-  padding: 20px;
+  padding: 10px 20px;
   transition: background-color 0.3s;
   cursor: pointer;
 

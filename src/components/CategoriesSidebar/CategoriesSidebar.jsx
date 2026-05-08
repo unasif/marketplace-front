@@ -105,7 +105,7 @@ const CategoriesSidebar = () => {
             <p className={styles.sidebarHeader} style={{ marginTop: '16px', borderTop: '1px solid #D5DADF', paddingTop: '16px' }}>
               Виробники
             </p>
-            <ul className={styles.rootList} style={{ height: 'auto', maxHeight: '300px' }}>
+            <ul className={`${styles.rootList} ${styles.manufacturersList}`}>
               {manufacturers.map((m, index) => {
                 const manufacturerName = typeof m === 'string' ? m : m.name;
               
