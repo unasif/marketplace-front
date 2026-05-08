@@ -34,7 +34,6 @@
 }
 
 .sidebarScrollArea {
-  max-height: 100vh;
   overflow-y: auto;
   @include custom-scrollbar;
 }
