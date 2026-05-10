@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { use } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import styles from "../CategoriesModal/CategoriesModal.module.scss";
 //тимчасові іконки
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -75,6 +75,8 @@ const catalogData = [
 const CategoriesModal = ({ isOpen, onClose }) => {
     // Зберігаємо об'єкт активної категорії
     const [activeCategory, setActiveCategory] = useState(null);
+    const [searchParams] = useSearchParams();
+    const currentManufacturer = searchParams.get("manufacturer");
 
     // Скидаємо стейт при закритті/відкритті
     useEffect(() => {
@@ -128,7 +130,7 @@ const CategoriesModal = ({ isOpen, onClose }) => {
                                         <div className={styles.linksList}>
                                             {group.links.map((link, linkIndex) => (
                                                 <Link
-                                                    to={`/products?category=${link}`} 
+                                                    to={`/products?category=${link}${currentManufacturer ? `&manufacturer=${currentManufacturer}` : ''}`} 
                                                     key={linkIndex}
                                                     className={styles.subLink}
                                                     onClick={onClose}

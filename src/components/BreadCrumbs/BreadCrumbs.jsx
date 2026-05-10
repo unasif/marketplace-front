@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./BreadCrumbs.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import useCategories from "../../hooks/useCategories";
 
 function BreadCrumbs({ token, categoryId }) {
+  const [searchParams] = useSearchParams();
+  const currentManufacturer = searchParams.get("manufacturer");
   const categories = useCategories(token);
 
   const filteredCategories = categories.filter(
@@ -18,7 +20,7 @@ function BreadCrumbs({ token, categoryId }) {
       {categoryId && (
         <span>
           <Link
-            to={`/products?category=${categoryId}`}
+            to={`/products?category=${categoryId}${currentManufacturer ? `&manufacturer=${currentManufacturer}` : ''}`}
             className={styles.categoryName}
             key={categoryId}
           >

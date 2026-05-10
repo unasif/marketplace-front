@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import useCategoriesById from "../../hooks/useCategoriesById";
 import AccordionArrow from "../../assets/accordionArrow.svg";
 import styles from "../CategoriesSidebar/CategoriesSidebar.module.scss";
 
 const SubCategories = ({ categories: propCategories, categoryId, level = 0 }) => {
   // Викликаємо хук тільки для підкатегорій (коли categoryId існує)
+  const [searchParams] = useSearchParams();
+  const currentManufacturer = searchParams.get("manufacturer");
   const fetchedCategories = useCategoriesById(categoryId);
   
   // Якщо є propCategories - використовуємо їх, інакше fetchedCategories
@@ -30,7 +32,7 @@ const SubCategories = ({ categories: propCategories, categoryId, level = 0 }) =>
       {categories.map((category) => (
         <li key={category.id} className={styles.menuItem}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Link to={`/products?category=${category.id}`}>{category.name}</Link>
+            <Link to={`/products?category=${category.id}${currentManufacturer ? `&manufacturer=${currentManufacturer}` : ''}`}>{category.name}</Link>
             <SubCategoriesArrow
               categoryId={category.id}
               open={openIds.includes(category.id)}

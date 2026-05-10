@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import styles from "./CategoriesSidebar.module.scss";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import useCategories from "../../hooks/useCategories";
 import useManufacturers from "../../hooks/useManufacturers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,16 +11,18 @@ import useCategoriesById from "../../hooks/useCategoriesById";
 
 const CategoriesSidebar = () => {
   const [activeCategory, setActiveCategory] = useState(null);
+  const [searchParams] = useSearchParams();
   const categories = useCategories();
   const subcategories = useCategoriesById(activeCategory?.id);
   const listRef = useRef(null);
 
   const { manufacturers } = useManufacturers();
-
-  const { manufacturer } = useParams();
   const navigate = useNavigate();
-  const selectedManufacturers = manufacturer 
-    ? decodeURIComponent(manufacturer).split(',') 
+  
+  const currentCategory = searchParams.get("category");
+  const currentManufacturer = searchParams.get("manufacturer");
+  const selectedManufacturers = currentManufacturer 
+    ? decodeURIComponent(currentManufacturer).split(',') 
     : [];
 
   const topLevelCategories = categories.filter(cat => !cat.categories_id || cat.categories_id === null);
@@ -39,18 +41,24 @@ const CategoriesSidebar = () => {
   const handleToggleManufacturer = (name) => {
     let newSelected;
     if (selectedManufacturers.includes(name)) {
-      newSelected = selectedManufacturers.filter(m => m !== name); // Видалити, якщо вже є
+      newSelected = selectedManufacturers.filter(m => m !== name);
     } else {
-      newSelected = [...selectedManufacturers, name]; // Додати, якщо немає
+      newSelected = [...selectedManufacturers, name];
     }
 
-    if (newSelected.length === 0) {
-      navigate('/'); // Якщо нічого не вибрано, повертаємось на головну (або вкажіть ваш шлях)
-    } else if (newSelected.length === 1) {
-      navigate(`/products?manufacturer=${encodeURIComponent(newSelected[0])}`);
+    // Будуємо URL з обома параметрами
+    const params = new URLSearchParams();
+    if (currentCategory) {
+      params.set("category", currentCategory);
+    }
+    if (newSelected.length > 0) {
+      params.set("manufacturer", encodeURIComponent(newSelected[0]));
+    }
+
+    if (params.toString()) {
+      navigate(`/products?${params.toString()}`);
     } else {
-      // Якщо кілька виробників - взяти першого
-      navigate(`/products?manufacturer=${encodeURIComponent(newSelected[0])}`);
+      navigate('/');
     }
   };
 
@@ -73,7 +81,7 @@ const CategoriesSidebar = () => {
               className={`${styles.rootItem} ${activeCategory?.id === category.id ? styles.active : ''}`}
               onMouseEnter={() => handleCategoryHover(category)}
             >
-              <Link to={`/products?category=${category.id}`} className={styles.rootLink}>
+              <Link to={`/products?category=${category.id}${currentManufacturer ? `&manufacturer=${currentManufacturer}` : ''}`} className={styles.rootLink}>
                 <span>{category.name}</span>
                 <FontAwesomeIcon icon={faChevronRight} className={styles.arrowIcon} />
               </Link>
@@ -132,6 +140,7 @@ const CategoriesSidebar = () => {
                     subcat={subcat}
                     handleClose={handleClose}
                     styles={styles}
+                    currentManufacturer={currentManufacturer}
                   />
                 ))
               )}
@@ -144,14 +153,14 @@ const CategoriesSidebar = () => {
   );
 };
 
-const SubCategoryItem = ({ subcat, handleClose, styles }) => {
+const SubCategoryItem = ({ subcat, handleClose, styles, currentManufacturer }) => {
   const level3Items = useCategoriesById(subcat.id);
 
   return (
     <Grid item xs={12} sm={6} md={3} key={subcat.id}>
       <div className={styles.groupBlock}>
         <h3 className={styles.groupTitle}>
-          <Link to={`/products?category=${subcat.id}`} onClick={handleClose}>
+          <Link to={`/products?category=${subcat.id}${currentManufacturer ? `&manufacturer=${currentManufacturer}` : ''}`} onClick={handleClose}>
             {subcat.name}
           </Link>
         </h3>
@@ -159,7 +168,7 @@ const SubCategoryItem = ({ subcat, handleClose, styles }) => {
           {level3Items.map((item) => (
             <li key={item.id} style={{ marginBottom: '4px' }}>
               <Link
-                to={`/products?category=${item.id}`}
+                to={`/products?category=${item.id}${currentManufacturer ? `&manufacturer=${currentManufacturer}` : ''}`}
                 onClick={handleClose}
                 className={styles.subcategoryLink}
               >
