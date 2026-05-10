@@ -8,8 +8,7 @@ import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import { Home } from "./pages/Home/Home";
 import { About } from "./pages/About/About";
 import { Communication } from "./pages/Communication/Communication";
-import { ProductsByCategory } from "./pages/ProductsByCategory/ProductsByCategory";
-import { ProductsByManufacturer } from "./pages/ProductsByManufacturer/ProductsByManufacturer";
+import { ProductsList } from "./pages/ProductsList/ProductsList";
 import { SingleProduct } from "./pages/SingleProduct/SingleProduct";
 import { CategoryProvider } from "./contexts/CategoryContext";
 import { CartProvider } from "./contexts/CartContext";
@@ -54,10 +53,11 @@ function App() {
                   <Route path="/communication" element={<Communication />} />
                   <Route
                     path="/category/:id"
-                    element={<ProductsByCategory token={token} />}
+                    element={<ProductsList token={token} />}
                   />
-                  <Route path="/manufacturer/:manufacturer" 
-                   element={<ProductsByManufacturer token={token} />} 
+                  <Route 
+                    path="/manufacturer/:manufacturer" 
+                    element={<ProductsList token={token} />}
                   />
                   <Route path="/" element={<Home token={token} />} />
                   <Route
