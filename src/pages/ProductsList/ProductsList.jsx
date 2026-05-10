@@ -9,6 +9,7 @@ import ProductPrice from "../../components/ProductPrice/ProductPrice";
 import ProductQuantity from "../../components/ProductQuantity/ProductQuantity";
 import { instance } from "../../api";
 import useProductsByManufacturer from "../../hooks/useProductsByManufacturer";
+import useCategoryName from "../../hooks/useCategoryName";
 
 export const ProductsList = ({ token }) => {
   const [searchParams] = useSearchParams();
@@ -22,14 +23,21 @@ export const ProductsList = ({ token }) => {
   const [title, setTitle] = useState("");
   const [filterTitle, setFilterTitle] = useState("");
 
+  // Отримуємо назву категорії
+  const { categoryName } = useCategoryName(categoryId);
+
   // Логіка визначення активних фільтрів
   const hasCategory = !!categoryId;
   const hasManufacturer = !!manufacturerParam;
-  const decodedManufacturer = manufacturerParam ? decodeURIComponent(manufacturerParam) : null;
   
-  // Отримуємо товари виробника (якщо виробник вибраний)
+  // Парсимо множинні виробники із URL (розділені комами)
+  const decodedManufacturers = manufacturerParam 
+    ? decodeURIComponent(manufacturerParam).split(',').map(m => m.trim())
+    : [];
+  
+  // Отримуємо товари виробників (якщо вибрані)
   const { products: manufacturerProducts } = useProductsByManufacturer(
-    hasManufacturer ? decodedManufacturer : null
+    hasManufacturer ? decodedManufacturers : null
   );
 
   // Reset state when filters change
@@ -46,12 +54,14 @@ export const ProductsList = ({ token }) => {
     if (!token) return;
     
     let titleParts = [];
-    if (hasCategory) titleParts.push(`Категорія`);
-    if (hasManufacturer) titleParts.push(decodedManufacturer);
+    if (hasCategory && categoryName) titleParts.push(`Категорія: ${categoryName}`);
+    if (hasManufacturer && decodedManufacturers.length > 0) {
+      titleParts.push(`Виробники: ${decodedManufacturers.join(', ')}`);
+    }
     setFilterTitle(titleParts.join(" • "));
 
     // Якщо обидва фільтри активні - комбінуємо результати
-    if (hasCategory && hasManufacturer) {
+    if (hasCategory && hasManufacturer && decodedManufacturers.length > 0) {
       setLoading(true);
       instance
         .get(`product/by_categories_id/?categories_id=${categoryId}`, {
@@ -60,9 +70,11 @@ export const ProductsList = ({ token }) => {
         })
         .then((response) => {
           const categoryProducts = response.data.rows || [];
-          // Фільтруємо товари категорії за виробником
+          // Фільтруємо товари категорії за вибраними виробниками
           const filtered = categoryProducts.filter(
-            (p) => p.manufacturer && p.manufacturer.toLowerCase() === decodedManufacturer.toLowerCase()
+            (p) => p.manufacturer && decodedManufacturers.some(
+              mfg => p.manufacturer.toLowerCase() === mfg.toLowerCase()
+            )
           );
           setProducts(filtered);
           setTotalCount(filtered.length);
@@ -85,12 +97,12 @@ export const ProductsList = ({ token }) => {
         })
         .finally(() => setLoading(false));
     }
-    // Тільки виробник
-    else if (hasManufacturer && manufacturerProducts) {
+    // Тільки виробники
+    else if (hasManufacturer && manufacturerProducts && manufacturerProducts.length > 0) {
       setProducts(manufacturerProducts);
       setTotalCount(manufacturerProducts.length);
     }
-  }, [categoryId, manufacturerParam, token, hasCategory, hasManufacturer, decodedManufacturer, manufacturerProducts]);
+  }, [categoryId, categoryName, manufacturerParam, token, hasCategory, hasManufacturer, decodedManufacturers, manufacturerProducts]);
 
   const handleLoadMore = () => {
     if (loading || products.length >= totalCount || !hasCategory) return;
@@ -157,10 +169,12 @@ export const ProductsList = ({ token }) => {
             {products.length === 0 && !loading && (
               <p style={{ color: '#708292', padding: '20px' }}>
                 {hasCategory && hasManufacturer
-                  ? `Товари не знайдено для цієї категорії та виробника`
+                  ? `Товари не знайдено для цієї категорії та вибраних виробників`
                   : hasCategory
                   ? "Товари не знайдено"
-                  : `Товари не знайдено для виробника: ${decodedManufacturer}`}
+                  : hasManufacturer
+                  ? `Товари не знайдено для вибраних виробників: ${decodedManufacturers.join(', ')}`
+                  : "Товари не знайдено"}
               </p>
             )}
           </div>

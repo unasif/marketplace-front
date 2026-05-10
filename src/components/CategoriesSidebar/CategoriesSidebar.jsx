@@ -22,7 +22,7 @@ const CategoriesSidebar = () => {
   const currentCategory = searchParams.get("category");
   const currentManufacturer = searchParams.get("manufacturer");
   const selectedManufacturers = currentManufacturer 
-    ? decodeURIComponent(currentManufacturer).split(',') 
+    ? decodeURIComponent(currentManufacturer).split(',').map(m => m.trim())
     : [];
 
   const topLevelCategories = categories.filter(cat => !cat.categories_id || cat.categories_id === null);
@@ -52,7 +52,7 @@ const CategoriesSidebar = () => {
       params.set("category", currentCategory);
     }
     if (newSelected.length > 0) {
-      params.set("manufacturer", encodeURIComponent(newSelected[0]));
+      params.set("manufacturer", encodeURIComponent(newSelected.join(',')));
     }
 
     if (params.toString()) {

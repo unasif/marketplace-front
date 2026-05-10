@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
 import { instance } from "../api";
 
-const useProductsByManufacturer = (manufacturer) => {
+const useProductsByManufacturer = (manufacturers) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     console.log("🔄 useProductsByManufacturer: Хук ініціалізований");
-    console.log("🏭 useProductsByManufacturer: manufacturer =", manufacturer);
+    console.log("🏭 useProductsByManufacturer: manufacturers =", manufacturers);
 
     const fetchProducts = async () => {
       console.log("⏳ useProductsByManufacturer: Починаємо завантажувати товари...");
       setLoading(true);
       setError(null);
       try {
-        // Перетворюємо виробника на масив для єдиної обробки
-        const manufacturerList = Array.isArray(manufacturer) 
-          ? manufacturer 
-          : (manufacturer ? [manufacturer] : []);
+        // Перетворюємо виробників на масив для єдиної обробки
+        const manufacturerList = Array.isArray(manufacturers) 
+          ? manufacturers 
+          : (manufacturers ? [manufacturers] : []);
 
         if (manufacturerList.length === 0) {
           console.log("⚠️ useProductsByManufacturer: Список виробників порожній");
@@ -41,6 +41,7 @@ const useProductsByManufacturer = (manufacturer) => {
         
         // Комбінуємо результати з усіх запитів
         const allProducts = [];
+        const seenIds = new Set();
         responses.forEach((response, index) => {
           const productsData = response.data.rows || response.data;
           console.log(`✅ useProductsByManufacturer: Успішно отримано товари від виробника "${manufacturerList[index]}"`);
@@ -49,11 +50,17 @@ const useProductsByManufacturer = (manufacturer) => {
           );
           
           if (Array.isArray(productsData)) {
-            allProducts.push(...productsData);
+            productsData.forEach(product => {
+              // Уникаємо дублікатів товарів
+              if (!seenIds.has(product.id_bas)) {
+                seenIds.add(product.id_bas);
+                allProducts.push(product);
+              }
+            });
           }
         });
 
-        console.log("📦 useProductsByManufacturer: Усього товарів з усіх виробників:", allProducts.length);
+        console.log("📦 useProductsByManufacturer: Усього унікальних товарів з усіх виробників:", allProducts.length);
         setProducts(allProducts);
       } catch (error) {
         console.error("❌ useProductsByManufacturer: Помилка отримання товарів:", error);
@@ -70,11 +77,11 @@ const useProductsByManufacturer = (manufacturer) => {
       }
     };
 
-    if (manufacturer) {
+    if (manufacturers && (Array.isArray(manufacturers) ? manufacturers.length > 0 : true)) {
       console.log("✔️ useProductsByManufacturer: Виробник(и) вказан(i), виконуємо запит");
       fetchProducts();
     } else {
-      console.log("⚠️ useProductsByManufacturer: Виробник не вказан, очищуємо товари");
+      console.log("⚠️ useProductsByManufacturer: Виробники не вказані, очищуємо товари");
       setProducts([]);
       setError(null);
       setLoading(false);
@@ -83,7 +90,7 @@ const useProductsByManufacturer = (manufacturer) => {
     return () => {
       console.log("🧹 useProductsByManufacturer: Хук очищується (cleanup)");
     };
-  }, [manufacturer]);
+  }, [manufacturers]);
 
   console.log("🔍 useProductsByManufacturer: Повертаємо стан:", {
     productsCount: products.length,
