@@ -6,6 +6,11 @@ const useProductsByManufacturer = (manufacturers) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Стабілізуємо залежність - конвертуємо масив в строку для порівняння
+  const manufacturersString = Array.isArray(manufacturers) 
+    ? JSON.stringify(manufacturers.sort())
+    : String(manufacturers);
+
   useEffect(() => {
     console.log("🔄 useProductsByManufacturer: Хук ініціалізований");
     console.log("🏭 useProductsByManufacturer: manufacturers =", manufacturers);
@@ -90,7 +95,7 @@ const useProductsByManufacturer = (manufacturers) => {
     return () => {
       console.log("🧹 useProductsByManufacturer: Хук очищується (cleanup)");
     };
-  }, [manufacturers]);
+  }, [manufacturersString]);
 
   console.log("🔍 useProductsByManufacturer: Повертаємо стан:", {
     productsCount: products.length,

@@ -102,7 +102,7 @@ export const ProductsList = ({ token }) => {
       setProducts(manufacturerProducts);
       setTotalCount(manufacturerProducts.length);
     }
-  }, [categoryId, categoryName, manufacturerParam, token, hasCategory, hasManufacturer, decodedManufacturers, manufacturerProducts]);
+  }, [categoryId, categoryName, manufacturerParam, token]);
 
   const handleLoadMore = () => {
     if (loading || products.length >= totalCount || !hasCategory) return;

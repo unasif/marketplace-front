@@ -17,7 +17,16 @@ const useCategoryName = (categoryId) => {
       setError(null);
       try {
         const response = await instance.get(`/category/?id=${categoryId}`);
-        setCategoryName(response.data?.[0]?.name || null);
+        
+        // Обробляємо обидва випадки: масив або об'єкт
+        let categoryData = null;
+        if (Array.isArray(response.data) && response.data.length > 0) {
+          categoryData = response.data[0];
+        } else if (response.data && typeof response.data === 'object') {
+          categoryData = response.data;
+        }
+        
+        setCategoryName(categoryData?.name || null);
       } catch (err) {
         console.error("Помилка отримання назви категорії:", err);
         setError(err);
