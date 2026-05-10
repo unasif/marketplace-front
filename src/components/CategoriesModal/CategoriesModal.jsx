@@ -128,7 +128,7 @@ const CategoriesModal = ({ isOpen, onClose }) => {
                                         <div className={styles.linksList}>
                                             {group.links.map((link, linkIndex) => (
                                                 <Link
-                                                    to={`/category/${link}`} 
+                                                    to={`/products?category=${link}`} 
                                                     key={linkIndex}
                                                     className={styles.subLink}
                                                     onClick={onClose}

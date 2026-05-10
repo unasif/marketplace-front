@@ -18,7 +18,7 @@ function BreadCrumbs({ token, categoryId }) {
       {categoryId && (
         <span>
           <Link
-            to={`/category/${categoryId}`}
+            to={`/products?category=${categoryId}`}
             className={styles.categoryName}
             key={categoryId}
           >

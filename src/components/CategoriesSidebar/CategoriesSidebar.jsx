@@ -46,9 +46,11 @@ const CategoriesSidebar = () => {
 
     if (newSelected.length === 0) {
       navigate('/'); // Якщо нічого не вибрано, повертаємось на головну (або вкажіть ваш шлях)
+    } else if (newSelected.length === 1) {
+      navigate(`/products?manufacturer=${encodeURIComponent(newSelected[0])}`);
     } else {
-      const encoded = encodeURIComponent(newSelected.join(','));
-      navigate(`/manufacturer/${encoded}`);
+      // Якщо кілька виробників - взяти першого
+      navigate(`/products?manufacturer=${encodeURIComponent(newSelected[0])}`);
     }
   };
 
@@ -71,7 +73,7 @@ const CategoriesSidebar = () => {
               className={`${styles.rootItem} ${activeCategory?.id === category.id ? styles.active : ''}`}
               onMouseEnter={() => handleCategoryHover(category)}
             >
-              <Link to={`/category/${category.id}`} className={styles.rootLink}>
+              <Link to={`/products?category=${category.id}`} className={styles.rootLink}>
                 <span>{category.name}</span>
                 <FontAwesomeIcon icon={faChevronRight} className={styles.arrowIcon} />
               </Link>
@@ -149,7 +151,7 @@ const SubCategoryItem = ({ subcat, handleClose, styles }) => {
     <Grid item xs={12} sm={6} md={3} key={subcat.id}>
       <div className={styles.groupBlock}>
         <h3 className={styles.groupTitle}>
-          <Link to={`/category/${subcat.id}`} onClick={handleClose}>
+          <Link to={`/products?category=${subcat.id}`} onClick={handleClose}>
             {subcat.name}
           </Link>
         </h3>
@@ -157,7 +159,7 @@ const SubCategoryItem = ({ subcat, handleClose, styles }) => {
           {level3Items.map((item) => (
             <li key={item.id} style={{ marginBottom: '4px' }}>
               <Link
-                to={`/category/${item.id}`}
+                to={`/products?category=${item.id}`}
                 onClick={handleClose}
                 className={styles.subcategoryLink}
               >

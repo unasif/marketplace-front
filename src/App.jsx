@@ -52,11 +52,7 @@ function App() {
                   <Route path="/about" element={<About />} />
                   <Route path="/communication" element={<Communication />} />
                   <Route
-                    path="/category/:id"
-                    element={<ProductsList token={token} />}
-                  />
-                  <Route 
-                    path="/manufacturer/:manufacturer" 
+                    path="/products"
                     element={<ProductsList token={token} />}
                   />
                   <Route path="/" element={<Home token={token} />} />

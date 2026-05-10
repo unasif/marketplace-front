@@ -30,7 +30,7 @@ const SubCategories = ({ categories: propCategories, categoryId, level = 0 }) =>
       {categories.map((category) => (
         <li key={category.id} className={styles.menuItem}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Link to={`/category/${category.id}`}>{category.name}</Link>
+            <Link to={`/products?category=${category.id}`}>{category.name}</Link>
             <SubCategoriesArrow
               categoryId={category.id}
               open={openIds.includes(category.id)}

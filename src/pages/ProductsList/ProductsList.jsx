@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductsList.module.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import ButtonBuy from "../../components/ButtonBuy/ButtonBuy";
 import ButtonLike from "../../components/ButtonLike/ButtonLike";
 import ProductMainImage from "../../components/ProductMainImage/ProductMainImage";
@@ -11,63 +11,93 @@ import { instance } from "../../api";
 import useProductsByManufacturer from "../../hooks/useProductsByManufacturer";
 
 export const ProductsList = ({ token }) => {
-  const { id, manufacturer } = useParams();
+  const [searchParams] = useSearchParams();
+  const categoryId = searchParams.get("category");
+  const manufacturerParam = searchParams.get("manufacturer");
+  
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
   const [title, setTitle] = useState("");
+  const [filterTitle, setFilterTitle] = useState("");
 
-  // For category filtering
-  const isCategoryView = !!id;
-  const decodedManufacturer = manufacturer ? decodeURIComponent(manufacturer) : null;
-  const { products: manufacturerProducts, error: manufacturerError } = useProductsByManufacturer(
-    decodedManufacturer
+  // Логіка визначення активних фільтрів
+  const hasCategory = !!categoryId;
+  const hasManufacturer = !!manufacturerParam;
+  const decodedManufacturer = manufacturerParam ? decodeURIComponent(manufacturerParam) : null;
+  
+  // Отримуємо товари виробника (якщо виробник вибраний)
+  const { products: manufacturerProducts } = useProductsByManufacturer(
+    hasManufacturer ? decodedManufacturer : null
   );
 
-  // Reset state when route params change
+  // Reset state when filters change
   useEffect(() => {
     setProducts([]);
     setCurrentPage(1);
     setTotalCount(0);
     setTitle("");
-  }, [id, manufacturer]);
+    setFilterTitle("");
+  }, [categoryId, manufacturerParam]);
 
-  // Fetch category products
+  // Fetch products based on filters
   useEffect(() => {
-    if (!isCategoryView || !token || !id) return;
+    if (!token) return;
+    
+    let titleParts = [];
+    if (hasCategory) titleParts.push(`Категорія`);
+    if (hasManufacturer) titleParts.push(decodedManufacturer);
+    setFilterTitle(titleParts.join(" • "));
 
-    setLoading(true);
-    instance
-      .get(`product/by_categories_id/?categories_id=${id}`, {
-        headers: { Authorization: token },
-        params: { page: 1, limit: 8 },
-      })
-      .then((response) => {
-        setProducts(response.data.rows);
-        setCurrentPage(2);
-        setTotalCount(response.data.count);
-      })
-      .finally(() => setLoading(false));
-  }, [id, token, isCategoryView]);
-
-  // Update products when manufacturer products change
-  useEffect(() => {
-    if (isCategoryView) return;
-
-    if (decodedManufacturer && manufacturerProducts) {
+    // Якщо обидва фільтри активні - комбінуємо результати
+    if (hasCategory && hasManufacturer) {
+      setLoading(true);
+      instance
+        .get(`product/by_categories_id/?categories_id=${categoryId}`, {
+          headers: { Authorization: token },
+          params: { page: 1, limit: 100 },
+        })
+        .then((response) => {
+          const categoryProducts = response.data.rows || [];
+          // Фільтруємо товари категорії за виробником
+          const filtered = categoryProducts.filter(
+            (p) => p.manufacturer && p.manufacturer.toLowerCase() === decodedManufacturer.toLowerCase()
+          );
+          setProducts(filtered);
+          setTotalCount(filtered.length);
+          setCurrentPage(2);
+        })
+        .finally(() => setLoading(false));
+    }
+    // Тільки категорія
+    else if (hasCategory) {
+      setLoading(true);
+      instance
+        .get(`product/by_categories_id/?categories_id=${categoryId}`, {
+          headers: { Authorization: token },
+          params: { page: 1, limit: 8 },
+        })
+        .then((response) => {
+          setProducts(response.data.rows);
+          setCurrentPage(2);
+          setTotalCount(response.data.count);
+        })
+        .finally(() => setLoading(false));
+    }
+    // Тільки виробник
+    else if (hasManufacturer && manufacturerProducts) {
       setProducts(manufacturerProducts);
-      setTitle(decodedManufacturer);
       setTotalCount(manufacturerProducts.length);
     }
-  }, [manufacturerProducts, decodedManufacturer, isCategoryView]);
+  }, [categoryId, manufacturerParam, token, hasCategory, hasManufacturer, decodedManufacturer, manufacturerProducts]);
 
   const handleLoadMore = () => {
-    if (loading || products.length >= totalCount || !isCategoryView) return;
+    if (loading || products.length >= totalCount || !hasCategory) return;
 
     setLoading(true);
     instance
-      .get(`product/by_categories_id/?categories_id=${id}`, {
+      .get(`product/by_categories_id/?categories_id=${categoryId}`, {
         headers: { Authorization: token },
         params: { page: currentPage, limit: 8 },
       })
@@ -86,13 +116,13 @@ export const ProductsList = ({ token }) => {
     <div className={styles.categoriesContainer}>
       <Sidebar 
         token={token} 
-        categoryId={isCategoryView ? Number(id) : undefined}
+        categoryId={hasCategory ? Number(categoryId) : undefined}
       />
       <main>
         <div className={styles.mainContainer}>
-          {!isCategoryView && title && (
+          {filterTitle && (
             <h2 style={{ padding: '30px 0 10px', color: '#001f3d', fontSize: '24px', fontWeight: 700 }}>
-              {title}
+              {filterTitle}
             </h2>
           )}
 
@@ -126,14 +156,16 @@ export const ProductsList = ({ token }) => {
 
             {products.length === 0 && !loading && (
               <p style={{ color: '#708292', padding: '20px' }}>
-                {isCategoryView 
-                  ? "Товари не знайдено" 
-                  : `Товари не знайдено для виробника: <b>${title}</b>`}
+                {hasCategory && hasManufacturer
+                  ? `Товари не знайдено для цієї категорії та виробника`
+                  : hasCategory
+                  ? "Товари не знайдено"
+                  : `Товари не знайдено для виробника: ${decodedManufacturer}`}
               </p>
             )}
           </div>
 
-          {isCategoryView && products.length < totalCount && (
+          {hasCategory && !hasManufacturer && products.length < totalCount && (
             <div className={styles.loadMoreContainer}>
               <button
                 className={styles.loadMoreButton}
