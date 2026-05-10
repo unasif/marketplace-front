@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../ProductsByCategory/ProductsByCategory.module.scss";
+import styles from "./ProductsList.module.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Link, useParams } from "react-router-dom";
 import ButtonBuy from "../../components/ButtonBuy/ButtonBuy";
