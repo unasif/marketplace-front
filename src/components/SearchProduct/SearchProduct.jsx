@@ -45,6 +45,13 @@ const SearchProduct = ({ token }) => {
     setResetKey((prev) => prev + 1);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && input.trim().length > 0) {
+      event.preventDefault();
+      onShowMore(input);
+    }
+  };
+
   return (
     <Autocomplete
       key={resetKey}
@@ -118,6 +125,7 @@ const SearchProduct = ({ token }) => {
           {...params}
           placeholder="Search"
           variant="outlined"
+          onKeyDown={handleKeyDown}
           sx={{
             width: 345,
             "& .MuiOutlinedInput-root": {
