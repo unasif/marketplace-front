@@ -34,6 +34,7 @@ export const ProductsList = ({ token }) => {
   const hasSearch = !!searchQuery;
 
   const allProducts = useProducts(token);
+  const [visibleCount, setVisibleCount] = useState(8);
 
   const searchResults = hasSearch
     ? allProducts.filter((p) =>
@@ -58,6 +59,7 @@ export const ProductsList = ({ token }) => {
     setTotalCount(0);
     setTitle("");
     setFilterTitle("");
+    setVisibleCount(8);
   }, [categoryId, manufacturerParam, searchQuery]);
 
   // Fetch products based on filters
