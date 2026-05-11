@@ -10,11 +10,13 @@ import ProductQuantity from "../../components/ProductQuantity/ProductQuantity";
 import { instance } from "../../api";
 import useProductsByManufacturer from "../../hooks/useProductsByManufacturer";
 import useCategoryName from "../../hooks/useCategoryName";
+import useProducts from "../../hooks/useProducts";
 
 export const ProductsList = ({ token }) => {
   const [searchParams] = useSearchParams();
   const categoryId = searchParams.get("category");
   const manufacturerParam = searchParams.get("manufacturer");
+  const searchQuery = searchParams.get("search");
   
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,6 +31,15 @@ export const ProductsList = ({ token }) => {
   // Логіка визначення активних фільтрів
   const hasCategory = !!categoryId;
   const hasManufacturer = !!manufacturerParam;
+  const hasSearch = !!searchQuery;
+
+  const allProducts = useProducts(token);
+
+  const searchResults = hasSearch
+    ? allProducts.filter((p) =>
+      p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  : [];
   
   // Парсимо множинні виробники із URL (розділені комами)
   const decodedManufacturers = manufacturerParam 
@@ -41,13 +52,13 @@ export const ProductsList = ({ token }) => {
   );
 
   // Reset state when filters change
-  useEffect(() => {
+    useEffect(() => {
     setProducts([]);
     setCurrentPage(1);
     setTotalCount(0);
     setTitle("");
     setFilterTitle("");
-  }, [categoryId, manufacturerParam]);
+  }, [categoryId, manufacturerParam, searchQuery]);
 
   // Fetch products based on filters
   useEffect(() => {
@@ -130,64 +141,95 @@ export const ProductsList = ({ token }) => {
       />
       <main>
         <div className={styles.mainContainer}>
-          {filterTitle && (
-            <h2 style={{ padding: '30px 0 10px', color: '#001f3d', fontSize: '24px', fontWeight: 700 }}>
-              {filterTitle}
-            </h2>
-          )}
-
-          <div className={styles.productContainer}>
-            {products.map((product) => (
-              <div key={product.id_bas} className={styles.productCardWrapper}>
-                <Link to={`/product/${product.id_bas}`} className={styles.productLink}>
-                  <div className={styles.productCard}>
-                    <div className={styles.picturesCard}>
-                      <ProductMainImage product={product} />
+          {hasSearch ? (
+            <>
+              <h2 style={{ padding: "30px 0 10px", color: "#001f3d", fontSize: "24px", fontWeight: 700 }}>
+                Результати пошуку:{" "}
+                <em style={{ color: "#136ABA" }}>"{searchQuery}"</em>
+                <span style={{ fontSize: "16px", color: "#708292", marginLeft: "12px", fontWeight: 400 }}>
+                  ({searchResults.length} товарів)
+                </span>
+              </h2>
+              <div className={styles.productContainer}>
+                {searchResults.length === 0 && (
+                  <p style={{ color: "#708292", padding: "20px" }}>Нічого не знайдено.</p>
+                )}
+                {searchResults.map((product) => (
+                  <div key={product.id_bas} className={styles.productCardWrapper}>
+                    <Link to={`/product/${product.id_bas}`} className={styles.productLink}>
+                      <div className={styles.productCard}>
+                        <div className={styles.picturesCard}>
+                          <ProductMainImage product={product} />
+                        </div>
+                        <div className={styles.name}>{product.name}</div>
+                        <ProductQuantity token={token} idProduct={product.id_bas} />
+                      </div>
+                      <ProductPrice token={token} idProduct={product.id_bas} className={styles.priceContainer} />
+                    </Link>
+                    <div className={styles.buyLike}>
+                      <div className={styles.buy}>
+                        <ButtonBuy product={product} onClick={handleButtonClick} />
+                      </div>
+                      <div className={styles.blockLike}>
+                        <ButtonLike product={product} onClick={handleButtonClick} />
+                      </div>
                     </div>
-                    <div className={styles.name}>{product.name}</div>
-                    <ProductQuantity token={token} idProduct={product.id_bas} />
                   </div>
-                  <ProductPrice 
-                    token={token} 
-                    idProduct={product.id_bas} 
-                    className={styles.priceContainer} 
-                  />
-                </Link>
-                <div className={styles.buyLike}>
-                  <div className={styles.buy}>
-                    <ButtonBuy product={product} onClick={handleButtonClick} />
-                  </div>
-                  <div className={styles.blockLike}>
-                    <ButtonLike product={product} onClick={handleButtonClick} />
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
-
-            {products.length === 0 && !loading && (
-              <p style={{ color: '#708292', padding: '20px' }}>
-                {hasCategory && hasManufacturer
-                  ? `Товари не знайдено для цієї категорії та вибраних виробників`
-                  : hasCategory
-                  ? "Товари не знайдено"
-                  : hasManufacturer
-                  ? `Товари не знайдено для вибраних виробників: ${decodedManufacturers.join(', ')}`
-                  : "Товари не знайдено"}
-              </p>
-            )}
-          </div>
-
-          {hasCategory && !hasManufacturer && products.length < totalCount && (
-            <div className={styles.loadMoreContainer}>
-              <button
-                className={styles.loadMoreButton}
-                onClick={handleLoadMore}
-                disabled={loading}
-              >
-                {loading ? "Завантаження..." : "Показати ще"}
-              </button>
-            </div>
+            </>
+          ) : (
+            <>
+              {filterTitle && (
+                <h2 style={{ padding: '30px 0 10px', color: '#001f3d', fontSize: '24px', fontWeight: 700 }}>
+                  {filterTitle}
+                </h2>
+              )}
+              <div className={styles.productContainer}>
+                {products.map((product) => (
+                  <div key={product.id_bas} className={styles.productCardWrapper}>
+                    <Link to={`/product/${product.id_bas}`} className={styles.productLink}>
+                      <div className={styles.productCard}>
+                        <div className={styles.picturesCard}>
+                          <ProductMainImage product={product} />
+                        </div>
+                        <div className={styles.name}>{product.name}</div>
+                        <ProductQuantity token={token} idProduct={product.id_bas} />
+                      </div>
+                      <ProductPrice token={token} idProduct={product.id_bas} className={styles.priceContainer} />
+                    </Link>
+                    <div className={styles.buyLike}>
+                      <div className={styles.buy}>
+                        <ButtonBuy product={product} onClick={handleButtonClick} />
+                      </div>
+                      <div className={styles.blockLike}>
+                        <ButtonLike product={product} onClick={handleButtonClick} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {products.length === 0 && !loading && (
+                  <p style={{ color: '#708292', padding: '20px' }}>
+                    {hasCategory && hasManufacturer
+                      ? `Товари не знайдено для цієї категорії та вибраних виробників`
+                      : hasCategory
+                      ? "Товари не знайдено"
+                      : hasManufacturer
+                      ? `Товари не знайдено для вибраних виробників: ${decodedManufacturers.join(', ')}`
+                      : "Товари не знайдено"}
+                  </p>
+                )}
+              </div>
+              {hasCategory && !hasManufacturer && products.length < totalCount && (
+                <div className={styles.loadMoreContainer}>
+                  <button className={styles.loadMoreButton} onClick={handleLoadMore} disabled={loading}>
+                    {loading ? "Завантаження..." : "Показати ще"}
+                  </button>
+                </div>
+              )}
+            </>
           )}
+
         </div>
       </main>
     </div>
