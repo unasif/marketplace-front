@@ -51,58 +51,56 @@ export const ProductsList = ({ token }) => {
 
   // Fetch products based on filters
   useEffect(() => {
-    if (!token) return;
-    
-    let titleParts = [];
-    if (hasCategory && categoryName) titleParts.push(`Категорія: ${categoryName}`);
-    if (hasManufacturer && decodedManufacturers.length > 0) {
-      titleParts.push(`Виробники: ${decodedManufacturers.join(', ')}`);
-    }
-    setFilterTitle(titleParts.join(" • "));
+  if (!token) return;
 
-    // Якщо обидва фільтри активні - комбінуємо результати
-    if (hasCategory && hasManufacturer && decodedManufacturers.length > 0) {
-      setLoading(true);
-      instance
-        .get(`product/by_categories_id/?categories_id=${categoryId}`, {
-          headers: { Authorization: token },
-          params: { page: 1, limit: 100 },
-        })
-        .then((response) => {
-          const categoryProducts = response.data.rows || [];
-          // Фільтруємо товари категорії за вибраними виробниками
-          const filtered = categoryProducts.filter(
-            (p) => p.manufacturer && decodedManufacturers.some(
-              mfg => p.manufacturer.toLowerCase() === mfg.toLowerCase()
-            )
-          );
-          setProducts(filtered);
-          setTotalCount(filtered.length);
-          setCurrentPage(2);
-        })
-        .finally(() => setLoading(false));
-    }
-    // Тільки категорія
-    else if (hasCategory) {
-      setLoading(true);
-      instance
-        .get(`product/by_categories_id/?categories_id=${categoryId}`, {
-          headers: { Authorization: token },
-          params: { page: 1, limit: 8 },
-        })
-        .then((response) => {
-          setProducts(response.data.rows);
-          setCurrentPage(2);
-          setTotalCount(response.data.count);
-        })
-        .finally(() => setLoading(false));
-    }
-    // Тільки виробники
-    else if (hasManufacturer && manufacturerProducts && manufacturerProducts.length > 0) {
+  let titleParts = [];
+  if (hasCategory && categoryName) titleParts.push(`Категорія: ${categoryName}`);
+  if (hasManufacturer && decodedManufacturers.length > 0) {
+    titleParts.push(`Виробники: ${decodedManufacturers.join(', ')}`);
+  }
+  setFilterTitle(titleParts.join(" • "));
+
+  if (hasCategory && hasManufacturer && decodedManufacturers.length > 0) {
+    setLoading(true);
+    instance
+      .get(`product/by_categories_id/?categories_id=${categoryId}`, {
+        headers: { Authorization: token },
+        params: { page: 1, limit: 100 },
+      })
+      .then((response) => {
+        const categoryProducts = response.data.rows || [];
+        const filtered = categoryProducts.filter(
+          (p) => p.manufacturer && decodedManufacturers.some(
+            mfg => p.manufacturer.toLowerCase() === mfg.toLowerCase()
+          )
+        );
+        setProducts(filtered);
+        setTotalCount(filtered.length);
+        setCurrentPage(2);
+      })
+      .finally(() => setLoading(false));
+  } else if (hasCategory) {
+    setLoading(true);
+    instance
+      .get(`product/by_categories_id/?categories_id=${categoryId}`, {
+        headers: { Authorization: token },
+        params: { page: 1, limit: 8 },
+      })
+      .then((response) => {
+        setProducts(response.data.rows);
+        setCurrentPage(2);
+        setTotalCount(response.data.count);
+      })
+      .finally(() => setLoading(false));
+  }
+  }, [categoryId, categoryName, manufacturerParam, token]);
+
+  useEffect(() => {
+    if (hasManufacturer && !hasCategory && manufacturerProducts.length > 0) {
       setProducts(manufacturerProducts);
       setTotalCount(manufacturerProducts.length);
     }
-  }, [categoryId, categoryName, manufacturerParam, token]);
+  }, [manufacturerProducts, hasManufacturer, hasCategory]);
 
   const handleLoadMore = () => {
     if (loading || products.length >= totalCount || !hasCategory) return;
