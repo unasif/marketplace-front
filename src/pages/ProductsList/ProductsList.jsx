@@ -156,7 +156,7 @@ export const ProductsList = ({ token }) => {
                 {searchResults.length === 0 && (
                   <p style={{ color: "#708292", padding: "20px" }}>Нічого не знайдено.</p>
                 )}
-                {searchResults.map((product) => (
+                {searchResults.slice(0, visibleCount).map((product) => ( // ⬅️ slice
                   <div key={product.id_bas} className={styles.productCardWrapper}>
                     <Link to={`/product/${product.id_bas}`} className={styles.productLink}>
                       <div className={styles.productCard}>
@@ -179,6 +179,17 @@ export const ProductsList = ({ token }) => {
                   </div>
                 ))}
               </div>
+
+              {visibleCount < searchResults.length && ( // ⬅️ кнопка "Показати ще"
+                <div className={styles.loadMoreContainer}>
+                  <button
+                    className={styles.loadMoreButton}
+                    onClick={() => setVisibleCount((prev) => prev + 8)}
+                  >
+                    Показати ще
+                  </button>
+                </div>
+              )}
             </>
           ) : (
             <>
