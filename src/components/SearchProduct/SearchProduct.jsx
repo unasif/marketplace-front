@@ -40,16 +40,10 @@ const SearchProduct = ({ token }) => {
   };
 
   const onShowMore = (query) => {
+    if (!query || !query.trim()) return; // Захист від порожнього пошуку
     navigate(`/products?search=${encodeURIComponent(query)}`);
     setInput("");
     setResetKey((prev) => prev + 1);
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter" && input.trim().length > 0) {
-      event.preventDefault();
-      onShowMore(input);
-    }
   };
 
   return (
@@ -71,17 +65,20 @@ const SearchProduct = ({ token }) => {
       onChange={(event, selected) => {
         if (!selected) return;
 
+        // 1. Якщо клікнули на "Показати ще"
         if (selected.__showMore) {
           onShowMore(selected.query);
           return;
         }
 
+        // 2. Якщо натиснули Enter після вводу тексту (freeSolo повертає рядок)
         if (typeof selected === "string") {
-          const found = products.find(
-            (p) => p.name.toLowerCase() === selected.toLowerCase()
-          );
-          if (found?.id_bas) onProductSelect(found.id_bas);
-        } else if (selected.id_bas) {
+          onShowMore(selected);
+          return;
+        } 
+        
+        // 3. Якщо обрали конкретний товар зі списку (кліком або стрілками + Enter)
+        if (selected.id_bas) {
           onProductSelect(selected.id_bas);
         }
       }}
@@ -125,7 +122,7 @@ const SearchProduct = ({ token }) => {
           {...params}
           placeholder="Search"
           variant="outlined"
-          onKeyDown={handleKeyDown}
+          // Функцію handleKeyDown видалено, щоб уникнути конфліктів з Autocomplete
           sx={{
             width: 345,
             "& .MuiOutlinedInput-root": {
