@@ -7,6 +7,7 @@ import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ModalCartShopping from '../ModalCartShopping/ModalCartShopping';
 import { useCart } from "../../contexts/CartContext";
+import { useFavourites } from "../../contexts/FavouritesContext";
 import defaultLogo from "../../assets/no-photo-available.svg";
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
@@ -49,8 +50,9 @@ const Header = ({ token, logo: propLogo }) => {
     setOpenCartShopping(false);
   };
   
-  const { cart } = useCart(); // Отримуємо кошик з контексту
-  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0); // Підрахунок загальної кількості товарів
+  const { cart } = useCart();
+  const { count: favouritesCount } = useFavourites();
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <header className={styles.header}>
@@ -91,13 +93,17 @@ const Header = ({ token, logo: propLogo }) => {
           </IconButton>
 
           <IconButton
+            component={RouterLink}
+            to="/favourites"
             aria-label="favorites"
             className={`${styles.headerButton} ${styles.headerIconButton}`}
             disableRipple
             disableTouchRipple
             disableFocusRipple
           >
-            <FontAwesomeIcon icon={faHeart} className={styles.headerIcon} />
+            <CartBadge badgeContent={favouritesCount} color="error" overlap="circular">
+              <FontAwesomeIcon icon={faHeart} className={styles.headerIcon} />
+            </CartBadge>
             <p className={styles.headerIconLabel}>Обране</p>
           </IconButton>
 

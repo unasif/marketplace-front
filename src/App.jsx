@@ -12,6 +12,8 @@ import { ProductsList } from "./pages/ProductsList/ProductsList";
 import { SingleProduct } from "./pages/SingleProduct/SingleProduct";
 import { CategoryProvider } from "./contexts/CategoryContext";
 import { CartProvider } from "./contexts/CartContext";
+import { FavouritesProvider } from "./contexts/FavouritesContext";
+import { Favourites } from "./pages/Favourites/Favourites";
 import { PopUpProvider } from "./contexts/PopUpContext";
 import PopUpContainer from "./components/PopUp/PopUpContainer.jsx";
 import OrderPage from "./pages/OrderPage/OrderPage";
@@ -37,6 +39,7 @@ function App() {
   return (
     <PopUpProvider>
       <CartProvider>
+        <FavouritesProvider token={token}>
         <CategoryProvider>
           <CssBaseline /> 
           <div className="wrapper">
@@ -56,6 +59,7 @@ function App() {
                     element={<ProductsList token={token} />}
                   />
                   <Route path="/" element={<Home token={token} />} />
+                  <Route path="/favourites" element={<Favourites token={token} />} />
                   <Route
                     path="/product/:id"
                     element={<SingleProduct token={token} />}
@@ -73,6 +77,7 @@ function App() {
           </div>
           <PopUpContainer />
         </CategoryProvider>
+        </FavouritesProvider>
       </CartProvider>
     </PopUpProvider>
   );

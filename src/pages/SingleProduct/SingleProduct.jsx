@@ -113,7 +113,7 @@ export const SingleProduct = ({ token }) => {
               <h3>{product.name}</h3>
               <div className={styles.containerLike}>
                 <div className={styles.blockLike}>
-                  <ButtonLike />
+                  <ButtonLike product={product} />
                 </div>
               </div>
             </div>

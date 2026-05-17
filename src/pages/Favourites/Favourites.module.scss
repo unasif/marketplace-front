@@ -1,0 +1,269 @@
+.mainContainer {
+  padding: 100px 15px;
+  max-width: 1072px;
+  margin: 0 auto;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #001f3d;
+}
+
+.countBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 228px;
+  background-color: #f0f4f8;
+  color: #708292;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.sortSelect {
+  border: 1px solid #D5DADF;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #001f3d;
+  background: #ffffff;
+  cursor: pointer;
+
+  &:focus {
+    outline: 2px solid #136ABA;
+    outline-offset: 1px;
+  }
+}
+
+.nudge {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  border: 1px solid #D5DADF;
+  background-color: #f8fbff;
+}
+
+.nudgeText {
+  margin: 0;
+  color: #001f3d;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.nudgeDismiss {
+  background: none;
+  border: none;
+  color: #708292;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  padding: 0 4px;
+
+  &:hover {
+    color: #001f3d;
+  }
+}
+
+.productContainer {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.productCardWrapper {
+  background-color: #ffffff;
+  border: 1px solid #D5DADF;
+  max-width: 240px;
+  width: 100%;
+  padding-bottom: 25px;
+  border-radius: 10px;
+  position: relative;
+
+  a {
+    text-decoration: none;
+  }
+
+  &:hover:not(.unavailable) {
+    border: 1px solid #13B3BA;
+  }
+}
+
+.unavailable {
+  opacity: 0.72;
+  border-style: dashed;
+}
+
+.productLink {
+  display: block;
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.picturesCard img {
+  aspect-ratio: 240 / 200;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.name {
+  font-weight: 700;
+  line-height: 1.4;
+  color: #001f3d;
+  padding-left: 14px;
+  padding-right: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  min-height: 45px;
+}
+
+.priceRow {
+  padding: 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #001f3d;
+}
+
+.savedPrice {
+  font-size: 13px;
+  color: #708292;
+  text-decoration: line-through;
+}
+
+.staleBadge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: #fff4e5;
+  color: #b45309;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.unavailableBadge {
+  display: inline-flex;
+  align-self: flex-start;
+  margin: 0 14px 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: #f0f4f8;
+  color: #708292;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cardActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.removeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #D5DADF;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #9d9d9d;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    color: #136ABA;
+    border-color: #13B3BA;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #136ABA;
+    outline-offset: 2px;
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 20px 64px;
+}
+
+.emptyIcon {
+  color: #D5DADF;
+  font-size: 72px;
+  margin-bottom: 24px;
+}
+
+.emptyTitle {
+  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #001f3d;
+}
+
+.emptyText {
+  margin: 0 0 32px;
+  max-width: 420px;
+  color: #708292;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.ctaButton {
+  background-color: #136ABA;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 12px 40px;
+  border-radius: 228px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #13B3BA;
+  }
+}
