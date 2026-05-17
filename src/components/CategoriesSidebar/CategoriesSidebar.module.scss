@@ -59,7 +59,7 @@
   margin: 0;
   height: 45vh;
   scrollbar-gutter: stable;
-  overflow-y: auto;
+  overflow-y: hidden;
   @include custom-scrollbar;
 
   .hasShadow & {
@@ -69,7 +69,7 @@
 
 .manufacturersList {
   max-height: 300px;
-  overflow-y: scroll;
+  overflow-y: auto;
   @include custom-scrollbar;
 }
 
