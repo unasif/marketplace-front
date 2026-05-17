@@ -32,11 +32,12 @@
   z-index: 100;
   transition: filter 0.3s ease;
   height: calc(100vh - 96px);
-  overflow: visible;
+  overflow-y: auto;
 }
 
 .sidebarScrollArea {
-  overflow: hidden;
+  overflow-y: auto;
+  @include custom-scrollbar;
 }
 
 .hasShadow {
@@ -55,7 +56,7 @@
 
 .rootList {
   list-style: none;
-  padding: 0; 
+  padding: 0;
   margin: 0;
   height: 45vh;
   scrollbar-gutter: stable;
