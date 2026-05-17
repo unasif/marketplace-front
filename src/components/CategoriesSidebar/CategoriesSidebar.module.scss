@@ -51,28 +51,18 @@
 
 .rootList {
   list-style: none;
-  padding: 0; 
+  padding: 0;
   margin: 0;
-  height: 45vh;
+  height: 65vh;
   scrollbar-gutter: stable;
-  overflow-y: auto;
+  overflow-y: auto;     // ← завжди
   @include custom-scrollbar;
-
-  .hasShadow & {
-    overflow-y: auto;
-  }
 }
 
 .manufacturersList {
   max-height: 300px;
-  height: 100%;
-  min-height: 0; 
-  display: block; 
-  overflow-y: auto; 
-  overscroll-behavior: contain; 
-  position: relative;
-  z-index: 10;
-  
+  overflow-y: auto;
+  scrollbar-gutter: stable;
   @include custom-scrollbar;
 }
 
