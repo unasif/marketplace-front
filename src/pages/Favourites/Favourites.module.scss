@@ -1,89 +1,35 @@
 .mainContainer {
   padding: 100px 15px;
   max-width: 1072px;
-  margin: 0 auto;
 }
 
-.pageHeader {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+.contentContainer h3 {
+  font-size: 36px;
+  line-height: 36px;
+  padding-bottom: 20px;
+}
+
+.contentContainer p {
+  text-align: justify;
+  font-size: 20px;
+  line-height: 25px;
   margin-bottom: 32px;
 }
 
-.pageTitle {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 700;
-  color: #001f3d;
-}
-
-.countBadge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 28px;
-  height: 28px;
-  padding: 0 10px;
+.ctaButton {
+  display: inline-block;
+  background-color: #136ABA;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 12px 40px;
   border-radius: 228px;
-  background-color: #f0f4f8;
-  color: #708292;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.toolbar {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 24px;
-}
-
-.sortSelect {
-  border: 1px solid #D5DADF;
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 14px;
-  color: #001f3d;
-  background: #ffffff;
-  cursor: pointer;
-
-  &:focus {
-    outline: 2px solid #136ABA;
-    outline-offset: 1px;
-  }
-}
-
-.nudge {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 28px;
-  padding: 16px 20px;
-  border-radius: 10px;
-  border: 1px solid #D5DADF;
-  background-color: #f8fbff;
-}
-
-.nudgeText {
-  margin: 0;
-  color: #001f3d;
-  font-size: 15px;
-  line-height: 1.5;
-}
-
-.nudgeDismiss {
-  background: none;
   border: none;
-  color: #708292;
   cursor: pointer;
-  font-size: 22px;
-  line-height: 1;
-  padding: 0 4px;
+  text-decoration: none;
+  transition: background-color 0.2s;
 
   &:hover {
-    color: #001f3d;
+    background-color: #13B3BA;
   }
 }
 
@@ -98,23 +44,23 @@
   background-color: #ffffff;
   border: 1px solid #D5DADF;
   max-width: 240px;
-  width: 100%;
   padding-bottom: 25px;
   border-radius: 10px;
-  position: relative;
+  cursor: pointer;
 
   a {
     text-decoration: none;
   }
+}
 
-  &:hover:not(.unavailable) {
-    border: 1px solid #13B3BA;
-  }
+.productCardWrapper:hover:not(.unavailable) {
+  border: 1px solid #13B3BA;
 }
 
 .unavailable {
   opacity: 0.72;
   border-style: dashed;
+  cursor: default;
 }
 
 .productLink {
@@ -137,6 +83,7 @@
 
 .name {
   font-weight: 700;
+  font-style: normal;
   line-height: 1.4;
   color: #001f3d;
   padding-left: 14px;
@@ -150,28 +97,18 @@
   min-height: 45px;
 }
 
-.priceRow {
-  padding: 0 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.priceContainer {
+  flex: 1 0 38px;
+  align-content: flex-end;
+  padding-left: 14px;
 }
 
-.price {
-  font-size: 18px;
-  font-weight: 700;
-  color: #001f3d;
-}
-
-.savedPrice {
-  font-size: 13px;
-  color: #708292;
-  text-decoration: line-through;
+.stalePriceHint {
+  padding: 0 14px 8px;
 }
 
 .staleBadge {
   display: inline-flex;
-  align-self: flex-start;
   padding: 4px 8px;
   border-radius: 6px;
   background-color: #fff4e5;
@@ -182,8 +119,7 @@
 
 .unavailableBadge {
   display: inline-flex;
-  align-self: flex-start;
-  margin: 0 14px 8px;
+  margin: 12px 14px 0;
   padding: 4px 8px;
   border-radius: 6px;
   background-color: #f0f4f8;
@@ -192,78 +128,19 @@
   font-weight: 600;
 }
 
-.cardActions {
+.buyLike {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-self: center;
+  margin-top: 24px;
+  gap: 24px;
 }
 
-.removeButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid #D5DADF;
-  border-radius: 50%;
-  background: #ffffff;
-  color: #9d9d9d;
-  cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease;
-
-  &:hover {
-    color: #136ABA;
-    border-color: #13B3BA;
-  }
-
-  &:focus-visible {
-    outline: 2px solid #136ABA;
-    outline-offset: 2px;
-  }
-}
-
-.emptyState {
+.buy {
   display: flex;
-  flex-direction: column;
+}
+
+.blockLike {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 48px 20px 64px;
-}
-
-.emptyIcon {
-  color: #D5DADF;
-  font-size: 72px;
-  margin-bottom: 24px;
-}
-
-.emptyTitle {
-  margin: 0 0 12px;
-  font-size: 24px;
-  font-weight: 700;
-  color: #001f3d;
-}
-
-.emptyText {
-  margin: 0 0 32px;
-  max-width: 420px;
-  color: #708292;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.ctaButton {
-  background-color: #136ABA;
-  color: #ffffff;
-  font-size: 16px;
-  padding: 12px 40px;
-  border-radius: 228px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #13B3BA;
-  }
 }
