@@ -65,14 +65,7 @@
 
 .manufacturersList {
   max-height: 300px;
-  height: 100%;
-  min-height: 0; 
-  display: block; 
-  overflow-y: auto; 
-  overscroll-behavior: contain; 
-  position: relative;
-  z-index: 10;
-  
+  overflow-y: scroll;
   @include custom-scrollbar;
 }
 
