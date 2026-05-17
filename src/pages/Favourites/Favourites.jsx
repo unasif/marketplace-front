@@ -8,6 +8,7 @@ import ButtonBuy from "../../components/ButtonBuy/ButtonBuy";
 import ButtonLike from "../../components/ButtonLike/ButtonLike";
 import ProductPrice from "../../components/ProductPrice/ProductPrice";
 import noPhotoAvailable from "../../assets/no-photo-available.svg";
+import { favouriteItemToProduct } from "../../utils/favouriteItemToProduct";
 
 const STALE_PRICE_THRESHOLD = 0.05;
 
@@ -36,14 +37,6 @@ const checkProductAvailability = async (productId, token) => {
     return false;
   }
 };
-
-const favouriteItemToProduct = (item) => ({
-  id_bas: item.id,
-  id: item.id,
-  name: item.title,
-  main_photo: item.imageUrl,
-  categories_id: item.category,
-});
 
 export const Favourites = ({ token }) => {
   const { items, count } = useFavourites();
@@ -107,6 +100,10 @@ export const Favourites = ({ token }) => {
 
   return (
     <div className={styles.mainContainer}>
+      <div className={styles.pageHeader}>
+        <h1 className={styles.pageTitle}>Моє обране</h1>
+        <span className={styles.countBadge}>{count}</span>
+      </div>
       <div className={styles.productContainer}>
         {displayItems.map((item) => {
           const product = favouriteItemToProduct(item);

@@ -33,6 +33,35 @@
   }
 }
 
+.pageHeader {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #001f3d;
+}
+
+.countBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 228px;
+  background-color: #f0f4f8;
+  color: #708292;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .productContainer {
   display: flex;
   gap: 30px;

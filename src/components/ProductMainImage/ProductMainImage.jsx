@@ -8,7 +8,11 @@ const ProductMainImage = ({ product }) => {
   let imageUrl = null;
 
   if (main_photo) {
-    if (main_photo.startsWith("http") || main_photo.startsWith("https")) {
+    if (
+      main_photo.startsWith("http") ||
+      main_photo.startsWith("https") ||
+      main_photo.startsWith("/")
+    ) {
       imageUrl = main_photo;
     } else {
       imageUrl = `${baseURL}${main_photo.replace(/\\/g, "/")}`;

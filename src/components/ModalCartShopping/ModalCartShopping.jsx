@@ -5,6 +5,7 @@ import useTotalPrice from "../../hooks/useTotalPrice";
 import styles from "./ModalCartShopping.module.scss";
 import close from "../../assets/close.svg";
 import ProductMainImage from "../../components/ProductMainImage/ProductMainImage";
+import { getCartProductId } from "../../utils/cartProduct";
 import ProductPriceCartShopping from "../../components/ProductPriceCartShopping/ProductPriceCartShopping";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -38,7 +39,7 @@ const ModalCartShopping = ({ open, onClose, token }) => {
           <div>
             <ul className={styles.cartItems}>
               {cart.map((item) => (
-                <li key={item.id} className={styles.cartItem}>
+                <li key={getCartProductId(item)} className={styles.cartItem}>
                   <div className={styles.itemImageWrapper}>
                     <ProductMainImage product={item} />
                   </div>
@@ -48,7 +49,7 @@ const ModalCartShopping = ({ open, onClose, token }) => {
                       Ціна:
                       <ProductPriceCartShopping
                         token={token}
-                        idProduct={item.id_bas}
+                        idProduct={getCartProductId(item)}
                         className={styles.priceContainer}
                       />
                       ₴
@@ -61,12 +62,15 @@ const ModalCartShopping = ({ open, onClose, token }) => {
                       min="1"
                       className={styles.quantityInput}
                       onChange={(e) =>
-                        updateQuantity(item.id, parseInt(e.target.value))
+                        updateQuantity(
+                          getCartProductId(item),
+                          parseInt(e.target.value, 10)
+                        )
                       }
                     />
                     <button
                       className={styles.removeButton}
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => removeFromCart(getCartProductId(item))}
                     >
                       <FontAwesomeIcon icon={faTrashCan} />
                     </button>

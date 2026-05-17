@@ -1,52 +1,92 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import {
+  getCartProductId,
+  normalizeCartProduct,
+} from "../utils/cartProduct";
 
-// Створення контексту
 const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
-  // Завантаження кошика з localStorage, якщо він існує
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
+const cartItemMatchesId = (item, productId) =>
+  getCartProductId(item) === String(productId);
+
+const mergeCartItems = (items) => {
+  const merged = new Map();
+
+  items.forEach((item) => {
+    const normalized = normalizeCartProduct(item);
+    const id = normalized.id;
+
+    if (!id) {
+      return;
+    }
+
+    if (merged.has(id)) {
+      const existing = merged.get(id);
+      merged.set(id, {
+        ...existing,
+        quantity: existing.quantity + (item.quantity || 1),
+        main_photo: existing.main_photo || normalized.main_photo,
+      });
+    } else {
+      merged.set(id, { ...normalized, quantity: item.quantity || 1 });
+    }
   });
 
-  // Збереження кошика в localStorage при кожній зміні
+  return Array.from(merged.values());
+};
+
+export const CartProvider = ({ children }) => {
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (!savedCart) {
+      return [];
+    }
+
+    try {
+      return mergeCartItems(JSON.parse(savedCart));
+    } catch {
+      return [];
+    }
+  });
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // Додавання товару до кошика
   const addToCart = (product) => {
+    const normalized = normalizeCartProduct(product);
+
     setCart((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === product.id);
+      const existingProduct = prevCart.find(
+        (item) => getCartProductId(item) === normalized.id
+      );
+
       if (existingProduct) {
-        // Збільшуємо кількість, якщо товар вже є в кошику
         return prevCart.map((item) =>
-          item.id === product.id
+          cartItemMatchesId(item, normalized.id)
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
-      // Додаємо новий товар
-      return [...prevCart, { ...product, quantity: 1 }];
+
+      return [...prevCart, { ...normalized, quantity: 1 }];
     });
   };
 
-  // Видалення товару з кошика
   const removeFromCart = (productId) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+    setCart((prevCart) =>
+      prevCart.filter((item) => !cartItemMatchesId(item, productId))
+    );
   };
 
-  // Оновлення кількості товару
   const updateQuantity = (productId, quantity) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
+        cartItemMatchesId(item, productId) ? { ...item, quantity } : item
       )
     );
   };
 
-  // Очистка кошика
   const clearCart = () => {
     setCart([]);
   };
@@ -60,5 +100,4 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-// Хук для зручного доступу до контексту кошика
 export const useCart = () => useContext(CartContext);
