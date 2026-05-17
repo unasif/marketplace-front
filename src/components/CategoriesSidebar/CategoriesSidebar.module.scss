@@ -32,7 +32,6 @@
   z-index: 100;
   transition: filter 0.3s ease;
   height: calc(100vh - 96px);
-  overflow: hidden;
 }
 
 .sidebarScrollArea {
@@ -58,14 +57,10 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  height: 45vh;
+  height: calc(100vh - 96px - 60px);
+  overflow-y: auto;
   scrollbar-gutter: stable;
-  overflow-y: hidden;
   @include custom-scrollbar;
-
-  .hasShadow & {
-    overflow-y: auto;
-  }
 }
 
 .manufacturersList {
