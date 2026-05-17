@@ -72,7 +72,7 @@ const Footer = ({ logo, adress, phonenumber, gmail, logoIm }) => {
   const phone = info.phone || phonenumber || "";
   const email = info.email || gmail || "";
 
-  const logoPath = info.logo || logo || logoIm || defaultLogo;
+  const logoPath = info.logo || logo || logoIm || "";
   const logoData = { logo: logoPath };
 
   // Social links (lowercase keys expected). If link provided without protocol, prepend https://, otherwise fall back to standard pages.

@@ -38,7 +38,7 @@ const Header = ({ token, logo: propLogo }) => {
   const useBaseInfo = require("../../hooks/useBaseInfo").default;
   const baseInfo = useBaseInfo();
   const info = Array.isArray(baseInfo) ? baseInfo[0] || {} : baseInfo || {};
-  const logoPath = info.logo || propLogo || defaultLogo;
+  const logoPath = info.logo || propLogo || "";
   const logoData = { logo: logoPath };
 
   const handleCartClick = (event) => {
